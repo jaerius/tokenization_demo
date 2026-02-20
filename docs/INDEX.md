@@ -26,6 +26,7 @@ Research -> IA/UX -> Design -> Documentation -> Orchestrator QA.
 | Document | Summary |
 |---|---|
 | [design/screen-inventory.md](design/screen-inventory.md) | DSRV-like dark console screen inventory and UI specs |
+| [design/figma-table-data.md](design/figma-table-data.md) | Figma-importable CSV table package as spreadsheet fallback |
 
 ## 4) Documentation (Agent 4)
 

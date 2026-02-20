@@ -105,3 +105,13 @@ Required sheets:
 - Every `source_doc` points to an existing markdown file
 - P0 items must have at least one linked flow step
 - Every screen in inventory maps to at least one IA page
+
+## 7) CSV fallback package for Figma table import
+
+When a live spreadsheet integration is unavailable, use the generated CSV package:
+
+- `docs/design/figma-table-data/IA_Map.csv`
+- `docs/design/figma-table-data/User_Flow_Map.csv`
+- `docs/design/figma-table-data/Screen_Mapping.csv`
+
+These files preserve the same schema and can be imported into Figma table plugins.

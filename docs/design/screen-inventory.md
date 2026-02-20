@@ -93,3 +93,4 @@ All modals include:
 3. Assemble screens in section 3 order
 4. Link prototype hotspots for Flow A/B/C
 5. Export screen links to `docs/INDEX.md`
+6. Import fallback table package from `docs/design/figma-table-data.md` and `docs/design/figma-table-data/*.csv`
