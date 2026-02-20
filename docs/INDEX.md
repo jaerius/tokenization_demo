@@ -26,6 +26,7 @@ Research -> IA/UX -> Design -> Documentation -> Orchestrator QA.
 | Document | Summary |
 |---|---|
 | [design/screen-inventory.md](design/screen-inventory.md) | DSRV-like dark console screen inventory and UI specs |
+| [design/screen-wireframes.md](design/screen-wireframes.md) | Local fallback screen drawings (ASCII wireframes) for immediate visual review |
 
 ## 4) Documentation (Agent 4)
 

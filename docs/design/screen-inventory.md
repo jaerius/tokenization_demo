@@ -20,6 +20,7 @@ Current status:
 - Live Figma frame creation through MCP is blocked in this runtime.
 - This file provides implementation-ready frame specs and command payloads that can be
   executed immediately once the MCP server is discoverable.
+- Local drawn wireframes are provided in `docs/design/screen-wireframes.md`.
 
 ## 3) DSRV-like visual system
 
