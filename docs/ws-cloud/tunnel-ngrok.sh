@@ -16,9 +16,13 @@ if [[ ! -x "${NGROK_BIN}" ]]; then
   chmod +x "${NGROK_BIN}"
 fi
 
-if [[ -n "${NGROK_AUTHTOKEN:-}" ]]; then
-  "${NGROK_BIN}" config add-authtoken "${NGROK_AUTHTOKEN}" >/dev/null
+if [[ -z "${NGROK_AUTHTOKEN:-}" ]]; then
+  echo "[ngrok] NGROK_AUTHTOKEN is required."
+  echo "[ngrok] Set it first: export NGROK_AUTHTOKEN=<your-token>"
+  exit 1
 fi
+
+"${NGROK_BIN}" config add-authtoken "${NGROK_AUTHTOKEN}" >/dev/null
 
 echo "[ngrok] starting tunnel to http://localhost:3055"
 echo "[ngrok] after startup, connect with wss://<ngrok-domain>/"

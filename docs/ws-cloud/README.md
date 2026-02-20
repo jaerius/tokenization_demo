@@ -23,9 +23,11 @@ Choose one:
 
 ```bash
 cd /workspace/docs/ws-cloud
-# optional: export NGROK_AUTHTOKEN=xxxx
+export NGROK_AUTHTOKEN=xxxx
 npm run tunnel:ngrok
 ```
+
+`NGROK_AUTHTOKEN` is required by ngrok.
 
 ### cloudflared
 
@@ -74,3 +76,9 @@ With server running, verify channel ack locally:
 cd /workspace/docs/ws-cloud
 npm run check
 ```
+
+## Notes from this cloud environment
+
+- Server listen on `0.0.0.0:3055` and local join/ack check is verified.
+- `cloudflared` quick tunnel creation is verified and emits an HTTPS URL.
+- In this container, DNS resolution for newly issued `*.trycloudflare.com` can be delayed or unavailable; test from your browser/host machine if that happens.
