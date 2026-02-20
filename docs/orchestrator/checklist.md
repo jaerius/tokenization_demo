@@ -23,18 +23,20 @@ Phase 2 can start only if all are true:
 - [x] R-03 Market comparison document exists.
 - [x] R-04 Requirements summary document exists.
 - [x] R-05 Market comparison includes Securitize.
-- [x] R-06 Market comparison includes Polymath.
-- [x] R-07 Market comparison includes Pedex.
-- [x] R-08 Market comparison includes columns: feature, flow, target, cost.
+- [x] R-06 Market comparison includes Bridge.
+- [x] R-07 Market comparison includes Fireblocks.
+- [x] R-08 Market comparison includes columns: scope, asset, collateral/reserve, lifecycle.
 - [ ] R-09 Notion root + 2 subpages fetched with MCP evidence.
 - [ ] R-10 Slack 10+ messages collected with channel/date/summary/category.
+- [x] R-11 Competitor deep research document exists.
+- [x] R-12 Competitive gap analysis document exists.
 
 ### 2.2 Agent 2 (IA/UX) checks
 
 - [x] U-01 IA includes 6 mandatory domains.
 - [x] U-02 IA section mapping follows Claude section 3 structure.
 - [x] U-03 IA includes data fields at section level.
-- [x] U-04 UserFlow includes 7 named flows.
+- [x] U-04 UserFlow includes 7 mandatory flows + competitive extension flow.
 - [x] U-05 Each flow has 5-column step table.
 - [x] U-06 Mermaid diagrams count is 7 or more.
 - [x] U-07 Flow-to-IA screen mapping exists.
@@ -68,12 +70,15 @@ Phase 2 can start only if all are true:
 - [x] D-15 Design system includes primary/secondary colors.
 - [x] D-16 Design system includes 2+ typography levels.
 - [x] D-17 Design system includes 8px spacing rule.
-- [ ] D-18 Live Figma frame URLs attached.
+- [x] D-18 Screen-to-screen transition map exists.
+- [x] D-19 Program selector and collateral-aware mint screens are defined.
+- [x] D-20 Redemption queue and reserve transparency screen definitions exist.
+- [ ] D-21 Live Figma frame URLs attached.
 
 ### 3.2 Phase 2 verdict
 
 - Status: **PASS WITH GAPS**
-- Gaps: D-18 (Figma MCP server discovery pending)
+- Gaps: D-21 live frame URLs attached (Figma MCP server discovery pending)
 
 ## 4) Phase 3 checklist (Documentation + Orchestrator QA)
 

@@ -71,6 +71,10 @@ Current status:
 | SCR-12 | Modal/Add Wallet | Wallet creation modal | FL-07 | P1 | Pending MCP |
 | SCR-13 | Governance/Policies | Governance > Policies + Approval Workflow | FL-03, FL-05 | P1 | Pending MCP |
 | SCR-14 | Settings/API+Users | Settings > API Keys, User Management | Support | P2 | Pending MCP |
+| SCR-15 | Tokens/Program Selector | Tokens > Token Program Selector | FL-08 | P0 | Pending MCP |
+| SCR-16 | Tokens/Mint Request Builder | Tokens > Mint Request Builder | FL-08 | P0 | Pending MCP |
+| SCR-17 | Tokens/Redemption Queue | Tokens > Redemption Queue | FL-08, FL-05 | P1 | Pending MCP |
+| SCR-18 | Collateral/Profiles | Collateral Profiles + Reserve Transparency | FL-08 | P1 | Pending MCP |
 
 ## 5) Claude success-criteria implementation checklist
 
@@ -164,6 +168,27 @@ Recent Activity sample (10 rows):
 - [x] Function list
 - [x] Parameter form
 
+### 5.6 Token Program and Collateral (SCR-15/16/17/18)
+
+- [x] Program Selector fields:
+  - asset class
+  - token type
+  - base currency
+  - eligibility rule summary
+- [x] Mint Request Builder fields:
+  - collateral profile
+  - collateral ratio target/current
+  - reserve attestation status
+  - mint amount and destination
+- [x] Redemption Queue:
+  - redemption status
+  - payout rail (fiat/on-chain)
+  - settlement SLA and queue order
+- [x] Collateral Profiles:
+  - cash/treasury ratio
+  - reserve provider
+  - proof-of-reserve link and timestamp
+
 ## 6) IA section to screen/frame mapping
 
 | IA section | Screen IDs | Notes |
@@ -187,19 +212,57 @@ Recent Activity sample (10 rows):
 | Governance > Approval Workflows | SCR-13 | Stage visualization |
 | Settings > API Keys | SCR-14 | Key lifecycle |
 | Settings > User Management | SCR-14 | User role table |
+| Tokens > Token Program Selector | SCR-15 | Asset class and token program setup |
+| Tokens > Mint Request Builder | SCR-16 | Collateral-aware mint intent creation |
+| Tokens > Redemption Queue | SCR-17 | Burn/transfer to redeem continuity |
+| Collateral and liquidity > Collateral Profiles | SCR-18 | Reserve strategy and profile management |
+| Collateral and liquidity > Reserve Transparency | SCR-18 | Attestation and reserve composition view |
 
-## 7) Talk-to-Figma command payloads (ready to run when MCP appears)
+## 7) Screen-to-screen connection map
+
+```mermaid
+flowchart TD
+    SCR01[SCR-01 Dashboard] --> SCR02[SCR-02 Token List]
+    SCR02 --> SCR04[SCR-04 Add Token]
+    SCR02 --> SCR05[SCR-05 Link Token]
+    SCR02 --> SCR15[SCR-15 Program Selector]
+    SCR15 --> SCR16[SCR-16 Mint Request Builder]
+    SCR16 --> SCR03[SCR-03 Token Detail]
+    SCR03 --> SCR06[SCR-06 Mint Modal]
+    SCR03 --> SCR07[SCR-07 Burn Modal]
+    SCR03 --> SCR08[SCR-08 Transfer Modal]
+    SCR07 --> SCR17[SCR-17 Redemption Queue]
+    SCR08 --> SCR17
+    SCR16 --> SCR18[SCR-18 Collateral Profiles]
+    SCR06 --> SCR13[SCR-13 Governance]
+    SCR07 --> SCR13
+    SCR08 --> SCR13
+    SCR03 --> SCR10[SCR-10 Contracts Manage]
+```
+
+Transition matrix:
+
+| From | To | Trigger | Purpose |
+|---|---|---|---|
+| SCR-02 | SCR-15 | Create mint program | Define what tokenized asset to mint |
+| SCR-15 | SCR-16 | Continue | Add collateral and mint parameters |
+| SCR-16 | SCR-18 | Inspect collateral | Validate reserve profile before submit |
+| SCR-03 | SCR-07 | Burn action | Move supply reduction to redemption state |
+| SCR-07 | SCR-17 | Burn success | Track payout and settlement |
+| SCR-03 | SCR-08 | Transfer/Withdraw action | Route asset and then observe settlement |
+
+## 8) Talk-to-Figma command payloads (ready to run when MCP appears)
 
 Use the following payloads in Talk to Figma channel `tr35xtyx` after server discovery.
 
-### 7.1 Create root pages
+### 8.1 Create root pages
 
 1. Create page `01_Layout`
 2. Create page `02_Screens`
 3. Create page `03_Components`
 4. Create page `04_Flows`
 
-### 7.2 Build frame set
+### 8.2 Build frame set
 
 1. Create frame `SCR-01 Dashboard/Home` (1440x1024, dark background)
 2. Create frame `SCR-02 Tokens/List`
@@ -211,18 +274,26 @@ Use the following payloads in Talk to Figma channel `tr35xtyx` after server disc
 8. Create frame `SCR-08 Modal/Transfer`
 9. Create frame `SCR-09 Contracts/List`
 10. Create frame `SCR-10 Contracts/Manage`
+11. Create frame `SCR-15 Tokens/Program Selector`
+12. Create frame `SCR-16 Tokens/Mint Request Builder`
+13. Create frame `SCR-17 Tokens/Redemption Queue`
+14. Create frame `SCR-18 Collateral/Profiles`
 
-### 7.3 Component checklist
+### 8.3 Component checklist
 
 - Primary, secondary, danger button variants
 - Input default/error/disabled
 - Status chip set (pending, completed, failed)
 - Table template with pagination
 - Modal shell with sticky footer actions
+- Collateral ratio badge and reserve freshness indicator
+- Route selector component (fiat/on-chain settlement)
 
-## 8) Validation status
+## 9) Validation status
 
 - IA section coverage: PASS
 - User flow coverage: PASS
 - Design system consistency: PASS
 - Live Figma artifact generation: BLOCKED (MCP server not discoverable in runtime)
+- Connected screen transitions: PASS (documented)
+- Program/collateral mint context: PASS (documented)

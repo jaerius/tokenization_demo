@@ -12,7 +12,9 @@ Research -> IA/UX -> Design -> Documentation -> Orchestrator QA.
 | [research/requirements-summary.md](research/requirements-summary.md) | MVP functional/non-functional requirements and scope boundaries |
 | [research/notion-slack-research.md](research/notion-slack-research.md) | Notion/Slack MCP collection plan, placeholders, and follow-up tasks |
 | [research/fireblocks-tokenization-notes.md](research/fireblocks-tokenization-notes.md) | Fireblocks capability mapping for tokenization demo flows |
-| [research/market-comparison.md](research/market-comparison.md) | Comparative analysis of major tokenization products |
+| [research/market-comparison.md](research/market-comparison.md) | Fireblocks/Bridge/Securitize 비교표와 제품 패턴 요약 |
+| [research/competitor-deep-research-2026-02.md](research/competitor-deep-research-2026-02.md) | 경쟁사 공식 docs 기반 자산/담보/플로우 근거 수집 |
+| [research/competitive-gap-analysis.md](research/competitive-gap-analysis.md) | 현 문서 대비 경쟁사 기준 갭과 추가 지원 범위 정의 |
 
 ## 2) IA/UX (Agent 2)
 

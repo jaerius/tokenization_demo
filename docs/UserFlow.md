@@ -104,8 +104,8 @@ flowchart LR
 | Step | Screen | User Action | System Response | Exception / Branch |
 |---|---|---|---|---|
 | 1 | Token Detail | Click `Mint` | Open Mint modal | - |
-| 2 | Mint Modal | Enter amount and destination wallet | Validate amount/rules | Limit exceeded warning |
-| 3 | Mint Modal | Click `Confirm` | Create operation and evaluate policy | Approval required branch |
+| 2 | Mint Modal | Select token program, collateral profile, mint amount, destination wallet | Validate amount, collateral ratio, and eligibility rules | Limit exceeded or invalid collateral ratio warning |
+| 3 | Mint Modal | Click `Confirm` | Create operation and evaluate policy and reserve checks | Approval required branch |
 | 4 | Approval Queue | Approver accepts or rejects | Execute or cancel request | Rejected action logs cancellation |
 | 5 | Token Detail | Review updated supply and holder row | Refresh info and activity feed | Failed tx adds failure row |
 
@@ -115,11 +115,14 @@ flowchart LR
 sequenceDiagram
     participant U as Operator
     participant UI as Token Detail UI
+    participant C as Collateral Service
     participant P as Policy Engine
     participant X as Execution Layer
     U->>UI: Click Mint
     UI->>U: Open modal
-    U->>UI: Enter amount and destination, confirm
+    U->>UI: Select program, collateral, amount, destination and confirm
+    UI->>C: Validate collateral profile and ratio
+    C-->>UI: pass/fail
     UI->>P: Validate policy requirements
     P-->>UI: auto-approve or require approval
     alt approval required
@@ -294,7 +297,45 @@ flowchart TD
 | Wallet creation | Wallets > Add Wallet |
 | Result update | Tokens > Token Detail - Holders, Wallets > Vault Accounts |
 
-## 9) Cross-flow screen mapping matrix
+## 9) Flow extension - Program and Collateral Aware Mint (FL-08)
+
+### 9.1 Step table
+
+| Step | Screen | User Action | System Response | Exception / Branch |
+|---|---|---|---|---|
+| 1 | Token Program Selector | Select asset class and token program | Load program eligibility and base currency | Program disabled / unavailable |
+| 2 | Mint Request Builder | Select collateral profile and ratio target | Validate reserve policy and threshold | Ratio below threshold blocks submit |
+| 3 | Mint Request Builder | Enter mint amount and destination | Check inventory/liquidity hints and policy | Inventory warning or delayed settlement notice |
+| 4 | Governance Approval | Submit for approval if required | Route to approval queue or direct execute | Approval rejected |
+| 5 | Token Detail + Redemption Queue | Confirm minted balance and downstream redeem path | Update activity, supply, and redemption context | Partial failure creates incident ticket |
+
+### 9.2 Diagram
+
+```mermaid
+flowchart LR
+    A[Token Program Selector] --> B[Mint Request Builder]
+    B --> C[Collateral Profile Check]
+    C --> D{Ratio and reserve valid?}
+    D -->|No| E[Show collateral error]
+    D -->|Yes| F[Policy and eligibility check]
+    F --> G{Approval required?}
+    G -->|Yes| H[Approval Queue]
+    G -->|No| I[Execute mint]
+    H --> I
+    I --> J[Token Detail update]
+    J --> K[Redemption Queue context ready]
+```
+
+### 9.3 IA mapping
+
+| Flow element | IA reference |
+|---|---|
+| Program selection | Tokens > Token Program Selector |
+| Collateral validation | Collateral and liquidity > Collateral Profiles |
+| Mint execution | Tokens > Mint Request Builder, Governance > Approval Workflows |
+| Post-mint continuity | Tokens > Token Detail, Tokens > Redemption Queue |
+
+## 10) Cross-flow screen mapping matrix
 
 | Flow ID | Flow name | Primary screens | Supporting screens |
 |---|---|---|---|
@@ -305,8 +346,9 @@ flowchart TD
 | FL-05 | Transfer | Token Detail, Transfer Modal | Governance Policies |
 | FL-06 | Manage Contract | Token Detail, Contract Detail | Read Function, Write Function |
 | FL-07 | Add Wallet | Token Detail, Add Wallet Modal | Wallets Vault Accounts |
+| FL-08 | Program & Collateral Mint | Token Program Selector, Mint Request Builder | Collateral Profiles, Governance Approval |
 
-## 10) Error scenario matrix
+## 11) Error scenario matrix
 
 | Error code | Typical trigger | User-facing behavior | Recovery path |
 |---|---|---|---|
@@ -318,8 +360,11 @@ flowchart TD
 | ERR-006 | Approval rejected | Toast + timeline entry | Re-submit with policy-compliant params |
 | ERR-007 | Contract write reverted | Result panel error | Inspect params and retry |
 | ERR-008 | Duplicate wallet link | Conflict message | Select a different vault |
+| ERR-009 | Collateral ratio below policy minimum | Mint blocked with policy detail | Select another collateral profile or lower amount |
+| ERR-010 | Reserve attestation stale | Warning before confirm | Require override approval or wait for attestation refresh |
+| ERR-011 | Liquidity inventory insufficient | Delayed settlement notice | Queue mint or reduce request amount |
 
-## 11) Mermaid coverage checklist
+## 12) Mermaid coverage checklist
 
 - [x] Flow 4.1 Issue New Token diagram
 - [x] Flow 4.2 Link Existing Token diagram
@@ -328,8 +373,42 @@ flowchart TD
 - [x] Flow 4.5 Transfer diagram
 - [x] Flow 4.6 Manage Contract diagram
 - [x] Flow 4.7 Add Wallet diagram
+- [x] Flow FL-08 Program and Collateral Mint diagram
 
-## 12) MVP scope confirmation (P0 vs P1)
+## 13) Screen connectivity map (operator journey)
+
+```mermaid
+flowchart TD
+    D[Dashboard] --> TL[Token List]
+    TL --> AT[Add Token Wizard]
+    TL --> LT[Link Token]
+    TL --> TP[Token Program Selector]
+    TP --> MB[Mint Request Builder]
+    MB --> TD[Token Detail]
+    TD --> MM[Mint Modal]
+    TD --> BM[Burn Modal]
+    TD --> TM[Transfer Modal]
+    BM --> RQ[Redemption Queue]
+    TM --> RQ
+    TD --> MC[Manage Contract]
+    TD --> AW[Add Wallet]
+    MM --> GQ[Governance Queue]
+    BM --> GQ
+    TM --> GQ
+    GQ --> TD
+    TD --> D
+```
+
+## 14) Token and collateral selection matrix
+
+| Token program example | Asset class | Token type | Candidate collateral basket | Typical mint objective |
+|---|---|---|---|---|
+| T-Bill Access Token | treasury | fund_share | cash + short-duration treasury MMF | Yield-bearing treasury exposure |
+| Private Credit Income | private_credit | debt_token | cash + receivables-backed reserve | Income strategy representation |
+| Real Estate Project Token | real_estate | equity_token | cash + staged project collateral | Project-based financing exposure |
+| Enterprise Stable Token | stablecoin | stablecoin | cash + treasury reserve mix | Payments and treasury operations |
+
+## 15) MVP scope confirmation (P0 vs P1)
 
 ### P0 flow coverage
 
@@ -339,6 +418,7 @@ flowchart TD
 - FL-04 Burn
 - FL-05 Transfer
 - FL-06 Manage Contract
+- FL-08 Program and Collateral Mint
 
 ### P1 flow coverage
 
@@ -348,3 +428,4 @@ flowchart TD
 
 P0 flows prove token onboarding and lifecycle controls.
 P1 flow improves enterprise wallet management depth.
+Collateral-aware minting is treated as P0 due to competitor baseline requirements.

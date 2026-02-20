@@ -38,6 +38,8 @@ Provide an export-ready structure for Google Spreadsheet or CSV with two require
 | Dashboard | Token Overview | KPI cards, distribution chart | total_token_count, total_supply_usd, chain_distribution | top summary zone | P0 |
 | Tokens | Token List | search, filter, 8-column table | name, symbol, blockchain_logo, contract_address, total_supply, holding, holders, actions | sortable and pageable | P0 |
 | Governance | Policies | policy list and status chips | policy_name, scope_actions, required_approvals, status | read-heavy in MVP | P1 |
+| Tokens | Token Program Selector | asset class and token type selector | program_id, asset_class, token_type, base_currency | defines what is minted | P0 |
+| Tokens | Mint Request Builder | collateral-aware mint form | collateral_profile_id, collateral_ratio_target, proof_of_reserve_url | defines what backs mint | P0 |
 
 ## 4) UserFlow_Sheet specification
 
@@ -63,6 +65,8 @@ Provide an export-ready structure for Google Spreadsheet or CSV with two require
 | Issue New Token | 1 | Token List | Click Add Token | Open Add Token Step 1 | - |
 | Issue New Token | 5 | Add Token Step 3 | Click Deploy/Issue | Submit transaction and show loading | failure shows retry |
 | Transfer | 2 | Transfer Modal | Input source, destination, amount | Validate destination whitelist | block if non-whitelisted |
+| Program & Collateral Mint | 1 | Token Program Selector | Select asset class and token program | Load eligibility and base currency | disabled program |
+| Program & Collateral Mint | 2 | Mint Request Builder | Select collateral profile and ratio | Validate collateral threshold | ratio below minimum |
 
 ## 5) CSV export templates
 
@@ -85,3 +89,4 @@ flow_name,step,screen,user_action,system_response,exception_branch
 - `priority` must be one of `P0`, `P1`, `P2`.
 - `step` must be positive integers with no duplicates per flow.
 - Every flow in UserFlow_Sheet must exist in `docs/UserFlow.md`.
+- Mint-related rows should include program/collateral context when applicable.

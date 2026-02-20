@@ -24,11 +24,13 @@ Validation scope:
 | Criterion | Result | Note |
 |---|---|---|
 | Fireblocks docs summary (3 documents) | PASS | Documented in research notes |
-| Market comparison (3+ products, required columns) | PASS | Includes Securitize/Polymath/Pedex |
+| Market comparison (3+ products, required columns) | PASS | Includes Fireblocks/Bridge/Securitize |
+| Competitor deep research document exists | PASS | `docs/research/competitor-deep-research-2026-02.md` |
+| Competitive gap analysis exists | PASS | `docs/research/competitive-gap-analysis.md` |
 | Notion root + 2 subpages evidence | FAIL | MCP unavailable in runtime |
 | Slack 10+ messages with required metadata | FAIL | MCP unavailable in runtime |
 | IA section 3 alignment (6 domains) | PASS | IA table mapping complete |
-| User flow section 4 alignment (7 flows) | PASS | 7 flow tables + 7 diagrams |
+| User flow section 4 alignment (7 mandatory flows + extension) | PASS | mandatory 7 plus FL-08 extension documented |
 | IA + UserFlow line count >= 500 | PASS | Verified by line-count check |
 
 Verdict: **PASS WITH GAPS**
@@ -42,6 +44,9 @@ Verdict: **PASS WITH GAPS**
 | Token Detail 7-field/4-column/6-action requirement | PASS | Explicitly listed |
 | Add/Link/Mint/Burn/Transfer requirements | PASS | Each screen/modal specified |
 | Manage Contract read/write requirement | PASS | SCR-10 mapped |
+| Program/collateral mint screens defined | PASS | SCR-15/SCR-16/SCR-18 mapped |
+| Screen-to-screen transition map exists | PASS | Screen connection mermaid and transition matrix added |
+| Redemption continuity screen defined | PASS | SCR-17 mapped from burn/transfer outcomes |
 | IA section to frame mapping table exists | PASS | Included in screen inventory |
 | Live Figma frame links available | FAIL | MCP server discovery failed |
 
@@ -72,6 +77,10 @@ Verdict: **PASS**
 | Tokens > Add Token | 3-step wizard | SCR-04 checklist | Yes |
 | Tokens > Link Token | Verify + Link form | SCR-05 checklist | Yes |
 | Smart Contracts > Read/Write | Contract management UI | SCR-10 checklist | Yes |
+| Tokens > Token Program Selector | Program-first mint setup | SCR-15 mapping | Yes |
+| Tokens > Mint Request Builder | Collateral-aware mint intent | SCR-16 mapping | Yes |
+| Collateral and liquidity > Reserve Transparency | Reserve and attestation context | SCR-18 mapping | Yes |
+| Tokens > Redemption Queue | Burn/transfer continuity | SCR-17 mapping | Yes |
 | Wallets > Add Wallet | Add wallet modal | SCR-12 mapping | Yes |
 | Governance > Policies/Workflow | Policy and workflow surface | SCR-13 mapping | Yes |
 | Settings > API/User | Settings tables | SCR-14 mapping | Yes |
@@ -88,6 +97,7 @@ Verdict: **PASS**
 | FL-05 Transfer | Token Detail, Transfer modal | SCR-03, SCR-08 | Yes |
 | FL-06 Manage Contract | Token Detail, Contract Detail | SCR-03, SCR-10 | Yes |
 | FL-07 Add Wallet | Token Detail, Add Wallet modal | SCR-03, SCR-12 | Yes |
+| FL-08 Program & Collateral Mint | Program Selector, Mint Builder, Collateral Profiles | SCR-15, SCR-16, SCR-18 | Yes |
 | Flow-to-Figma frame link | Live frame URLs | Pending MCP | No (tracked in gaps) |
 
 ## 6) Mismatch policy

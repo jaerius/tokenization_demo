@@ -18,6 +18,8 @@ is intended to be used as the source of truth for:
 3. Clear separation between action execution and governance decisions.
 4. Deterministic terminology across IA, UserFlow, and Design inventory.
 5. Every section in Claude section 3 must map to a concrete screen/frame.
+6. Every mint action must be tied to an asset program and collateral model.
+7. Critical screens must define explicit in/out transitions for operator continuity.
 
 ## 3) Global navigation model
 
@@ -57,6 +59,9 @@ Secondary navigation:
 | Token Detail - Actions | Action button group | mint, burn, withdraw, manage_contract, add_wallet, more | Six actions are mandatory | SCR-03 |
 | Add Token | Three-step form wizard | step1_blockchain, step2_name, step2_symbol, step2_decimals, step2_contract_option, step3_review_confirm | EVM/Stellar/Ripple branch behavior | SCR-04 |
 | Link Token | Existing token linking form | blockchain, contract_address_or_asset_code, verify_result | Verify and Link are separate states | SCR-05 |
+| Token Program Selector | Program and asset-class assignment panel | program_id, asset_class, token_type, base_currency, investment_minimum | Defines what is minted before mint flow starts | SCR-15 |
+| Mint Request Builder | Extended mint request form | token_id, mint_amount, collateral_profile_id, collateral_ratio, destination_wallet, policy_gate | Adds collateral context to mint intent | SCR-16 |
+| Redemption Queue | Burn/redeem queue with settlement paths | redemption_id, payout_rail, settlement_window, queue_status | Burn to redemption continuity view | SCR-17 |
 
 ### 4.3 Smart Contracts (EVM only)
 
@@ -87,6 +92,14 @@ Secondary navigation:
 |---|---|---|---|---|
 | API Keys | Table and key lifecycle controls | key_name, created_at, permissions, revoke_state | Mask sensitive values | SCR-14 |
 | User Management | User roster and role controls | user_name, role, last_login | Read-only is acceptable for MVP | SCR-14 |
+
+### 4.7 Collateral and liquidity (competitive alignment extension)
+
+| Screen/Section | Included elements | Data fields | Notes | Screen ID |
+|---|---|---|---|---|
+| Collateral Profiles | Profile list and active ratio cards | collateral_profile_id, collateral_type, target_ratio, reserve_provider, status | Inspired by Bridge reserve strategy patterns | SCR-18 |
+| Reserve Transparency | Reserve composition and proof links | cash_ratio, treasury_ratio, attestation_url, last_attested_at | Makes mint decision auditable | SCR-18 |
+| Route and Settlement Context | Destination route summary for transfer/redemption | payout_rail, source_chain, destination_chain, settlement_sla | Bridge-like route visibility | SCR-17 |
 
 ## 5) Field dictionary by domain object
 
@@ -144,6 +157,29 @@ Secondary navigation:
 | timeout_minutes | integer | No | Approval timeout |
 | status | enum | Yes | active/inactive/draft |
 
+### 5.5 Token program
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| program_id | string | Yes | Issuance program identifier |
+| asset_class | enum | Yes | treasury/private_credit/private_equity/real_estate/stablecoin/other |
+| token_type | enum | Yes | fund_share/debt_token/equity_token/stablecoin/utility |
+| base_currency | enum | Yes | USD/EUR/MXN/other |
+| minimum_investment | decimal | No | Product entry threshold |
+| eligibility_rule | string | No | Compliance gate reference |
+
+### 5.6 Collateral and reserve
+
+| Field | Type | Required | Description |
+|---|---|---|---|
+| collateral_profile_id | string | Yes | Collateral profile identifier |
+| collateral_type | enum | Yes | cash/treasury/money_market_fund/stablecoin/other |
+| collateral_ratio_target | decimal | Yes | Target collateralization ratio |
+| reserve_provider | string | No | Custodian or reserve manager |
+| proof_of_reserve_url | string | No | Public/internal reserve evidence URL |
+| last_attested_at | datetime | No | Last reserve attestation timestamp |
+| inventory_balance | decimal | No | Available token inventory for fast redemption/swap |
+
 ## 6) Sitemap and route model
 
 ```mermaid
@@ -163,6 +199,9 @@ flowchart TD
     Tokens --> TokenDetail[Token Detail]
     Tokens --> AddToken[Add Token Wizard]
     Tokens --> LinkToken[Link Token Form]
+    Tokens --> ProgramSelector[Token Program Selector]
+    Tokens --> MintBuilder[Mint Request Builder]
+    Tokens --> RedemptionQueue[Redemption Queue]
 
     TokenDetail --> MintModal[Mint Modal]
     TokenDetail --> BurnModal[Burn Modal]
@@ -182,6 +221,12 @@ flowchart TD
 
     Settings --> APIKeys[API Keys]
     Settings --> UserManagement[User Management]
+
+    ProgramSelector --> MintBuilder
+    MintBuilder --> CollateralProfiles[Collateral Profiles]
+    CollateralProfiles --> ReserveTransparency[Reserve Transparency]
+    BurnModal --> RedemptionQueue
+    TransferModal --> RouteSettlement[Route and Settlement Context]
 ```
 
 ## 7) MVP priority and rationale
@@ -199,6 +244,8 @@ flowchart TD
 | SCR-07 | Burn Modal | Core lifecycle action |
 | SCR-08 | Transfer Modal | Core lifecycle action |
 | SCR-10 | Manage Contract | Contract operation proof point |
+| SCR-15 | Token Program Selector | Explicitly defines what tokenized asset is being minted |
+| SCR-16 | Mint Request Builder | Adds collateral and policy context before mint execution |
 
 ### 7.2 P1 (should-have)
 
@@ -209,6 +256,8 @@ flowchart TD
 | SCR-12 | Add Wallet | Required for extended flow but can be simplified |
 | SCR-13 | Governance | Important for policy framing; can be read-only in MVP |
 | SCR-14 | Settings | Operationally useful, not critical to first demo |
+| SCR-17 | Redemption Queue | Adds burn->redeem continuity and settlement tracking |
+| SCR-18 | Collateral Profiles | Adds reserve composition and attestation visibility |
 
 ## 8) IA acceptance checklist
 
@@ -220,3 +269,5 @@ flowchart TD
 - [x] Smart Contracts include Read/Write function modeling.
 - [x] Wallet, Governance, and Settings sections are defined.
 - [x] P0 versus P1 priorities and rationale are explicit.
+- [x] Token program and collateral models are defined before mint execution.
+- [x] Burn/transfer continuity to redemption/settlement context is modeled.

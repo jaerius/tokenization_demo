@@ -26,7 +26,9 @@
 - Notion 검색: tokenization 관련 페이지, [2ff7fc3011a98028ba47deaec94f887f](https://www.notion.so/dsrv/2ff7fc3011a98028ba47deaec94f887f) 및 하위 페이지 수집
 - Slack 검색: tokenization, Fireblocks, WaaS, 지갑 관련 메시지 수집
 - Fireblocks 문서: [Tokenization](https://developers.fireblocks.com/docs/tokenization), [Issue New Tokens](https://developers.fireblocks.com/docs/issue-new-tokens) 등 정리
-- 시장 제품 조사: Securitize, Polymath, Pedex, Coinbase Asset Hub 등 기능·플로우 비교
+- Bridge 문서: [Overview](https://apidocs.bridge.xyz/get-started/introduction/overview), [Issuance](https://apidocs.bridge.xyz/platform/issuance/overview), [Custom Stablecoin](https://apidocs.bridge.xyz/platform/issuance/custom), [Supported Routes](https://apidocs.bridge.xyz/get-started/introduction/what-we-support/payment-routes) 정리
+- Securitize 문서/페이지: [Institutional Tokenization](https://securitize.io/institutional-tokenization), [Intro to Tokenization](https://securitize.io/insights/intro-to-tokenization) 및 대표 상품 페이지 정리
+- 시장 제품 조사: Fireblocks, Bridge, Securitize 중심으로 기능·플로우·자산군·담보모델 비교
 
 **산출물**
 - `docs/research/` 폴더 내 조사 리포트
@@ -37,8 +39,11 @@
 - [ ] Notion 메인 페이지(2ff7fc3011a98028ba47deaec94f887f) 및 하위 페이지 2개 이상 페치
 - [ ] Slack 관련 메시지 10건 이상 수집·분류 (채널명, 날짜, 요약, 카테고리: 요구사항/의사결정/이슈)
 - [ ] Fireblocks 문서: Tokenization, Issue New Tokens, Tokenization Page 3개 문서 핵심 기능·플로우 정리
-- [ ] 시장 제품 3개 이상 비교표: Securitize, Polymath, Pedex 등 (기능, 플로우, 타겟, 비용 컬럼)
+- [ ] Bridge 문서 기반 stablecoin 발행/담보/리저브/라우팅 구조 요약
+- [ ] Securitize 문서 기반 자산군(예: treasuries, private credit/equity, real estate 등) 요약
+- [ ] 시장 제품 3개 이상 비교표: Fireblocks, Bridge, Securitize 포함 (기능, 플로우, 자산군, 담보/리저브, 타겟, 비용 컬럼)
 - [ ] `docs/research/requirements-summary.md` 존재, 핵심 요구사항 5개 이상 추출
+- [ ] `docs/research/competitor-deep-research-*.md` 존재, 출처 URL 포함
 
 ---
 
@@ -50,6 +55,8 @@
 - IA 설계: **본 문서 §3 IA 상세 명세**를 기준으로 페이지 구조, 섹션별 포함 요소, 데이터 필드 정의
 - User Flow 설계: **본 문서 §4 User Flow 상세 명세**를 기준으로 단계별 화면·액션·시스템 응답·예외 정의
 - Mermaid 다이어그램 작성 (플로우별)
+- 화면 연결성 설계: 핵심 화면 간 전이(From/To/Trigger/Result) 매트릭스 작성
+- 민팅 모델 설계: "어떤 토큰을 무엇을 담보로 민팅하는지"를 데이터 필드로 명시
 - Fireblocks 스타일 IA 반영 및 데모 MVP 범위 정의
 
 **산출물**
@@ -59,9 +66,11 @@
 **성공 기준**
 - [ ] IA 문서에 §3의 6개 영역(Dashboard, Tokens, Smart Contracts, Wallets, Governance, Settings) 모두 포함
 - [ ] 각 영역별 섹션·포함 요소·데이터 필드가 §3 테이블과 1:1 매핑
-- [ ] User Flow 문서에 §4의 7개 플로우(발행, 연결, Mint, Burn, Transfer, Manage Contract, Add Wallet) 단계별 정의
+- [ ] User Flow 문서에 §4의 7개 필수 플로우(발행, 연결, Mint, Burn, Transfer, Manage Contract, Add Wallet) + 확장 플로우(Program/Collateral Mint) 정의
 - [ ] 각 플로우별 5컬럼(단계, 화면, 사용자 액션, 시스템 응답, 예외/분기) 테이블 포함
 - [ ] Mermaid 다이어그램 7개 이상 (플로우별 flowchart 또는 sequenceDiagram), 문법 오류 없이 렌더링 가능
+- [ ] 화면 연결 다이어그램 1개 이상 + 전이 매트릭스 1개 이상
+- [ ] 민팅 플로우에 토큰 프로그램(자산군/토큰타입) + 담보 프로필(담보 유형/비율/증빙) 필드 포함
 - [ ] MVP 범위 명시: P0(필수) vs P1(선택) 화면 목록, 우선순위 근거
 - [ ] `docs/IA.md`, `docs/UserFlow.md` 파일 존재, 총 500줄 이상
 
@@ -76,6 +85,8 @@
 - Talk to Cursor/Figma 활용: 자연어로 UI 생성·수정
 - **§3 IA 상세 명세**의 각 섹션별 포함 요소를 화면에 반영 (예: Token List 컬럼, Dashboard 카드 등)
 - **§4 User Flow 상세 명세**의 단계별 화면 구현 (모달, 폼 필드, 버튼 등)
+- 화면 연결 프로토타이핑: 주요 버튼 클릭 시 화면 전이 연결
+- 민팅 컨텍스트 강화: 토큰 프로그램 선택 + 담보 선택/검증 UI 반영
 - Fireblocks 콘솔 스타일 참고 (다크 테마, 테이블 레이아웃 등)
 
 **산출물**
@@ -92,7 +103,12 @@
 - [ ] Burn 모달: Amount, Source 입력 필드, Confirm 버튼 (§4.4)
 - [ ] Transfer 모달: Source, Destination, Amount 입력 필드, Confirm 버튼 (§4.5)
 - [ ] Manage Contract: Read/Write 탭, 함수 목록, 파라미터 입력 폼 (§4.6)
+- [ ] Program Selector: 자산군, 토큰 타입, 기준 통화, 적격성 규칙 UI
+- [ ] Mint Request Builder: 담보 프로필, 담보 비율, 리저브 증빙 상태, Amount/Destination UI
+- [ ] Redemption Queue: Burn/Transfer 이후 정산 레일/상태/ETA 확인 UI
+- [ ] Collateral Profiles: cash/treasury 비율, 리저브 제공자, 증빙 링크/시점 UI
 - [ ] `docs/design/screen-inventory.md` 존재, IA §3 섹션 ↔ Figma 화면/프레임 매핑 테이블
+- [ ] `docs/design/screen-inventory.md`에 화면 전이 매트릭스(From, To, Trigger, Result) 포함
 - [ ] 디자인 시스템: Primary/Secondary 색상, 2단계 이상 타이포 스케일, 8px 그리드 간격 일관 적용
 
 ---
@@ -114,7 +130,7 @@
 
 **성공 기준**
 - [ ] IA 시트: 6개 영역 × 평균 3개 이상 섹션 = 18행 이상, 컬럼 6개(페이지, 섹션, 포함 요소, 데이터/필드, 비고, 우선순위)
-- [ ] User Flow 시트: 7개 플로우 × 평균 4단계 = 28행 이상, 컬럼 6개(플로우명, 단계, 화면, 사용자 액션, 시스템 응답, 예외/분기)
+- [ ] User Flow 시트: 7개 필수 플로우 + 확장 플로우(권장) 반영, 최소 28행 이상(확장 포함 시 32행 이상), 컬럼 6개(플로우명, 단계, 화면, 사용자 액션, 시스템 응답, 예외/분기)
 - [ ] `docs/INDEX.md` 존재: research, IA, UserFlow, design, orchestrator, spreadsheet 링크 6개 이상, 각 1줄 요약
 - [ ] `docs/spreadsheet-export-spec.md` 존재: IA 시트 컬럼 정의, User Flow 시트 컬럼 정의, 샘플 2행 이상
 - [ ] Google Spreadsheet(또는 CSV): IA 시트, User Flow 시트 export 가능한 형태로 정리
@@ -142,6 +158,7 @@
 - [ ] `docs/orchestrator/quality-report.md` 존재: IA ↔ Figma 매핑 검증표(섹션별 일치 여부), User Flow ↔ 디자인 검증표(플로우별 단계 일치 여부)
 - [ ] 검증 결과: 불일치 항목 0개 또는 갭 목록에 등록
 - [ ] `docs/orchestrator/gaps.md` 존재: 갭·이슈 목록(설명, 영향도, 우선순위 P0/P1/P2), 5개 이하 권장
+- [ ] 경쟁사 딥리서치 기반 갭 분석(`docs/research/competitive-gap-analysis.md`)을 QA 결과에 반영
 
 ---
 
@@ -198,6 +215,15 @@ Agent 2는 `docs/IA.md` 작성 시 아래 구조를 반드시 포함해야 한�
 |-----------|-----------|-------------|------|
 | **API Keys** | 테이블 + 생성 | Key Name, Created At, Permissions, Revoke | |
 | **User Management** | 테이블 | User, Role, Last Login | |
+
+### 3.7 Issuance Programs & Collateral (확장 명세)
+
+| 화면/섹션 | 포함 요소 | 데이터/필드 | 비고 |
+|-----------|-----------|-------------|------|
+| **Token Program Selector** | 프로그램 선택 폼 | Asset Class(treasury/private credit/private equity/real estate/stablecoin), Token Type, Base Currency, Eligibility Rule | 어떤 자산을 토큰화/민팅할지 정의 |
+| **Mint Request Builder** | 민팅 요청 빌더 | Program, Collateral Profile, Collateral Ratio, Amount, Destination, Policy Gate | 어떤 담보로 민팅할지 정의 |
+| **Collateral Profiles** | 담보 프로필 테이블 | Profile ID, Basket(cash/treasury/MMF 등), Target Ratio, Reserve Provider, Proof URL, Last Attested At | Bridge식 리저브 모델 반영 |
+| **Redemption Queue** | 리딤/정산 큐 | Request ID, Source Token, Payout Rail(fiat/on-chain), Settlement SLA, Status | Burn/Transfer 이후 연결 화면 |
 
 ---
 
@@ -274,15 +300,26 @@ Agent 2는 `docs/UserFlow.md` 작성 시 아래 플로우를 단계별로 상세
 | 3 | Add Wallet Modal | "Add" 클릭 | 지갑 생성/연결 | 이미 존재 시 에러 |
 | 4 | - | 완료 | 성공 토스트, Holders 테이블에 추가 | |
 
-### 4.8 User Flow 문서 필수 포함 항목
+### 4.8 Program & Collateral Mint 플로우 - 상세
+
+| 단계 | 화면 | 사용자 액션 | 시스템 응답 | 예외/분기 |
+|------|------|-------------|------------|-----------|
+| 1 | Program Selector | Asset Class, Token Type, Base Currency 선택 | 프로그램 적격성 규칙 로드 | 비활성 프로그램 선택 시 차단 |
+| 2 | Mint Request Builder | Collateral Profile, Ratio, Amount, Destination 입력 | 담보 비율/리저브 증빙/정책 검증 | 비율 부족 또는 증빙 stale 경고 |
+| 3 | Governance/Approval | "Submit Mint Request" | 승인 큐 또는 즉시 실행 | 승인 거부 시 취소 |
+| 4 | Token Detail | 민팅 결과 확인 | Supply/Holders/Activity 반영 | 부분 실패 시 재시도 안내 |
+| 5 | Redemption Queue | 후속 리딤 가능 상태 확인 | 정산 레일, 예상 정산시간 표시 | 레일 미지원 시 대체 레일 안내 |
+
+### 4.9 User Flow 문서 필수 포함 항목
 
 `docs/UserFlow.md`에는 다음이 반드시 포함되어야 한다:
 
-- **플로우 목록**: 발행, 연결, Mint, Burn, Transfer, Manage Contract, (선택) Add Wallet
+- **플로우 목록**: 발행, 연결, Mint, Burn, Transfer, Manage Contract, Add Wallet(필수) + Program/Collateral Mint(확장)
 - **각 플로우별**: 단계 번호, 화면명, 사용자 액션, 시스템 응답, 예외/분기
 - **Mermaid 다이어그램**: 플로우별 시퀀스 또는 플로우차트
 - **화면 매핑**: 각 단계 → IA의 해당 화면/섹션 참조
 - **에러 시나리오**: 주요 에러(잔액 부족, 화이트리스트 미등록, 승인 거부 등) 및 처리
+- **연결성**: 화면 전이 다이어그램 + 전이 매트릭스(From/To/Trigger/Result)
 
 ---
 
@@ -332,10 +369,13 @@ flowchart LR
 | **조사 완료** | Notion tokenization 페이지 3개 이상 수집·요약 | `docs/research/` 내 파일 존재, 페이지 URL·제목·요약 포함 |
 | **조사 완료** | Slack 메시지 10건 이상 수집·분류 | requirements-summary 또는 별도 파일에 채널·날짜·요약·카테고리 |
 | **조사 완료** | Fireblocks 문서 3개 핵심 기능·플로우 정리 | Issue, Mint, Burn, Transfer, Manage Contract 포함 |
-| **조사 완료** | 시장 제품 3개 이상 비교표 | Securitize, Polymath, Pedex 등 기능·플로우·타겟 컬럼 |
+| **조사 완료** | 시장 제품 3개 이상 비교표 | Fireblocks, Bridge, Securitize 기능·플로우·자산군·담보모델 컬럼 |
+| **조사 완료** | Bridge 발행/담보/리저브/라우팅 정리 | xUSD, reserve strategy, inventory, supported routes 근거 포함 |
+| **조사 완료** | Securitize 자산군/컴플라이언스/리딤 정리 | treasuries, private credit/equity, real estate, onboarding/redemption 근거 포함 |
 | **IA 완성** | `docs/IA.md` 존재, §3 6개 영역 반영 | Dashboard, Tokens, Smart Contracts, Wallets, Governance, Settings |
-| **IA 완성** | `docs/UserFlow.md` 존재, §4 7개 플로우 반영 | 발행, 연결, Mint, Burn, Transfer, Manage Contract, Add Wallet |
+| **IA 완성** | `docs/UserFlow.md` 존재, §4 7개 필수 플로우 + 확장 플로우 반영 | 발행, 연결, Mint, Burn, Transfer, Manage Contract, Add Wallet (+ Program/Collateral Mint) |
 | **IA 완성** | Mermaid 다이어그램 7개 이상, 렌더링 가능 | 문법 오류 없음, 플로우별 flowchart/sequenceDiagram |
+| **IA 완성** | Program/Collateral Mint 확장 플로우 반영 | Token Program Selector, Mint Builder, Collateral, Redemption Queue |
 | **MVP 확정** | P0(필수) vs P1(선택) 화면 목록 명시 | Dashboard, Token List, Token Detail, Add/Link Token, Mint/Burn/Transfer 모달 |
 
 ### 6.2 Phase 2 성공 기준 (디자인)
@@ -349,7 +389,11 @@ flowchart LR
 | **Link Token** | Blockchain, Contract Address, Verify/Link | 단일 폼 또는 2단계 |
 | **Mint/Burn/Transfer** | 각 모달 Amount, Source/Destination, Confirm | 3개 모달 또는 공통 패턴 |
 | **Manage Contract** | Read/Write 탭, 함수 호출 UI | EVM 전용 |
+| **Program Selector** | Asset Class, Token Type, Base Currency, Eligibility UI | 민팅 대상 자산 정의 가능 |
+| **Mint Builder** | Collateral Profile, Ratio, Reserve Status, Amount/Destination | 담보 기반 민팅 맥락 제공 |
+| **Redemption Queue** | Payout Rail, Settlement SLA, Status | Burn/Transfer 후속 흐름 확인 가능 |
 | **매핑** | `docs/design/screen-inventory.md` | IA §3 섹션 ↔ Figma 프레임 매핑 테이블 |
+| **연결성** | 화면 전이 맵 + 전이 매트릭스 | From/To/Trigger/Result 정의 |
 | **디자인 시스템** | 색상, 타이포, 간격 일관 | 2색 이상, 2단계 타이포, 8px 그리드 |
 
 ### 6.3 Phase 3 성공 기준 (문서화)
@@ -357,7 +401,7 @@ flowchart LR
 | 구분 | 성공 기준 | 검증 방법 |
 |------|-----------|-----------|
 | **IA 시트** | 18행 이상, 6컬럼 | 페이지, 섹션, 포함 요소, 데이터/필드, 비고, 우선순위 |
-| **User Flow 시트** | 28행 이상, 6컬럼 | 플로우명, 단계, 화면, 액션, 응답, 예외 |
+| **User Flow 시트** | 28행 이상(확장 포함 시 32행 이상), 6컬럼 | 플로우명, 단계, 화면, 액션, 응답, 예외 |
 | **INDEX** | `docs/INDEX.md`, 6개 이상 링크 | research, IA, UserFlow, design, orchestrator, spreadsheet |
 | **스프레드시트 명세** | `docs/spreadsheet-export-spec.md` | 컬럼 정의, 샘플 2행 |
 | **Export** | Google Spreadsheet 또는 CSV | IA, User Flow 시트 export 가능 |
@@ -369,6 +413,7 @@ flowchart LR
 | **의존성** | Phase 1 완료 후 Phase 2, Phase 2 완료 후 Phase 3 | checklist.md에 Phase별 완료 조건 명시 |
 | **품질** | `docs/orchestrator/quality-report.md` | IA ↔ Figma, User Flow ↔ 디자인 검증표 |
 | **갭** | `docs/orchestrator/gaps.md` | 불일치·누락 항목, P0/P1/P2 우선순위 |
+| **경쟁사 기준 반영** | `docs/research/competitive-gap-analysis.md` | 경쟁사 대비 부족 기능 및 지원 범위 정의 |
 
 ### 6.5 최종 성공 기준
 
@@ -398,4 +443,6 @@ flowchart LR
 - [Cloud Agent 오케스트레이터 프롬프트](CLOUD_AGENT_PROMPT.md) - 한 번에 전체 Phase 실행용
 - [Tokenization Demo IA and Design Plan](.cursor/plans/tokenization_demo_ia_and_design_ba5497f3.plan.md)
 - [Fireblocks Tokenization Docs](https://developers.fireblocks.com/docs/tokenization)
+- [Bridge API Docs](https://apidocs.bridge.xyz/)
+- [Securitize Institutional Tokenization](https://securitize.io/institutional-tokenization)
 - [Notion Tokenization Page](https://www.notion.so/dsrv/2ff7fc3011a98028ba47deaec94f887f)
