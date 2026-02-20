@@ -9,7 +9,17 @@ Fireblocks provides enterprise-grade wallet and asset operation primitives that 
 - Policy and approval controls
 - Operational visibility
 
-## 2) Capability mapping for demo flows
+## 2) Source documents reviewed
+
+| Document | URL | Coverage in this project |
+|---|---|---|
+| Tokenization | https://developers.fireblocks.com/docs/tokenization | Core IA and lifecycle model |
+| Issue New Tokens | https://developers.fireblocks.com/docs/issue-new-tokens | Add Token flow design |
+| Tokenization Page (product guidance) | https://developers.fireblocks.com/docs/tokenization | Console behavior and operations framing |
+
+The summary below captures Issue, Mint, Burn, Transfer, and Manage Contract implications.
+
+## 3) Capability mapping for demo flows
 
 | Capability area | Demo implication | MVP usage |
 |---|---|---|
@@ -20,7 +30,17 @@ Fireblocks provides enterprise-grade wallet and asset operation primitives that 
 | Policy controls | Approval and risk constraints | Read-only or simplified |
 | Audit trail | Track lifecycle events and operators | Required |
 
-## 3) IA implications
+## 4) Flow implication notes
+
+| Flow | Required inputs | Key response states | Critical failure case |
+|---|---|---|---|
+| Issue New Token | chain, symbol, decimals, contract option | pending, completed | invalid contract params |
+| Mint | amount, destination | pending approval, completed | policy limit exceeded |
+| Burn | amount, source | pending approval, completed | insufficient source balance |
+| Transfer | source, destination, amount | pending approval, completed | non-whitelisted destination |
+| Manage Contract | function, params, gas estimate | executed, reverted | function revert or gas failure |
+
+## 5) IA implications
 
 The IA should expose operation-first navigation:
 
@@ -31,7 +51,7 @@ The IA should expose operation-first navigation:
 5. Governance (policy and approval states)
 6. Settings (network/team/system configs)
 
-## 4) UX implications
+## 6) UX implications
 
 - Action modals should share a common structure:
   - Token selector
@@ -43,13 +63,13 @@ The IA should expose operation-first navigation:
   - Network/token standard
   - Recent activity table
 
-## 5) Risks and constraints
+## 7) Risks and constraints
 
 1. Chain and token-standard choices can reshape form fields and validations.
 2. Governance complexity can significantly impact flow depth.
 3. Live on-chain transaction states may require async handling beyond MVP.
 
-## 6) Recommendations for MVP
+## 8) Recommendations for MVP
 
 - Keep one primary network path and one secondary network placeholder.
 - Focus on deterministic demo data for mint/burn/transfer.

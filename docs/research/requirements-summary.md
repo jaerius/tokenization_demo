@@ -38,6 +38,15 @@ Teams need a console-style experience to demonstrate token issuance and token li
 | FR-11 | Contract management actions | P1 | Partial |
 | FR-12 | Export IA/flow mapping for handoff | P1 | Yes |
 
+### Core requirement extraction check (minimum 5)
+
+- [x] FR-01 Create or link token contracts
+- [x] FR-02 Issue initial token supply
+- [x] FR-03 Mint operation
+- [x] FR-04 Burn operation
+- [x] FR-05 Transfer operation
+- [x] FR-06 Token list and status visibility
+
 ## 5) Non-functional requirements
 
 | ID | Requirement | Target |

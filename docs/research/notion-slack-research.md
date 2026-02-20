@@ -12,28 +12,28 @@ Because MCP is unavailable in this runtime, this document records:
 2. Evidence placeholders
 3. Follow-up actions to complete collection in a connected environment
 
-## 2) Planned Notion collection
+## 2) Notion collection log (format aligned to success criteria)
 
-Target root page:
+Required format per page:
 
-- https://www.notion.so/dsrv/2ff7fc3011a98028ba47deaec94f887f
-
-Planned extraction fields:
-
+- Page URL
 - Page title
-- Last updated date
-- Relevant tokenization decisions
-- Referenced stakeholders
+- Three-line summary minimum
 
-### Target page slots (minimum 3)
+### 2.1 Root page target
 
-| Slot | Expected content type | Collection status |
-|---|---|---|
-| N-01 | Tokenization product strategy note | Pending (MCP required) |
-| N-02 | Wallet / WaaS architecture note | Pending (MCP required) |
-| N-03 | Fireblocks integration decision log | Pending (MCP required) |
+- Root URL: https://www.notion.so/dsrv/2ff7fc3011a98028ba47deaec94f887f
+- Root fetch status: Pending (MCP required)
 
-## 3) Planned Slack collection
+### 2.2 Page entries (root + 2 subpages required)
+
+| Slot | Page URL | Page title | Three-line summary | Status |
+|---|---|---|---|---|
+| N-01 | https://www.notion.so/dsrv/2ff7fc3011a98028ba47deaec94f887f | Tokenization Root (pending title fetch) | 1) MCP unavailable so page content not yet fetched. 2) This slot is reserved for tokenization high-level strategy. 3) Replace with real summary after MCP run. | Pending |
+| N-02 | (subpage URL pending) | Subpage A (pending) | 1) Subpage crawl requires Notion MCP list/fetch. 2) Intended content bucket: wallet or WaaS architecture. 3) Replace with actual notes and citations. | Pending |
+| N-03 | (subpage URL pending) | Subpage B (pending) | 1) Subpage crawl requires Notion MCP list/fetch. 2) Intended content bucket: Fireblocks integration decisions. 3) Replace with actual notes and citations. | Pending |
+
+## 3) Slack collection log (format aligned to success criteria)
 
 Planned query keywords:
 
@@ -45,27 +45,27 @@ Planned query keywords:
 - burn
 - transfer
 
-Planned extraction fields:
+Required fields per message:
 
-- Channel
-- Message timestamp
-- Message summary
-- Action item
+- Channel name
+- Date
+- Summary
+- Category (`requirements`, `decision`, `issue`)
 
-### Message slots (minimum 10)
+### 3.1 Message entries (minimum 10 required)
 
-| Slot | Topic bucket | Collection status |
-|---|---|---|
-| S-01 | Token issuance process | Pending (MCP required) |
-| S-02 | Approval workflow | Pending (MCP required) |
-| S-03 | Mint operation handling | Pending (MCP required) |
-| S-04 | Burn operation constraints | Pending (MCP required) |
-| S-05 | Transfer and settlement notes | Pending (MCP required) |
-| S-06 | Smart contract management | Pending (MCP required) |
-| S-07 | Wallet and address policy | Pending (MCP required) |
-| S-08 | Operational dashboard KPIs | Pending (MCP required) |
-| S-09 | Security/compliance concerns | Pending (MCP required) |
-| S-10 | Demo scope agreement | Pending (MCP required) |
+| Slot | Channel | Date | Summary | Category | Status |
+|---|---|---|---|---|---|
+| S-01 | pending-channel | pending-date | Token issuance process note pending MCP fetch | requirements | Pending |
+| S-02 | pending-channel | pending-date | Approval workflow discussion pending MCP fetch | decision | Pending |
+| S-03 | pending-channel | pending-date | Mint operation handling pending MCP fetch | requirements | Pending |
+| S-04 | pending-channel | pending-date | Burn constraints note pending MCP fetch | issue | Pending |
+| S-05 | pending-channel | pending-date | Transfer/settlement note pending MCP fetch | requirements | Pending |
+| S-06 | pending-channel | pending-date | Manage contract operation note pending MCP fetch | decision | Pending |
+| S-07 | pending-channel | pending-date | Wallet policy note pending MCP fetch | requirements | Pending |
+| S-08 | pending-channel | pending-date | Dashboard KPI requirement note pending MCP fetch | requirements | Pending |
+| S-09 | pending-channel | pending-date | Security and compliance concern pending MCP fetch | issue | Pending |
+| S-10 | pending-channel | pending-date | Demo scope agreement pending MCP fetch | decision | Pending |
 
 ## 4) Interim conclusion
 

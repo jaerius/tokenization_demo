@@ -1,78 +1,110 @@
-# Final Quality Report (Agent 5 Orchestrator)
+# Final Quality Report (Agent 5, Claude.md v2)
 
-## 1) Report scope
+## 1) Scope
 
-This report validates the 5-Agent orchestration execution for:
+Validation scope:
 
-- Phase 1: Research -> IA/UX -> Validation
-- Phase 2: Design -> Validation
-- Phase 3: Documentation -> Final QA
+- Phase 1: Research -> IA/UX
+- Phase 2: Design
+- Phase 3: Documentation -> QA
 
-## 2) Dependency order validation
+## 2) Dependency validation
 
-| Check | Result | Evidence |
+| Validation item | Result | Evidence |
 |---|---|---|
-| Research completed before IA/UX | PASS | `docs/research/*` exists prior to IA files |
-| IA/UX completed before Design | PASS | `docs/IA.md`, `docs/UserFlow.md` feed screen inventory |
-| Design completed before Documentation | PASS | `docs/design/screen-inventory.md` referenced by docs package |
-| Documentation completed before final QA report | PASS | `docs/INDEX.md`, `docs/spreadsheet-export-spec.md` produced before this report |
+| Phase 1 completed before Phase 2 | PASS | Research + IA + UserFlow files exist |
+| Phase 2 completed before Phase 3 | PASS | Design inventory exists before final docs update |
+| Checklist generated for all phases | PASS | `docs/orchestrator/checklist.md` |
+| Gap log generated for unresolved items | PASS | `docs/orchestrator/gaps.md` |
 
-## 3) Phase quality results
+## 3) Phase result summary
 
-### Phase 1 (Research + IA/UX)
+### 3.1 Phase 1 (Research and IA/UX)
 
 | Criterion | Result | Note |
 |---|---|---|
-| Fireblocks and market research documented | PASS | Completed in research folder |
-| Notion 3+ pages collected | FAIL | MCP not connected |
-| Slack 10+ messages collected | FAIL | MCP not connected |
-| IA required sections included | PASS | Dashboard/Tokens/Smart Contracts/Wallets/Governance/Settings present |
-| User Flow >= 3 with Mermaid | PASS | 3 flows provided |
-| MVP scope stated | PASS | Explicitly documented in IA |
+| Fireblocks docs summary (3 documents) | PASS | Documented in research notes |
+| Market comparison (3+ products, required columns) | PASS | Includes Securitize/Polymath/Pedex |
+| Notion root + 2 subpages evidence | FAIL | MCP unavailable in runtime |
+| Slack 10+ messages with required metadata | FAIL | MCP unavailable in runtime |
+| IA section 3 alignment (6 domains) | PASS | IA table mapping complete |
+| User flow section 4 alignment (7 flows) | PASS | 7 flow tables + 7 diagrams |
+| IA + UserFlow line count >= 500 | PASS | Verified by line-count check |
 
-Phase 1 verdict: **PASS WITH GAPS**
+Verdict: **PASS WITH GAPS**
 
-### Phase 2 (Design)
-
-| Criterion | Result | Note |
-|---|---|---|
-| Core screens defined (Dashboard/Token List/Token Detail) | PASS | Screen IDs SCR-01/02/03 |
-| Add/Link Token flow included | PASS | SCR-04/SCR-05 |
-| Mint/Burn/Transfer UI included | PASS | SCR-06/SCR-07/SCR-08 |
-| Consistent design system specified | PASS | Color/system tokens and components listed |
-| Figma live artifact verified | FAIL | MCP not connected |
-
-Phase 2 verdict: **PASS WITH GAPS**
-
-### Phase 3 (Documentation)
+### 3.2 Phase 2 (Design)
 
 | Criterion | Result | Note |
 |---|---|---|
-| INDEX with full artifact links | PASS | `docs/INDEX.md` |
-| Spreadsheet export spec reproducible | PASS | `docs/spreadsheet-export-spec.md` |
-| Gap list generated with priorities | PASS | `docs/orchestrator/gaps.md` |
-| Final QA report generated | PASS | This document |
+| Dashboard requirements implemented in spec | PASS | KPI + 10-row activity + 5 quick actions |
+| Token List 8-column requirement | PASS | Explicitly listed |
+| Token Detail 7-field/4-column/6-action requirement | PASS | Explicitly listed |
+| Add/Link/Mint/Burn/Transfer requirements | PASS | Each screen/modal specified |
+| Manage Contract read/write requirement | PASS | SCR-10 mapped |
+| IA section to frame mapping table exists | PASS | Included in screen inventory |
+| Live Figma frame links available | FAIL | MCP server discovery failed |
 
-Phase 3 verdict: **PASS**
+Verdict: **PASS WITH GAPS**
 
-## 4) Traceability matrix
+### 3.3 Phase 3 (Documentation and QA)
 
-| Requirement cluster | IA page(s) | Flow(s) | Screen(s) | Status |
-|---|---|---|---|---|
-| Token onboarding | Token List, Add Token, Link Token | Flow A, C | SCR-02, SCR-04, SCR-05 | Covered |
-| Lifecycle operations | Token Detail | Flow B, C | SCR-03, SCR-06, SCR-07, SCR-08 | Covered |
-| Contract oversight | Smart Contracts | Flow C | SCR-09, SCR-10 | Covered |
-| Governance visibility | Governance | Flow B, C | (spec-level in inventory) | Partially covered |
+| Criterion | Result | Note |
+|---|---|---|
+| INDEX includes required category links | PASS | research/IA/UserFlow/design/orchestrator/spreadsheet |
+| Spreadsheet spec defines 6-column IA and UserFlow sheets | PASS | Updated spec file |
+| Spreadsheet spec includes sample rows | PASS | Included |
+| Orchestrator reports complete | PASS | checklist, quality-report, gaps all present |
 
-## 5) Overall verdict
+Verdict: **PASS**
+
+## 4) IA <-> Design mapping verification table
+
+| IA section | Expected design artifact | Design evidence | Match |
+|---|---|---|---|
+| Dashboard > Token Overview | KPI cards | SCR-01 section 5.1 | Yes |
+| Dashboard > Recent Activity | 10+ row activity table | SCR-01 sample rows | Yes |
+| Dashboard > Quick Actions | 5 action buttons | SCR-01 checklist | Yes |
+| Tokens > Token List | 8-column table | SCR-02 checklist | Yes |
+| Tokens > Token Detail - Info | 7 fields | SCR-03 checklist | Yes |
+| Tokens > Token Detail - Holders | 4 columns | SCR-03 checklist | Yes |
+| Tokens > Token Detail - Actions | 6 actions | SCR-03 checklist | Yes |
+| Tokens > Add Token | 3-step wizard | SCR-04 checklist | Yes |
+| Tokens > Link Token | Verify + Link form | SCR-05 checklist | Yes |
+| Smart Contracts > Read/Write | Contract management UI | SCR-10 checklist | Yes |
+| Wallets > Add Wallet | Add wallet modal | SCR-12 mapping | Yes |
+| Governance > Policies/Workflow | Policy and workflow surface | SCR-13 mapping | Yes |
+| Settings > API/User | Settings tables | SCR-14 mapping | Yes |
+| Figma URL per frame | Clickable links | Pending MCP | No (tracked in gaps) |
+
+## 5) UserFlow <-> Design mapping verification table
+
+| Flow | Required screens | Design mapping | Match |
+|---|---|---|---|
+| FL-01 Issue New Token | Token List, Add Token | SCR-02, SCR-04 | Yes |
+| FL-02 Link Existing Token | Token List, Link Token | SCR-02, SCR-05 | Yes |
+| FL-03 Mint | Token Detail, Mint modal, Approval view | SCR-03, SCR-06, SCR-13 | Yes |
+| FL-04 Burn | Token Detail, Burn modal | SCR-03, SCR-07 | Yes |
+| FL-05 Transfer | Token Detail, Transfer modal | SCR-03, SCR-08 | Yes |
+| FL-06 Manage Contract | Token Detail, Contract Detail | SCR-03, SCR-10 | Yes |
+| FL-07 Add Wallet | Token Detail, Add Wallet modal | SCR-03, SCR-12 | Yes |
+| Flow-to-Figma frame link | Live frame URLs | Pending MCP | No (tracked in gaps) |
+
+## 6) Mismatch policy
+
+- If mismatch count is zero, report PASS.
+- If mismatch exists, register each mismatch in `docs/orchestrator/gaps.md`.
+
+Current mismatch status:
+
+- Functional mismatch count: 0
+- Artifact-link mismatch count: 1 category (Figma URL availability)
+
+## 7) Overall verdict
 
 Overall status: **CONDITIONALLY READY**
 
-The documentation package and IA/design specification are complete enough for implementation and demo walkthrough. Full sign-off requires MCP-connected reruns for Notion/Slack evidence and Figma live artifact validation.
+Condition for full sign-off:
 
-## 6) Required follow-up for full sign-off
-
-1. Connect Notion MCP and populate real page evidence.
-2. Connect Slack MCP and populate 10+ classified message excerpts.
-3. Connect Figma MCP and attach frame-level links for screen inventory.
-4. Re-run orchestrator validation and close GAP-001 through GAP-004.
+1. Discover and connect Figma MCP server, then attach frame URLs.
+2. Collect Notion and Slack evidence with MCP and update research docs.

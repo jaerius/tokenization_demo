@@ -18,8 +18,8 @@ Research -> IA/UX -> Design -> Documentation -> Orchestrator QA.
 
 | Document | Summary |
 |---|---|
-| [IA.md](IA.md) | Information architecture, sitemap, and MVP page inventory |
-| [UserFlow.md](UserFlow.md) | Three core user flows with Mermaid diagrams |
+| [IA.md](IA.md) | Claude section 3 aligned IA with 6 domains and section-level field mapping |
+| [UserFlow.md](UserFlow.md) | Claude section 4 aligned 7 detailed flows with per-flow tables and Mermaid diagrams |
 
 ## 3) Design (Agent 3)
 
@@ -31,7 +31,7 @@ Research -> IA/UX -> Design -> Documentation -> Orchestrator QA.
 
 | Document | Summary |
 |---|---|
-| [spreadsheet-export-spec.md](spreadsheet-export-spec.md) | Spreadsheet schema for IA and User Flow export/reproduction |
+| [spreadsheet-export-spec.md](spreadsheet-export-spec.md) | 6-column IA/UserFlow sheet schema with minimum row rules and CSV headers |
 | [INDEX.md](INDEX.md) | Central documentation index (this file) |
 
 ## 5) Orchestrator QA (Agent 5)
@@ -39,11 +39,11 @@ Research -> IA/UX -> Design -> Documentation -> Orchestrator QA.
 | Document | Summary |
 |---|---|
 | [orchestrator/checklist.md](orchestrator/checklist.md) | Phase gate checklist and dependency verification |
-| [orchestrator/quality-report.md](orchestrator/quality-report.md) | Final quality validation with pass/fail and evidence |
-| [orchestrator/gaps.md](orchestrator/gaps.md) | Open gaps, severity, and resolution plan |
+| [orchestrator/quality-report.md](orchestrator/quality-report.md) | Final quality validation with IA-to-design and flow-to-design verification tables |
+| [orchestrator/gaps.md](orchestrator/gaps.md) | Open gaps with impact and priority (P0/P1/P2) |
 | [../gaps.md](../gaps.md) | Root-level shortcut to orchestrator gap list |
 
 ## Notes
 
-- MCP-dependent evidence (Notion/Slack/Figma live sync) is recorded as pending where unavailable in runtime.
-- The current package is implementation-ready for next pass with connected MCP tools.
+- MCP-dependent evidence (Notion/Slack/Figma live sync) remains pending where MCP server discovery fails.
+- Design frames are fully specified and ready for immediate Talk-to-Figma execution when the server is reachable.

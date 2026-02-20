@@ -1,54 +1,112 @@
-# Orchestrator Checklist (Agent 5)
+# Orchestrator Checklist (Agent 5, Claude.md v2)
 
-## Dependency order compliance
+## 1) Phase gate dependency rules
 
-- [x] Research completed before IA/UX
-- [x] IA/UX completed before Design
-- [x] Design completed before Documentation
-- [x] Phase-based validation applied after each handoff
+- [x] Rule A: Phase 1 must complete before Phase 2 starts.
+- [x] Rule B: Phase 2 must complete before Phase 3 starts.
+- [x] Rule C: Validation report required at each phase boundary.
 
-## Phase 1 gate: Research -> IA/UX -> Validation
+### 1.1 Hard gate for Phase 1 completion
 
-### Agent 1 output check
+Phase 2 can start only if all are true:
 
-- [x] `docs/research/requirements-summary.md` created
-- [x] Fireblocks research documented
-- [x] Market comparison (3+ products) documented
-- [ ] Notion 3+ pages collected via MCP
-- [ ] Slack 10+ messages collected via MCP
+- [x] `docs/research/requirements-summary.md` exists.
+- [x] `docs/IA.md` exists.
+- [x] `docs/UserFlow.md` exists.
 
-### Agent 2 output check
+## 2) Phase 1 checklist (Research -> IA/UX)
 
-- [x] `docs/IA.md` created
-- [x] `docs/UserFlow.md` created
-- [x] Required IA sections included (Dashboard, Tokens, Smart Contracts, Wallets, Governance, Settings)
-- [x] User flows >= 3 and Mermaid-renderable
-- [x] MVP scope explicitly stated
+### 2.1 Agent 1 (Research) checks
 
-### Phase 1 validation result
+- [x] R-01 Research folder exists under `docs/research/`.
+- [x] R-02 Fireblocks notes document exists.
+- [x] R-03 Market comparison document exists.
+- [x] R-04 Requirements summary document exists.
+- [x] R-05 Market comparison includes Securitize.
+- [x] R-06 Market comparison includes Polymath.
+- [x] R-07 Market comparison includes Pedex.
+- [x] R-08 Market comparison includes columns: feature, flow, target, cost.
+- [ ] R-09 Notion root + 2 subpages fetched with MCP evidence.
+- [ ] R-10 Slack 10+ messages collected with channel/date/summary/category.
+
+### 2.2 Agent 2 (IA/UX) checks
+
+- [x] U-01 IA includes 6 mandatory domains.
+- [x] U-02 IA section mapping follows Claude section 3 structure.
+- [x] U-03 IA includes data fields at section level.
+- [x] U-04 UserFlow includes 7 named flows.
+- [x] U-05 Each flow has 5-column step table.
+- [x] U-06 Mermaid diagrams count is 7 or more.
+- [x] U-07 Flow-to-IA screen mapping exists.
+- [x] U-08 Error scenario matrix exists.
+- [x] U-09 MVP scope has P0 vs P1 split.
+- [x] U-10 Combined line count target for IA + UserFlow is met (verified separately).
+
+### 2.3 Phase 1 verdict
 
 - Status: **PASS WITH GAPS**
-- Reason: IA/UX artifacts are complete and consistent with available research, but MCP-dependent Notion/Slack evidence remains pending.
+- Gaps: R-09, R-10 (MCP collection pending)
 
-## Phase 2 gate: Design -> Validation
+## 3) Phase 2 checklist (Design)
 
-- [x] `docs/design/screen-inventory.md` created
-- [ ] Figma MCP sync evidence attached
-- [x] IA <-> screen inventory mapping validated
+### 3.1 Agent 3 (Design) checks
 
-### Phase 2 validation result
+- [x] D-01 `docs/design/screen-inventory.md` exists.
+- [x] D-02 Dashboard section includes Token Overview definition.
+- [x] D-03 Dashboard includes Recent Activity table with 10+ sample rows.
+- [x] D-04 Dashboard includes 5 Quick Action buttons.
+- [x] D-05 Token List includes required 8 columns.
+- [x] D-06 Token Detail includes 7 info fields.
+- [x] D-07 Token Detail includes 4-column Holders table.
+- [x] D-08 Token Detail includes 6 action buttons.
+- [x] D-09 Add Token 3-step form is defined.
+- [x] D-10 EVM/Stellar/Ripple branching behavior is defined.
+- [x] D-11 Link Token verify/link behavior is defined.
+- [x] D-12 Mint/Burn/Transfer modal fields are defined.
+- [x] D-13 Manage Contract read/write UI is defined.
+- [x] D-14 IA section to screen mapping table exists.
+- [x] D-15 Design system includes primary/secondary colors.
+- [x] D-16 Design system includes 2+ typography levels.
+- [x] D-17 Design system includes 8px spacing rule.
+- [ ] D-18 Live Figma frame URLs attached.
+
+### 3.2 Phase 2 verdict
 
 - Status: **PASS WITH GAPS**
-- Reason: Screen inventory fully maps IA and user flows, but live Figma artifact validation is pending until MCP connection is available.
+- Gaps: D-18 (Figma MCP server discovery pending)
 
-## Phase 3 gate: Documentation -> Final QA
+## 4) Phase 3 checklist (Documentation + Orchestrator QA)
 
-- [x] `docs/INDEX.md` created
-- [x] `docs/spreadsheet-export-spec.md` created
-- [x] `docs/orchestrator/quality-report.md` created
-- [x] `docs/orchestrator/gaps.md` created
+### 4.1 Agent 4 (Documentation) checks
 
-### Phase 3 validation result
+- [x] M-01 `docs/INDEX.md` exists.
+- [x] M-02 INDEX includes research/IA/UserFlow/design/orchestrator/spreadsheet links.
+- [x] M-03 `docs/spreadsheet-export-spec.md` exists.
+- [x] M-04 IA sheet columns defined (6 columns).
+- [x] M-05 User Flow sheet columns defined (6 columns).
+- [x] M-06 Sample rows are included (2+ rows each).
+- [x] M-07 Minimum row requirements (18 IA, 28 UserFlow) are documented.
+- [x] M-08 CSV export header format is provided.
+
+### 4.2 Agent 5 (Orchestrator QA) checks
+
+- [x] O-01 `docs/orchestrator/checklist.md` exists.
+- [x] O-02 Checklist contains 20+ validation items.
+- [x] O-03 `docs/orchestrator/quality-report.md` exists.
+- [x] O-04 Quality report contains IA-to-design mapping table.
+- [x] O-05 Quality report contains flow-to-design mapping table.
+- [x] O-06 `docs/orchestrator/gaps.md` exists.
+- [x] O-07 Gap list uses priority labels P0/P1/P2.
+- [x] O-08 Gap count is 5 or fewer.
+
+### 4.3 Phase 3 verdict
 
 - Status: **PASS**
-- Reason: Documentation package is complete and linked, with final QA and gaps list published.
+- Notes: Documentation and QA package complete; unresolved MCP-dependent evidence tracked in gaps.
+
+## 5) Final orchestration verdict
+
+- Overall: **CONDITIONALLY READY**
+- Condition for full sign-off:
+  - Resolve Notion/Slack MCP evidence collection
+  - Resolve Figma MCP server discovery and attach live frame links

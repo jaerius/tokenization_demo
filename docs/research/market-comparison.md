@@ -4,35 +4,38 @@
 
 - Securitize
 - Polymath
+- Pedex
 - Coinbase Asset Hub
-- Fireblocks-oriented enterprise console model
 
-## 2) Comparative table
+## 2) Comparison table (Claude.md required columns)
 
-| Product | Positioning | Strength | Limitation | UI/UX insight for this demo |
+| Product | Core features | Key flow style | Target customer | Cost model (public signal) | Notes for demo |
+|---|---|---|---|---|---|
+| Securitize | Issuance, compliance, investor lifecycle | Structured onboarding -> issuance -> lifecycle | Regulated issuers and asset managers | Enterprise contract pricing (quote-based) | Borrow lifecycle framing and compliance checkpoints |
+| Polymath | Security token standardization, governance control | Policy-first lifecycle with role constraints | Regulated token projects | Platform/service pricing (quote-based) | Reflect policy visibility in Governance area |
+| Pedex | Token issuance and exchange-linked operations | Asset onboarding with operations dashboard | Token issuers and trading-linked operators | B2B pricing model (non-public detailed tiers) | Use operational table patterns and status chips |
+| Coinbase Asset Hub | Asset listing and operational onboarding | Guided listing flow with verification checkpoints | Exchange and institutional operators | Enterprise tiered/commercial agreement | Use checklist style for Add/Link Token |
+
+## 3) Feature coverage matrix
+
+| Capability | Securitize | Polymath | Pedex | Coinbase Asset Hub |
 |---|---|---|---|---|
-| Securitize | End-to-end tokenization and compliance platform | Strong issuance and investor lifecycle framing | Heavier compliance flow may be complex for MVP | Keep issuance flow clear, show compliance hooks as expandable |
-| Polymath | Security-token focused infrastructure | Structured token lifecycle and policy controls | Niche framing for regulated securities can narrow scope | Expose policy modules without overloading initial flow |
-| Coinbase Asset Hub | Exchange-grade asset onboarding experience | Strong listing/onboarding workflow language | Less focused on custom governance screens for token ops | Use onboarding checklist pattern for Add/Link Token |
-| Fireblocks-style console | Operations-centric digital asset management | Practical action-driven flow (mint/burn/transfer) | Needs product-specific domain layer on top | Use dark, table-first, operation modal pattern |
+| New token issuance | High | High | Medium | Medium |
+| Existing token linking | Medium | Medium | Medium | High |
+| Mint/Burn/Transfer operations | Medium | High | Medium | Low/Medium |
+| Governance and approvals | High | High | Medium | Medium |
+| Activity visibility | Medium | Medium | High | High |
 
-## 3) Common patterns observed
+## 4) Design pattern extraction
 
-1. Step-based onboarding for new assets
-2. Strong activity logs and status indicators
-3. Role and policy checkpoints around high-impact actions
-4. Dense table layouts with filtering and drill-down
+1. Onboarding steps should be explicit and recoverable.
+2. Operational actions need modal confirmation and result tracking.
+3. Dense data tables are expected by enterprise operators.
+4. Policy and approval signals should be visible before commit.
 
-## 4) Recommended synthesis for Tokenization Demo
+## 5) Recommendation for DSRV-style prototype
 
-- Primary model: Fireblocks-style operation console
-- Supporting ideas:
-  - Securitize-like lifecycle framing
-  - Coinbase-like onboarding checklist for Add/Link Token
-  - Polymath-like policy visibility in Governance section
-
-## 5) Required differentiators for DSRV context
-
-- Multi-network readiness signaled in token list and detail
-- Wallet mapping clarity for enterprise operators
-- Minimal but explicit governance state shown before action execution
+- Use Fireblocks-like dark operation console as baseline.
+- Add Securitize/Polymath style policy context in Governance page.
+- Add Coinbase-like verification checklist for Add/Link Token.
+- Keep Pedex-like operational visibility with status-first tables.

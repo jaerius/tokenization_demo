@@ -1,29 +1,23 @@
 # Orchestrator Gap Log
 
-## Open gaps
+## Open gaps (<= 5 recommended)
 
-| Gap ID | Category | Severity | Description | Impact | Owner | Next action |
-|---|---|---|---|---|---|---|
-| GAP-001 | Research evidence | High | Notion MCP not connected, so required 3+ Notion pages are not fetched | Research traceability incomplete | Agent 1 | Re-run MCP collection and replace placeholders |
-| GAP-002 | Research evidence | High | Slack MCP not connected, so required 10+ messages are not collected | Team signal validation incomplete | Agent 1 | Re-run Slack search and classify messages |
-| GAP-003 | Design artifact | Medium | Figma MCP not connected, live design file not attached | Phase 2 visual QA partially blocked | Agent 3 | Create/update Figma file and link in docs |
-| GAP-004 | Validation depth | Medium | IA <-> Figma live node mapping unavailable | End-to-end design traceability partial | Agent 5 | Validate mapping after Figma sync |
+| Gap ID | Description | Impact | Priority | Owner | Next action |
+|---|---|---|---|---|---|
+| GAP-001 | Notion MCP evidence missing for root + 2 subpages | Phase 1 research traceability incomplete | P0 | Agent 1 | Re-run Notion MCP fetch and fill URL/title/3-line summaries |
+| GAP-002 | Slack MCP evidence missing for 10+ classified messages | Requirements and decision provenance incomplete | P0 | Agent 1 | Re-run Slack MCP search and fill channel/date/summary/category |
+| GAP-003 | Figma MCP server not discoverable (`tr35xtyx` not found) | Live design artifact and frame URLs unavailable | P1 | Agent 3 | Resolve MCP server discovery and generate frames |
+| GAP-004 | IA/UserFlow to live Figma frame link mapping absent | Final design traceability remains partial | P1 | Agent 5 | Attach frame links in screen inventory and quality report |
 
 ## Closed gaps
 
-| Gap ID | Resolution |
+| Gap ID | Resolution note |
 |---|---|
 | (none) | - |
 
-## Priority order
-
-1. GAP-001
-2. GAP-002
-3. GAP-003
-4. GAP-004
-
 ## Exit criteria
 
-- GAP-001 and GAP-002 resolved with real evidence excerpts and links.
-- GAP-003 resolved with Figma file URL and screen IDs.
-- GAP-004 resolved with IA page IDs mapped to Figma frame IDs.
+- GAP-001 resolved with 3 Notion page entries including URL, title, and 3-line summary.
+- GAP-002 resolved with 10 Slack message entries including channel, date, summary, category.
+- GAP-003 resolved with reachable Figma MCP server and generated frames.
+- GAP-004 resolved with section-to-frame URL mapping in design and QA docs.
