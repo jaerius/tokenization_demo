@@ -7,12 +7,22 @@
     "start": "HOST=0.0.0.0 PORT=3055 node server.js",
     "check": "node client-check.js",
     "tunnel:ngrok": "bash ./tunnel-ngrok.sh",
-    "tunnel:cloudflared": "bash ./tunnel-cloudflared.sh"
+    "tunnel:cloudflared": "bash ./tunnel-cloudflared.sh",
+    "tunnel:cloudflared:named": "bash ./tunnel-cloudflared-named.sh",
+    "pm2:start": "npx pm2 start ecosystem.config.cjs --update-env",
+    "pm2:restart": "npx pm2 restart ecosystem.config.cjs --update-env",
+    "pm2:status": "npx pm2 status",
+    "pm2:logs": "npx pm2 logs --lines 100",
+    "pm2:stop": "npx pm2 delete ws-server-3055 ws-cloudflared-named",
+    "figma-mcp:up": "bash ./run-figma-mcp.sh"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "ws": "^8.19.0"
+  },
+  "devDependencies": {
+    "pm2": "^6.0.13"
   }
 }
