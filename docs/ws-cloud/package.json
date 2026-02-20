@@ -1,0 +1,18 @@
+{
+  "name": "ws-cloud",
+  "version": "1.0.0",
+  "description": "WebSocket cloud connect demo for channel join/ack",
+  "main": "server.js",
+  "scripts": {
+    "start": "HOST=0.0.0.0 PORT=3055 node server.js",
+    "check": "node client-check.js",
+    "tunnel:ngrok": "bash ./tunnel-ngrok.sh",
+    "tunnel:cloudflared": "bash ./tunnel-cloudflared.sh"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ws": "^8.19.0"
+  }
+}
