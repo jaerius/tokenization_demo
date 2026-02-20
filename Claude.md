@@ -33,10 +33,12 @@
 - `docs/research/requirements-summary.md` (핵심 요구사항 요약)
 
 **성공 기준**
-- [ ] Notion tokenization 관련 페이지 3개 이상 수집·요약
-- [ ] Slack 관련 메시지 10건 이상 수집·분류
-- [ ] Fireblocks 핵심 기능·플로우 문서화 완료
-- [ ] 시장 제품 3개 이상 비교표 작성
+- [ ] Notion tokenization 관련 페이지 3개 이상 수집·요약 (페이지 URL, 제목, 핵심 내용 3줄 이상)
+- [ ] Notion 메인 페이지(2ff7fc3011a98028ba47deaec94f887f) 및 하위 페이지 2개 이상 페치
+- [ ] Slack 관련 메시지 10건 이상 수집·분류 (채널명, 날짜, 요약, 카테고리: 요구사항/의사결정/이슈)
+- [ ] Fireblocks 문서: Tokenization, Issue New Tokens, Tokenization Page 3개 문서 핵심 기능·플로우 정리
+- [ ] 시장 제품 3개 이상 비교표: Securitize, Polymath, Pedex 등 (기능, 플로우, 타겟, 비용 컬럼)
+- [ ] `docs/research/requirements-summary.md` 존재, 핵심 요구사항 5개 이상 추출
 
 ---
 
@@ -55,11 +57,13 @@
 - `docs/UserFlow.md` (User Flow 다이어그램 포함) — §4 단계별 플로우 반영
 
 **성공 기준**
-- [ ] IA 문서에 §3의 모든 섹션(Dashboard, Tokens, Smart Contracts, Wallets, Governance, Settings) 및 포함 요소 반영
+- [ ] IA 문서에 §3의 6개 영역(Dashboard, Tokens, Smart Contracts, Wallets, Governance, Settings) 모두 포함
+- [ ] 각 영역별 섹션·포함 요소·데이터 필드가 §3 테이블과 1:1 매핑
 - [ ] User Flow 문서에 §4의 7개 플로우(발행, 연결, Mint, Burn, Transfer, Manage Contract, Add Wallet) 단계별 정의
-- [ ] 각 플로우별 화면·액션·시스템 응답·예외 컬럼 포함
-- [ ] Mermaid 다이어그램이 렌더링 가능한 형태로 작성
-- [ ] MVP 범위(우선 구현 화면) 명시
+- [ ] 각 플로우별 5컬럼(단계, 화면, 사용자 액션, 시스템 응답, 예외/분기) 테이블 포함
+- [ ] Mermaid 다이어그램 7개 이상 (플로우별 flowchart 또는 sequenceDiagram), 문법 오류 없이 렌더링 가능
+- [ ] MVP 범위 명시: P0(필수) vs P1(선택) 화면 목록, 우선순위 근거
+- [ ] `docs/IA.md`, `docs/UserFlow.md` 파일 존재, 총 500줄 이상
 
 ---
 
@@ -79,12 +83,17 @@
 - 화면 목록: `docs/design/screen-inventory.md` (IA §3 섹션 ↔ Figma 화면 매핑)
 
 **성공 기준**
-- [ ] Dashboard: Token Overview, Recent Activity, Quick Actions (§3.1) 반영
-- [ ] Token List: Name, Symbol, Blockchain, Contract Address, Total Supply, Holding, Holders, Actions (§3.2) 반영
-- [ ] Token Detail: Info, Holders, Actions (§3.2) 반영
-- [ ] Add Token / Link Token 플로우 화면 (§4.1, §4.2) 반영
-- [ ] Mint, Burn, Transfer 모달 (§4.3~4.5) 반영
-- [ ] 일관된 디자인 시스템(색상, 타이포, 간격) 적용
+- [ ] Dashboard: Token Overview 카드(총 토큰 수, 공급량, 블록체인 분포), Recent Activity 테이블(10행 이상 샘플), Quick Actions 버튼 5개 (§3.1)
+- [ ] Token List: 8개 컬럼(Name, Symbol, Blockchain 로고, Contract Address, Total Supply, Holding, Holders, Actions), 필터/검색 UI (§3.2)
+- [ ] Token Detail: Info 카드(7개 필드), Holders 테이블(4컬럼), Actions 버튼 6개(Mint, Burn, Withdraw, Manage Contract, Add Wallet, More) (§3.2)
+- [ ] Add Token: 3단계 폼(Blockchain 선택 → 메타데이터 입력 → 확인), EVM/Stellar/Ripple 분기 UI (§4.1)
+- [ ] Link Token: Blockchain, Contract Address, Verify/Link 버튼 (§4.2)
+- [ ] Mint 모달: Amount, Destination 입력 필드, Confirm 버튼 (§4.3)
+- [ ] Burn 모달: Amount, Source 입력 필드, Confirm 버튼 (§4.4)
+- [ ] Transfer 모달: Source, Destination, Amount 입력 필드, Confirm 버튼 (§4.5)
+- [ ] Manage Contract: Read/Write 탭, 함수 목록, 파라미터 입력 폼 (§4.6)
+- [ ] `docs/design/screen-inventory.md` 존재, IA §3 섹션 ↔ Figma 화면/프레임 매핑 테이블
+- [ ] 디자인 시스템: Primary/Secondary 색상, 2단계 이상 타이포 스케일, 8px 그리드 간격 일관 적용
 
 ---
 
@@ -104,10 +113,11 @@
 - `docs/spreadsheet-export-spec.md` (시트 컬럼 명세 — §3, §4 구조 기반)
 
 **성공 기준**
-- [ ] IA 시트: §3의 6개 영역(Dashboard, Tokens, Smart Contracts, Wallets, Governance, Settings) 및 섹션별 포함 요소·데이터 필드 반영
-- [ ] User Flow 시트: §4의 7개 플로우 및 단계별 5컬럼(화면, 액션, 응답, 예외) 반영
-- [ ] INDEX.md에 모든 산출물 링크 및 1줄 요약
-- [ ] spreadsheet-export-spec.md로 시트 구조 재현 가능
+- [ ] IA 시트: 6개 영역 × 평균 3개 이상 섹션 = 18행 이상, 컬럼 6개(페이지, 섹션, 포함 요소, 데이터/필드, 비고, 우선순위)
+- [ ] User Flow 시트: 7개 플로우 × 평균 4단계 = 28행 이상, 컬럼 6개(플로우명, 단계, 화면, 사용자 액션, 시스템 응답, 예외/분기)
+- [ ] `docs/INDEX.md` 존재: research, IA, UserFlow, design, orchestrator, spreadsheet 링크 6개 이상, 각 1줄 요약
+- [ ] `docs/spreadsheet-export-spec.md` 존재: IA 시트 컬럼 정의, User Flow 시트 컬럼 정의, 샘플 2행 이상
+- [ ] Google Spreadsheet(또는 CSV): IA 시트, User Flow 시트 export 가능한 형태로 정리
 
 ---
 
@@ -127,10 +137,11 @@
 - `docs/orchestrator/gaps.md` (갭·이슈 목록)
 
 **성공 기준**
-- [ ] Phase 1 완료 후 Phase 2 시작 (의존성 준수)
-- [ ] IA ↔ Figma 화면 매핑 검증 완료
-- [ ] User Flow ↔ 디자인 일치 검증 완료
-- [ ] 갭·이슈 목록 작성 및 우선순위 부여
+- [ ] `docs/orchestrator/checklist.md` 존재: Phase 1~3 체크리스트, 에이전트별 산출물 검증 항목 20개 이상
+- [ ] Phase 1 완료 조건: Research 산출물 + IA.md + UserFlow.md 존재 시에만 Phase 2 진행
+- [ ] `docs/orchestrator/quality-report.md` 존재: IA ↔ Figma 매핑 검증표(섹션별 일치 여부), User Flow ↔ 디자인 검증표(플로우별 단계 일치 여부)
+- [ ] 검증 결과: 불일치 항목 0개 또는 갭 목록에 등록
+- [ ] `docs/orchestrator/gaps.md` 존재: 갭·이슈 목록(설명, 영향도, 우선순위 P0/P1/P2), 5개 이하 권장
 
 ---
 
@@ -314,25 +325,59 @@ flowchart LR
 
 ## 6. 성공 기준 (전체 프로젝트)
 
-### Phase 1 성공 기준
-- [ ] Notion, Slack, Fireblocks, 시장 제품 조사 완료
-- [ ] IA 문서 및 User Flow 문서 완성
-- [ ] MVP 범위 확정 (Dashboard, Tokens, Smart Contracts 기본)
+### 6.1 Phase 1 성공 기준 (조사 및 IA)
 
-### Phase 2 성공 기준
-- [ ] Figma에 Dashboard, Token List, Token Detail 화면 구현
-- [ ] Add Token / Link Token, Mint/Burn/Transfer UI 구현
-- [ ] IA와 화면 매핑 일치
+| 구분 | 성공 기준 | 검증 방법 |
+|------|-----------|-----------|
+| **조사 완료** | Notion tokenization 페이지 3개 이상 수집·요약 | `docs/research/` 내 파일 존재, 페이지 URL·제목·요약 포함 |
+| **조사 완료** | Slack 메시지 10건 이상 수집·분류 | requirements-summary 또는 별도 파일에 채널·날짜·요약·카테고리 |
+| **조사 완료** | Fireblocks 문서 3개 핵심 기능·플로우 정리 | Issue, Mint, Burn, Transfer, Manage Contract 포함 |
+| **조사 완료** | 시장 제품 3개 이상 비교표 | Securitize, Polymath, Pedex 등 기능·플로우·타겟 컬럼 |
+| **IA 완성** | `docs/IA.md` 존재, §3 6개 영역 반영 | Dashboard, Tokens, Smart Contracts, Wallets, Governance, Settings |
+| **IA 완성** | `docs/UserFlow.md` 존재, §4 7개 플로우 반영 | 발행, 연결, Mint, Burn, Transfer, Manage Contract, Add Wallet |
+| **IA 완성** | Mermaid 다이어그램 7개 이상, 렌더링 가능 | 문법 오류 없음, 플로우별 flowchart/sequenceDiagram |
+| **MVP 확정** | P0(필수) vs P1(선택) 화면 목록 명시 | Dashboard, Token List, Token Detail, Add/Link Token, Mint/Burn/Transfer 모달 |
 
-### Phase 3 성공 기준
-- [ ] Google Spreadsheet IA·User Flow 시트 완성
-- [ ] docs/INDEX.md에 전체 산출물 정리
-- [ ] 품질 검증 리포트 작성, 갭 목록 정리
+### 6.2 Phase 2 성공 기준 (디자인)
 
-### 최종 성공 기준
-- [ ] 데모 프로토타입으로 Tokenization 플로우 시연 가능
-- [ ] IA 및 User Flow가 Google Spreadsheet로 공유 가능
-- [ ] Fireblocks 스타일과 시장 제품을 반영한 설계 완료
+| 구분 | 성공 기준 | 검증 방법 |
+|------|-----------|-----------|
+| **Dashboard** | Token Overview, Recent Activity, Quick Actions 구현 | Figma 프레임 존재, §3.1 요소 포함 |
+| **Token List** | 8개 컬럼, 필터/검색 UI | Name, Symbol, Blockchain, Contract Address, Total Supply, Holding, Holders, Actions |
+| **Token Detail** | Info, Holders, Actions 섹션 | 7개 Info 필드, Holders 테이블, 6개 액션 버튼 |
+| **Add Token** | 3단계 폼, Blockchain 분기 | Step1~3, EVM/Stellar/Ripple 선택 UI |
+| **Link Token** | Blockchain, Contract Address, Verify/Link | 단일 폼 또는 2단계 |
+| **Mint/Burn/Transfer** | 각 모달 Amount, Source/Destination, Confirm | 3개 모달 또는 공통 패턴 |
+| **Manage Contract** | Read/Write 탭, 함수 호출 UI | EVM 전용 |
+| **매핑** | `docs/design/screen-inventory.md` | IA §3 섹션 ↔ Figma 프레임 매핑 테이블 |
+| **디자인 시스템** | 색상, 타이포, 간격 일관 | 2색 이상, 2단계 타이포, 8px 그리드 |
+
+### 6.3 Phase 3 성공 기준 (문서화)
+
+| 구분 | 성공 기준 | 검증 방법 |
+|------|-----------|-----------|
+| **IA 시트** | 18행 이상, 6컬럼 | 페이지, 섹션, 포함 요소, 데이터/필드, 비고, 우선순위 |
+| **User Flow 시트** | 28행 이상, 6컬럼 | 플로우명, 단계, 화면, 액션, 응답, 예외 |
+| **INDEX** | `docs/INDEX.md`, 6개 이상 링크 | research, IA, UserFlow, design, orchestrator, spreadsheet |
+| **스프레드시트 명세** | `docs/spreadsheet-export-spec.md` | 컬럼 정의, 샘플 2행 |
+| **Export** | Google Spreadsheet 또는 CSV | IA, User Flow 시트 export 가능 |
+
+### 6.4 Orchestrator 검증 기준
+
+| 구분 | 성공 기준 | 검증 방법 |
+|------|-----------|-----------|
+| **의존성** | Phase 1 완료 후 Phase 2, Phase 2 완료 후 Phase 3 | checklist.md에 Phase별 완료 조건 명시 |
+| **품질** | `docs/orchestrator/quality-report.md` | IA ↔ Figma, User Flow ↔ 디자인 검증표 |
+| **갭** | `docs/orchestrator/gaps.md` | 불일치·누락 항목, P0/P1/P2 우선순위 |
+
+### 6.5 최종 성공 기준
+
+| 구분 | 성공 기준 | 검증 방법 |
+|------|-----------|-----------|
+| **데모 시연** | Tokenization 플로우 3개 이상 시연 가능 | 발행 → Mint/Burn/Transfer → Manage Contract (또는 유사) |
+| **산출물 공유** | IA, User Flow가 Spreadsheet로 공유 가능 | 시트 구조 명세 기반 재현 가능 |
+| **설계 품질** | Fireblocks 스타일 반영 | 다크 테마, 테이블 레이아웃, Policy/Approval 개념 |
+| **문서 완성도** | docs/ 하위 모든 산출물 존재 | research, IA, UserFlow, design, orchestrator, INDEX, spreadsheet-export-spec |
 
 ---
 
