@@ -13,6 +13,7 @@ Research -> IA/UX -> Design -> Documentation -> Orchestrator QA.
 | [research/notion-slack-research.md](research/notion-slack-research.md) | Notion/Slack MCP collection plan, placeholders, and follow-up tasks |
 | [research/fireblocks-tokenization-notes.md](research/fireblocks-tokenization-notes.md) | Fireblocks capability mapping for tokenization demo flows |
 | [research/market-comparison.md](research/market-comparison.md) | Comparative analysis of major tokenization products |
+| [research/tokenization-product-api-comparison-ko.md](research/tokenization-product-api-comparison-ko.md) | Fireblocks/Tokeny/Securitize/Bridge 기능·API·공통점·차별점 비교(한국어) |
 
 ## 2) IA/UX (Agent 2)
 
