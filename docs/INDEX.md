@@ -26,8 +26,14 @@ Research -> IA/UX -> Design -> Documentation -> Orchestrator QA.
 
 | Document | Summary |
 |---|---|
+<<<<<<< Updated upstream
 | [design/screen-inventory.md](design/screen-inventory.md) | DSRV-like dark console screen inventory and UI specs |
 | [design/figma-table-data.md](design/figma-table-data.md) | Figma-importable CSV table package as spreadsheet fallback |
+=======
+| [design/screen-inventory.md](design/screen-inventory.md) | DSRV-like dark console screen inventory, UI specs, **Figma frame IDs** (P0 Add Token v2, Lifecycle Rail, Approval Queue v2 반영) |
+| [design/agent-a-completion-report.md](design/agent-a-completion-report.md) | Agent A (IA/UI 구조) 완료 보고 – SCR-04 v2, SCR-03 Lifecycle Rail, SCR-12 Approval Queue v2 |
+| [design/ai-agent-prompts.md](design/ai-agent-prompts.md) | P0 화면 보강용 단일 프롬프트 + 2-AI-Agent 분할 프롬프트 |
+>>>>>>> Stashed changes
 
 ## 4) Documentation (Agent 4)
 
@@ -47,5 +53,5 @@ Research -> IA/UX -> Design -> Documentation -> Orchestrator QA.
 
 ## Notes
 
-- MCP-dependent evidence (Notion/Slack/Figma live sync) is recorded as pending where unavailable in runtime.
-- The current package is implementation-ready for next pass with connected MCP tools.
+- MCP-dependent evidence (Notion/Slack) is recorded as pending where unavailable in runtime.
+- **Figma**: 14 screens implemented via Talk to Figma (channel d5x5n0on). See screen-inventory.md for frame IDs. SCR-15~18 (Program Selector, Mint Builder, Redemption Queue, Collateral Profiles) added 2026-02.
