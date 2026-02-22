@@ -1,0 +1,29 @@
+flow_id,flow_name,step_no,step_name,actor,source_screen,target_screen,decision_point,notes,source_doc
+FL-001,Issue New Token,1,Open Token List,Operator,Token List,Token List,,Start point,docs/UserFlow.md
+FL-001,Issue New Token,2,Click Add Token,Operator,Token List,Add Token,,Move to creation form,docs/UserFlow.md
+FL-001,Issue New Token,3,Select network and token standard,Operator,Add Token,Add Token,,Required selection,docs/UserFlow.md
+FL-001,Issue New Token,4,Input name symbol and initial supply,Operator,Add Token,Add Token,,Field entry,docs/UserFlow.md
+FL-001,Issue New Token,5,Review governance warning,Operator,Add Token,Add Token,,Pre-submit review,docs/UserFlow.md
+FL-001,Issue New Token,6,Submit create,Operator,Add Token,System Validation,,Creation request submitted,docs/UserFlow.md
+FL-001,Issue New Token,7,Validation passed,System,System Validation,Token Created,Yes,Successful validation branch,docs/UserFlow.md
+FL-001,Issue New Token,8,Validation failed,System,System Validation,Add Token,No,Show error and required fix,docs/UserFlow.md
+FL-001,Issue New Token,9,Redirect to token detail,System,Token Created,Token Detail,,Success terminal state,docs/UserFlow.md
+FL-002,Lifecycle Action Mint Burn Transfer,1,Open token detail,Operator,Token Detail,Token Detail,,Action entry point,docs/UserFlow.md
+FL-002,Lifecycle Action Mint Burn Transfer,2,Choose lifecycle action,Operator,Token Detail,Action Picker,,Mint burn or transfer,docs/UserFlow.md
+FL-002,Lifecycle Action Mint Burn Transfer,3,Open action modal,Operator,Action Picker,Mint Burn Transfer Modal,,Modal type depends on selection,docs/UserFlow.md
+FL-002,Lifecycle Action Mint Burn Transfer,4,Input action fields,Operator,Mint Burn Transfer Modal,Mint Burn Transfer Modal,,Amount and wallet fields,docs/UserFlow.md
+FL-002,Lifecycle Action Mint Burn Transfer,5,Review and confirm,Operator,Mint Burn Transfer Modal,Mint Burn Transfer Modal,,Final confirmation,docs/UserFlow.md
+FL-002,Lifecycle Action Mint Burn Transfer,6,Create operation request,System,Mint Burn Transfer Modal,Governance Decision,,Operation request persisted,docs/UserFlow.md
+FL-002,Lifecycle Action Mint Burn Transfer,7,Approval needed decision,System,Governance Decision,Pending Approval Queue,Yes,Route through approval queue,docs/UserFlow.md
+FL-002,Lifecycle Action Mint Burn Transfer,8,No approval required,System,Governance Decision,Execute Operation,No,Direct execution path,docs/UserFlow.md
+FL-002,Lifecycle Action Mint Burn Transfer,9,Execute operation,System,Pending Approval Queue,Execute Operation,After approval,Continue after approval,docs/UserFlow.md
+FL-002,Lifecycle Action Mint Burn Transfer,10,Update activity and supply,System,Execute Operation,Token Detail,,Refresh detail and logs,docs/UserFlow.md
+FL-003,End to End Operator Journey,1,Review dashboard,Operator,Dashboard,Token List,,Start from dashboard,docs/UserFlow.md
+FL-003,End to End Operator Journey,2,Add or link token,Operator,Token List,Add Token or Link Token,,Onboarding branch,docs/UserFlow.md
+FL-003,End to End Operator Journey,3,Open token detail,Operator,Add Token or Link Token,Token Detail,,Transition to operations,docs/UserFlow.md
+FL-003,End to End Operator Journey,4,Execute mint operation,Operator,Token Detail,Mint Modal,,Lifecycle step 1,docs/UserFlow.md
+FL-003,End to End Operator Journey,5,Execute transfer operation,Operator,Token Detail,Transfer Modal,,Lifecycle step 2,docs/UserFlow.md
+FL-003,End to End Operator Journey,6,Execute burn operation,Operator,Token Detail,Burn Modal,,Lifecycle step 3,docs/UserFlow.md
+FL-003,End to End Operator Journey,7,Review smart contract overview,Operator,Burn Modal,Smart Contract List,,Contract verification,docs/UserFlow.md
+FL-003,End to End Operator Journey,8,Review governance queue,Operator,Smart Contract List,Governance,,Policy check,docs/UserFlow.md
+FL-003,End to End Operator Journey,9,Return to dashboard KPI refresh,Operator,Governance,Dashboard,,End state,docs/UserFlow.md

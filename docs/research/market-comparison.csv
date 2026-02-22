@@ -1,0 +1,5 @@
+Product,Positioning,Strength,Limitation,UI_UX_Insight_for_Demo
+Securitize,End-to-end tokenization and compliance platform,Strong issuance and investor lifecycle framing,Heavier compliance flow may be complex for MVP,"Keep issuance flow clear, show compliance hooks as expandable"
+Polymath,Security-token focused infrastructure,Structured token lifecycle and policy controls,Niche framing for regulated securities can narrow scope,Expose policy modules without overloading initial flow
+Coinbase Asset Hub,Exchange-grade asset onboarding experience,Strong listing/onboarding workflow language,Less focused on custom governance screens for token ops,Use onboarding checklist pattern for Add/Link Token
+Fireblocks-style console,Operations-centric digital asset management,Practical action-driven flow (mint/burn/transfer),Needs product-specific domain layer on top,"Use dark, table-first, operation modal pattern"

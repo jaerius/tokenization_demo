@@ -1,0 +1,23 @@
+Depth,Path,Parent,Node,Priority,Type
+0,/Tokenization Demo,,Tokenization Demo,P0,Root
+1,/Tokenization Demo/Dashboard,Tokenization Demo,Dashboard,P1,Page
+1,/Tokenization Demo/Tokens,Tokenization Demo,Tokens,P0,Section
+1,/Tokenization Demo/Smart Contracts,Tokenization Demo,Smart Contracts,P1,Section
+1,/Tokenization Demo/Wallets,Tokenization Demo,Wallets,P1,Section
+1,/Tokenization Demo/Governance,Tokenization Demo,Governance,P1,Section
+1,/Tokenization Demo/Settings,Tokenization Demo,Settings,P2,Section
+2,/Tokenization Demo/Tokens/Token List,Tokens,Token List,P0,Page
+2,/Tokenization Demo/Tokens/Token Detail,Tokens,Token Detail,P0,Page
+2,/Tokenization Demo/Tokens/Add Token,Tokens,Add Token,P0,Page
+2,/Tokenization Demo/Tokens/Link Token,Tokens,Link Token,P0,Page
+2,/Tokenization Demo/Smart Contracts/Contract List,Smart Contracts,Contract List,P1,Page
+2,/Tokenization Demo/Smart Contracts/Contract Detail,Smart Contracts,Contract Detail,P1,Page
+2,/Tokenization Demo/Smart Contracts/Manage Contract,Smart Contracts,Manage Contract,P1,Page
+2,/Tokenization Demo/Wallets/Wallet List,Wallets,Wallet List,P1,Page
+2,/Tokenization Demo/Wallets/Wallet Detail,Wallets,Wallet Detail,P1,Page
+2,/Tokenization Demo/Governance/Policy Summary,Governance,Policy Summary,P1,Page
+2,/Tokenization Demo/Governance/Approval Queue,Governance,Approval Queue,P1,Page
+3,/Tokenization Demo/Tokens/Token Detail/Mint Action,Token Detail,Mint Action,P0,Action
+3,/Tokenization Demo/Tokens/Token Detail/Burn Action,Token Detail,Burn Action,P0,Action
+3,/Tokenization Demo/Tokens/Token Detail/Transfer Action,Token Detail,Transfer Action,P0,Action
+3,/Tokenization Demo/Tokens/Token Detail/Activity Log,Token Detail,Activity Log,P1,Component

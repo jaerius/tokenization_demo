@@ -1,0 +1,11 @@
+screen_id,screen_name,ia_page,flow_ids,figma_link,status
+SCR-01,Dashboard,Dashboard,FL-003,,planned
+SCR-02,Token List,Token List,FL-001|FL-003,,planned
+SCR-03,Token Detail,Token Detail,FL-001|FL-002|FL-003,,planned
+SCR-04,Add Token,Add Token,FL-001,,planned
+SCR-05,Link Token,Link Token,FL-003,,planned
+SCR-06,Mint Modal,Token Detail,FL-002,,planned
+SCR-07,Burn Modal,Token Detail,FL-002,,planned
+SCR-08,Transfer Modal,Token Detail,FL-002,,planned
+SCR-09,Smart Contract List,Smart Contracts,FL-003,,planned
+SCR-10,Manage Contract,Smart Contracts,FL-003,,planned

@@ -1,0 +1,6 @@
+Object,Key_Fields
+Token,"symbol; name; network; standard; total_supply; status"
+Contract,"address; network; owner; template; status"
+Wallet,"wallet_id; label; network; address; role"
+Operation,"type; amount; actor; timestamp; status; tx_hash"
+Policy,"policy_name; trigger; approver_group; decision_state"

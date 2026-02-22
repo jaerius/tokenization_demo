@@ -1,0 +1,11 @@
+page_id,page_name,section_name,feature_name,priority,owner,status,source_doc,screen_id
+IA-001,Dashboard,KPI Row,Token count and pending approvals,P1,Product,planned,docs/IA.md,SCR-01
+IA-002,Token List,Table,Search/filter/sort token inventory,P0,Product,planned,docs/IA.md,SCR-02
+IA-003,Token Detail,Action Panel,Mint/Burn/Transfer entry,P0,Product,planned,docs/IA.md,SCR-03
+IA-004,Add Token,Form,Create token metadata and network selection,P0,Product,planned,docs/IA.md,SCR-04
+IA-005,Link Token,Form,Link existing contract address,P0,Product,planned,docs/IA.md,SCR-05
+IA-006,Smart Contracts List,Contract Table,Contract status and owner visibility,P1,Ops,planned,docs/IA.md,SCR-09
+IA-007,Manage Contract,Config Panel,Update contract parameters and permissions,P1,Ops,planned,docs/IA.md,SCR-10
+IA-008,Wallets,Wallet Table,Source and destination wallet mapping,P1,Ops,planned,docs/IA.md,SPEC-ONLY
+IA-009,Governance,Approval Queue,Pending action approvals,P1,Risk,planned,docs/IA.md,SPEC-ONLY
+IA-010,Settings,Config,Network environment and team configuration,P2,Platform,planned,docs/IA.md,SPEC-ONLY
