@@ -56,7 +56,7 @@ flowchart LR
     B --> D[Deploy Contract]
     C --> D
     D --> E[Deployed Token Contract]
-    E --> F[Tokenization Operations\nIssue/Mint/Burn/Transfer]
+    E --> F["Tokenization Operations<br/>Issue/Mint/Burn/Transfer"]
     E --> G[ABI Fetch]
     H[Link Existing Contract] --> E
     I[TAP Policy] --> F
@@ -151,7 +151,7 @@ flowchart LR
     U[Investor] --> OAUTH[OAuth2 / Securitize iD]
     OAUTH --> V[Verification API]
     V --> W[Wallets API tokenId mapping]
-    DS[DS Token Interfaces\n(legacy public refs)] --> CS[Compliance Service]
+    DS["DS Token Interfaces<br/>(legacy public refs)"] --> CS[Compliance Service]
     DS --> RS[Registry Service]
     TS[Trust Service] --> DS
     COM[Communications Service] --> DS
