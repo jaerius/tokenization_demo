@@ -111,14 +111,6 @@ All modals include:
 
 ## 7) Figma implementation (completed)
 
-<<<<<<< Updated upstream
-1. Create pages: `01_Layout`, `02_Screens`, `03_Components`, `04_Flows`
-2. Build component set from section 6
-3. Assemble screens in section 3 order
-4. Link prototype hotspots for Flow A/B/C
-5. Export screen links to `docs/INDEX.md`
-6. Import fallback table package from `docs/design/figma-table-data.md` and `docs/design/figma-table-data/*.csv`
-=======
 All core screens created on Page 1 with:
 - **Design tokens**: Background #0B1220, Surface #121A2B, Primary #3B82F6, Danger #EF4444
 - **Layout**: Left nav (240px) + content area on all main screens
@@ -239,7 +231,14 @@ flowchart LR
 - **Governance (12:4728)**: Approval Queue v2 액션 버튼 추가 – Bulk Approve, Bulk Reject, Reassign, Escalate (13:6220~13:6227)
 - **Flow E - P0 Enhancement (13:6228)**: Add Token v2 플로우, Lifecycle Rail, Queue v2 Operation 다이어그램 신규 생성 (Group 25 스타일)
 
+### Figma setup reference
+1. Create pages: `01_Layout`, `02_Screens`, `03_Components`, `04_Flows`
+2. Build component set from section 6
+3. Assemble screens in section 3 order
+4. Link prototype hotspots for Flow A/B/C
+5. Export screen links to `docs/INDEX.md`
+6. Import fallback table package from `docs/design/figma-table-data.md` and `docs/design/figma-table-data/*.csv`
+
 ### Next steps (optional)
 1. Set prototype interactions in Figma (click hotspots)
 2. Export Figma file URL to `docs/INDEX.md`
->>>>>>> Stashed changes

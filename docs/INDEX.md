@@ -26,14 +26,10 @@ Research -> IA/UX -> Design -> Documentation -> Orchestrator QA.
 
 | Document | Summary |
 |---|---|
-<<<<<<< Updated upstream
-| [design/screen-inventory.md](design/screen-inventory.md) | DSRV-like dark console screen inventory and UI specs |
-| [design/figma-table-data.md](design/figma-table-data.md) | Figma-importable CSV table package as spreadsheet fallback |
-=======
 | [design/screen-inventory.md](design/screen-inventory.md) | DSRV-like dark console screen inventory, UI specs, **Figma frame IDs** (P0 Add Token v2, Lifecycle Rail, Approval Queue v2 반영) |
+| [design/figma-table-data.md](design/figma-table-data.md) | Figma-importable CSV table package as spreadsheet fallback |
 | [design/agent-a-completion-report.md](design/agent-a-completion-report.md) | Agent A (IA/UI 구조) 완료 보고 – SCR-04 v2, SCR-03 Lifecycle Rail, SCR-12 Approval Queue v2 |
 | [design/ai-agent-prompts.md](design/ai-agent-prompts.md) | P0 화면 보강용 단일 프롬프트 + 2-AI-Agent 분할 프롬프트 |
->>>>>>> Stashed changes
 
 ## 4) Documentation (Agent 4)
 
