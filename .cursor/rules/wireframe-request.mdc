@@ -1,0 +1,83 @@
+---
+description: Cloud Agent가 Figma 디자인 요청 명세서를 작성할 때 적용. Figma MCP에 직접 접근 불가한 환경에서 사용.
+globs:
+  - docs/design/wireframe-requests/**
+---
+
+# 와이어프레임 요청 명세서 작성 규칙
+
+## 1. 용도
+
+Cloud Agent(Sonnet)가 Figma MCP에 접근할 수 없을 때,
+로컬 Cursor Agent(Opus)가 실행할 수 있도록 **구체적인 디자인 명세서**를 작성한다.
+
+## 2. 파일 위치 및 명명
+
+```
+docs/design/wireframe-requests/
+├── WR-001-dashboard-kpi-cards.md
+├── WR-002-token-list-filter.md
+└── ...
+```
+
+파일명: `WR-{번호}-{화면-요소명}.md`
+
+## 3. 명세서 템플릿
+
+```markdown
+# WR-{번호}: {화면명} - {변경 내용}
+
+## 참조
+- IA: `docs/IA.md` > {섹션명}
+- UserFlow: `docs/UserFlow.md` > {플로우명} > 단계 {N}
+- 기존 화면: SCR-{XX} (Figma Frame ID: {ID})
+
+## 변경 유형
+- [ ] 새 화면 추가
+- [ ] 기존 화면 수정
+- [ ] 요소 추가
+- [ ] 요소 삭제/이동
+
+## 상세 명세
+
+### 레이아웃
+- 위치: (x, y) 기준점, 크기: W×H
+- 상위 프레임: {Frame ID 또는 화면명}
+
+### 요소 목록
+| 요소 | 유형 | 위치 | 크기 | 스타일 | 텍스트/값 |
+|------|------|------|------|--------|-----------|
+| {이름} | text/rect/frame | (x, y) | W×H | fill: #색상 | "텍스트" |
+
+### 인터랙션
+- 클릭 시: {어디로 이동 / 무엇을 열음}
+- 상태 변화: {hover, active, disabled 등}
+
+## 우선순위
+- P0 / P1 / P2
+
+## 완료 조건
+- [ ] Figma에 요소 생성됨
+- [ ] screen-inventory.md 갱신됨
+- [ ] 커밋 완료
+```
+
+## 4. 작성 원칙
+
+- **구체적 좌표와 크기를 명시**: "오른쪽 상단"이 아니라 `(x:1100, y:80, w:200, h:36)`
+- **색상은 디자인 토큰 사용**: `#4281ff`(primary), `#EF4444`(danger) 등
+- **기존 요소 참조**: Figma Frame ID를 정확히 기재
+- **IA/UserFlow 근거 명시**: 왜 이 요소가 필요한지 문서 참조로 설명
+- **하나의 요청 = 하나의 변경 단위**: 너무 큰 요청은 분할
+
+## 5. 실행 흐름
+
+```
+기획자 → Cloud Agent (이 규칙으로 명세서 작성)
+       → git push
+       → 알림 (Slack 또는 구두)
+       → 로컬 Agent (figma-wireframe.mdc 규칙으로 Figma 실행)
+       → screen-inventory.md 갱신
+       → git push
+       → 기획자 확인
+```

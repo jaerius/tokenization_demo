@@ -21,3 +21,16 @@ Depth,Path,Parent,Node,Priority,Type
 3,/Tokenization Demo/Tokens/Token Detail/Burn Action,Token Detail,Burn Action,P0,Action
 3,/Tokenization Demo/Tokens/Token Detail/Transfer Action,Token Detail,Transfer Action,P0,Action
 3,/Tokenization Demo/Tokens/Token Detail/Activity Log,Token Detail,Activity Log,P1,Component
+0,/Client Portal,,Client Portal,P0,Root
+1,/Client Portal/Client Dashboard,Client Portal,Client Dashboard,P0,Page
+1,/Client Portal/New Request Form,Client Portal,New Request Form,P0,Page
+1,/Client Portal/My Requests,Client Portal,My Requests,P0,Page
+2,/Client Portal/My Requests/Request Detail,My Requests,Request Detail,P0,Page
+1,/Client Portal/My Tokens,Client Portal,My Tokens,P1,Page
+2,/Client Portal/My Tokens/Token View,My Tokens,Token View,P1,Page
+0,/Admin Portal,,Admin Portal,P0,Root
+1,/Admin Portal/Admin Dashboard,Admin Portal,Admin Dashboard,P0,Page
+1,/Admin Portal/Request Queue,Admin Portal,Request Queue,P0,Page
+2,/Admin Portal/Request Queue/Request Review,Request Queue,Request Review,P0,Page
+1,/Admin Portal/Execution Panel,Admin Portal,Execution Panel,P0,Page
+1,/Admin Portal/Execution History,Admin Portal,Execution History,P1,Page

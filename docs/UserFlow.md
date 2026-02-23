@@ -33,12 +33,21 @@ flowchart TD
     C -->|Mint| D[Open Mint Modal]
     C -->|Burn| E[Open Burn Modal]
     C -->|Transfer| F[Open Transfer Modal]
+    C -->|Pause| P[Open Pause Modal]
+    C -->|Lock| LK[Open Lock Modal]
+    C -->|Emergency| EM[Open Emergency Modal]
     D --> G[Input Amount Destination]
     E --> H[Input Amount Source]
     F --> I[Input Amount Source Destination]
+    P --> P2[Confirm Pause/Unpause]
+    LK --> LK2[Input Address or Amount to Lock]
+    EM --> EM2[2-Step Danger Confirmation]
     G --> J[Review and Confirm]
     H --> J
     I --> J
+    P2 --> J
+    LK2 --> J
+    EM2 --> J
     J --> K[Create Operation Request]
     K --> L{Approval Needed?}
     L -->|Yes| M[Pending Approval Queue]
@@ -68,6 +77,30 @@ flowchart LR
 - Operation result states must be visible in Token Detail activity log.
 - Error states should preserve user input where possible.
 - Governance state should be shown before final submit.
+- All blockchain operations follow the **Tx Status Flow** (see §5-1).
+- All list/table views must have an **Empty State** with guidance message.
+- Dangerous actions (Pause, Emergency) require explicit acknowledgement UI.
+
+## 5-1) Tx Status Flow (post-confirm)
+
+```mermaid
+flowchart LR
+    A[User clicks Confirm] --> B[TX-01: Sending Tx]
+    B --> C{Tx Result}
+    C -->|Confirmed| D[TX-02: Tx Confirmed]
+    C -->|Failed| E[TX-03: Tx Failed]
+    C -->|Governance| F[TX-04: Pending Approval]
+    D --> G[Return to Token Detail]
+    E --> H{User Action}
+    H -->|Retry| A
+    H -->|Dismiss| G
+    F --> I[Go to Approval Queue]
+```
+
+**TX-01 Sending**: Progress bar (2/12 blocks), tx hash (pending), spinner
+**TX-02 Confirmed**: Green badge, block number, gas used, Etherscan link
+**TX-03 Failed**: Red badge, error message (e.g., out of gas), Retry button
+**TX-04 Governance**: Orange lock, Request ID, approver list, SLA countdown
 
 ## 6) Screen mapping
 
@@ -105,6 +138,17 @@ flowchart TB
         MM[SCR-06 Mint Modal]
         BM[SCR-07 Burn Modal]
         TM[SCR-08 Transfer Modal]
+        PM[SCR-25 Pause Modal]
+        LM[SCR-26 Lock Modal]
+        EMM[SCR-27 Emergency Modal]
+    end
+
+    subgraph DeployFlow["배포 결과"]
+        DR[SCR-24 Deploy Result]
+    end
+
+    subgraph AuditArea["감사"]
+        AL[SCR-28 Audit Log]
     end
 
     subgraph Contracts["Smart Contracts"]
@@ -142,13 +186,17 @@ flowchart TB
     TL -->|Collateral| CP
 
     %% Token 생성 완료 후
-    AT -->|Created| TD
+    AT -->|Submit| DR
+    DR -->|Go to Token Detail| TD
     LT -->|Linked| TD
 
     %% Token Detail 전환
     TD -->|Mint| MM
     TD -->|Burn| BM
     TD -->|Transfer| TM
+    TD -->|Pause| PM
+    TD -->|Lock| LM
+    TD -->|Emergency| EMM
     TD -->|Program Mint| PS
     TD -->|Mint Builder| MB
     TD -->|Redemption| RQ
@@ -171,6 +219,13 @@ flowchart TB
     MM -->|Done| TD
     BM -->|Done| TD
     TM -->|Done| TD
+    PM -->|Done| TD
+    LM -->|Done| TD
+    EMM -->|Done| TD
+
+    %% Audit / Governance 추가 연결
+    GOV -->|Audit Log| AL
+    D -->|Audit Log| AL
 
     %% Smart Contracts 전환
     SCL -->|Open Detail| CD
@@ -249,7 +304,8 @@ flowchart LR
     H --> I{Validation Passed}
     I -->|Yes| J[Create Token]
     I -->|No| K[Show Error]
-    J --> L[Redirect to Token Detail with Lifecycle Rail]
+    J --> J2[Deploy Result Screen]
+    J2 --> L[Redirect to Token Detail with Lifecycle Rail]
 ```
 
 ### P0 flow notes
@@ -367,6 +423,73 @@ flowchart LR
 | Write | transfer(address,uint256) | to, amount | 트랜잭션 |
 | Write | approve(address,uint256) | spender, amount | 트랜잭션 |
 | Write | pause() | 없음 | 트랜잭션 → 승인 |
+
+## 13-A) Flow E: Client Token Request (신청자 플로우)
+
+```mermaid
+flowchart LR
+    CLD[CL-01 Dashboard] --> CLR[CL-02 New Request]
+    CLD --> CLL[CL-03 My Requests]
+    CLD --> CLT[CL-05 My Tokens]
+
+    CLR -->|Submit| CLL
+    CLL -->|View| CLRD[CL-04 Request Detail]
+    CLRD -->|Message| CLRD
+    CLRD -->|Completed| CLT
+    CLT -->|View| CLV[CL-06 Token View]
+    CLV -->|Back| CLT
+    CLRD -->|Back| CLL
+```
+
+### Client 플로우 설명
+
+1. **신청**: CL-01 → CL-02에서 3-Step Wizard (네트워크/타입 → 토큰 정보/목적 → 검토/제출)
+2. **추적**: CL-03에서 전체 신청 목록 확인, 상태 칩으로 진행 현황 파악
+3. **상세**: CL-04에서 5단계 타임라인(Submitted → Under Review → Approved → Executing → Completed)과 어드민 메시지 확인
+4. **완료 후**: CL-05/CL-06에서 발행 완료 토큰 조회 (읽기 전용, 발행 요청 불가)
+
+## 13-B) Flow F: Admin Review & Execution (어드민 심사/실행 플로우)
+
+```mermaid
+flowchart LR
+    ADD[AD-01 Dashboard] --> ADQ[AD-02 Request Queue]
+    ADD -->|Review Next| ADR[AD-03 Request Review]
+
+    ADQ -->|Review| ADR
+    ADQ -->|Bulk Approve| ADQ
+    ADQ -->|Bulk Reject| ADQ
+
+    ADR -->|Approve| ADE[AD-04 Execution Panel]
+    ADR -->|Reject| ADQ
+    ADR -->|Hold| ADQ
+    ADR -->|Request Info| ADR
+
+    ADE -->|Complete| ADH[AD-05 Execution History]
+    ADE -->|Retry| ADE
+    ADH -->|View| ADE
+```
+
+### Admin 플로우 설명
+
+1. **접수 확인**: AD-01에서 대기 건수, SLA 초과 건 파악
+2. **심사**: AD-02에서 큐 확인 → AD-03에서 상세 심사 (KYC, 컴플라이언스 체크리스트)
+3. **결정**: Approve → AD-04 실행 / Reject → 사유 입력 후 큐 복귀 / Hold → 보류 / Request Info → 고객에 추가 서류 요청
+4. **실행**: AD-04에서 콜드월렛 서명 5단계 (Prepare → Sign → Broadcast → Confirm → Complete)
+5. **이력**: AD-05에서 전체 실행 이력 + 성공률/처리시간 통계
+
+### Cold Wallet Execution Status Flow
+
+```mermaid
+flowchart LR
+    P[Prepare Tx] --> S[Cold Wallet Signing]
+    S --> B[Broadcasting]
+    B --> C[Block Confirmation]
+    C --> D[Complete]
+    S -->|Timeout| R[Retry Signing]
+    R --> S
+    B -->|Failed| F[Tx Failed]
+    F -->|Retry| P
+```
 
 ## 13) 전체 화면 전환 매트릭스 (v2)
 

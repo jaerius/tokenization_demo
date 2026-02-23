@@ -49,7 +49,18 @@ Proposed base tokens:
 | SCR-12 | Governance (Approval Queue v2) | Governance > Approval Queue v2 | P0 Enhancement | P0 | **Figma done** | 12:4728 |
 | SCR-13 | Contract Detail | Smart Contracts > Contract Detail | IA alignment | P1 | **Figma done** | 13:6376 |
 | SCR-14 | Wallet Detail | Wallets > Wallet Detail | IA alignment | P1 | **Figma done** | 13:6355 |
-| SCR-23 | Settings Configuration | Settings > Configuration | IA alignment | P2 | **Figma done** | 13:6377 |
+| SCR-23 | Settings Configuration | Settings > Configuration + API Keys | IA alignment | P2 | **Figma done** | 13:6377 |
+| SCR-24 | Deploy Result | Tokens > Deploy Result | Flow A (post-submit) | P0 | **Figma done** | 34:7640 |
+| SCR-25 | Pause/Unpause | Token Detail > Btn Pause | Flow B | P0 | **Figma done** (버튼: 34:7632) | 10:4 내 |
+| SCR-26 | Lock/Unlock | Token Detail > Btn Lock | Flow B | P1 | **Figma done** (버튼: 34:7634) | 10:4 내 |
+| SCR-27 | Emergency Action | Token Detail > Btn Emergency | Flow B | P1 | **Figma done** (버튼: 34:7636) | 10:4 내 |
+| SCR-28 | Audit Log | Governance > Audit Log | Audit | P1 | **Figma done** | 34:7685 |
+| SCR-29 | Policy Editor | Governance > Policy Editor | Governance | P2 | **Figma done** | 34:7710 |
+| SCR-30 | Supply Overview | Tokens > Supply Overview | Token Lifecycle | P0 | **Figma done** | 41:8870 |
+| SCR-31 | Token Holders | Tokens > Token Holders | Token Lifecycle | P0 | **Figma done** | 41:8871 |
+| SCR-32 | Lockup Manager | Tokens > Lockup Schedules | Token Lifecycle | P0 | **Figma done** | 41:8872 |
+| SCR-33 | Lockup Detail | Tokens > Lockup Detail | Token Lifecycle | P0 | **Figma done** | 41:8873 |
+| SCR-34 | Create Lockup Modal | Lockup Manager > Create | Token Lifecycle | P0 | **Figma done** | 41:8874 |
 
 ## 3-1) P0 sync frame mapping (IA/UserFlow/Figma)
 
@@ -89,36 +100,55 @@ Proposed base tokens:
 
 ## 5) Modal interaction specs
 
-| Modal | Required fields | Validation |
-|---|---|---|
-| Mint | Amount, destination wallet, memo(optional) | amount > 0, wallet required |
-| Burn | Amount, source wallet, reason(optional) | amount <= wallet balance |
-| Transfer | Amount, source wallet, destination wallet | source != destination |
+| Modal | Required fields | Validation | Figma Frame |
+|---|---|---|---|
+| Mint | Amount, destination wallet, memo(optional) | amount > 0, wallet required | 10:7 |
+| Burn | Amount, source wallet, reason(optional) | amount <= wallet balance | 10:8 |
+| Transfer | Amount, source wallet, destination wallet | source != destination | 10:9 |
+| Pause | Checkbox acknowledgement, token info | checkbox required | 35:7789 |
+| Emergency | Reason (required), type "EMERGENCY" to confirm | both fields required | 35:7804 |
 
 All modals include:
 
 - Risk acknowledgement line
 - Governance state indicator (auto-approve/pending-approval)
 - Primary and secondary actions
+- Close (✕) button
+
+## 5-1) Transaction Status Overlays (post-confirm)
+
+| State | Description | Figma Frame | Key elements |
+|---|---|---|---|
+| TX-01 Sending | ⏳ Tx pending, progress bar, block confirmations | 35:7748 | Spinner, progress bar, tx hash |
+| TX-02 Confirmed | ✅ Tx success, block info, explorer link | 35:7758 | Green check, tx hash, "View on Etherscan" |
+| TX-03 Failed | ❌ Tx error, error message, retry | 35:7768 | Red X, error detail, Retry + Dismiss |
+| TX-04 Governance | 🔒 Pending approval, request ID, approvers | 35:7779 | Lock icon, SLA, "Go to Queue" CTA |
+
+## 5-2) Empty States
+
+| State | Message | CTA | Figma Frame |
+|---|---|---|---|
+| ES-01 Token List | No tokens found. | + Add Token | 35:7818 |
+| ES-02 Contract List | No contracts found. | — | 35:7819 |
+| ES-03 Wallet List | No wallets found. | — | 35:7820 |
+| ES-04 Activity | No activity yet. | — | 35:7821 |
+| ES-05 Approval Queue | No pending approvals. | — | 35:7822 |
+| ES-06 Audit Log | No audit records found. | — | 35:7823 |
 
 ## 6) Component system checklist
 
-- [x] Button variants: primary/secondary/danger/ghost
+- [x] Button variants: primary/secondary/danger/ghost/warning(orange)
 - [x] Input variants: default/error/disabled
 - [x] Status chips: active/pending/failed/completed
 - [x] Data table with pagination and empty state
 - [x] Modal shell with shared footer actions
+- [x] Transaction status overlays (pending/confirmed/failed/governance)
+- [x] Empty state components (icon + message + optional CTA)
+- [x] Warning/danger confirmation boxes (orange/red backgrounds)
+- [x] 2-step confirmation pattern (Emergency modal)
 
 ## 7) Figma implementation (completed)
 
-<<<<<<< Updated upstream
-1. Create pages: `01_Layout`, `02_Screens`, `03_Components`, `04_Flows`
-2. Build component set from section 6
-3. Assemble screens in section 3 order
-4. Link prototype hotspots for Flow A/B/C
-5. Export screen links to `docs/INDEX.md`
-6. Import fallback table package from `docs/design/figma-table-data.md` and `docs/design/figma-table-data/*.csv`
-=======
 All core screens created on Page 1 with:
 - **Design tokens**: Background #0B1220, Surface #121A2B, Primary #3B82F6, Danger #EF4444
 - **Layout**: Left nav (240px) + content area on all main screens
@@ -194,23 +224,127 @@ All core screens created on Page 1 with:
 - **SCR-21 Ops Monitoring & Alerts** (new): 실패 유형 대시보드, 알림 라우팅, 온콜 담당 정보
 - **SCR-22 Collection Metadata Helper** (new): NFT/Collection metadata 입력 헬퍼(ERC721F/ERC1155F 선택 시 노출)
 
-### Screen transition matrix
+### Figma Layout — Prototype Flow Map (2026-02-20)
 
+> 배치 원칙: **1:1 유저 시나리오 기반** — 좌→우로 happy path, 위→아래로 분기/서브플로우
 > 전체 화면 연결 흐름은 `docs/UserFlow.md` §7 Screen-to-screen flow 참고
+
+#### Figma Prototype Flow Layout
+
+```
+TOKENIZATION PLATFORM — PROTOTYPE FLOW MAP
+┌ Read left→right for happy path │ Read top→bottom for branches & sub-flows └
+
+──────────────────────────────────────────────────────────────────────────────────
+① SCENARIO 1: Token Creation Journey (Row 0, y=0)
+──────────────────────────────────────────────────────────────────────────────────
+
+  [Dashboard] → [Token List] → [Add Token] → [Deploy Result] → [Token Detail]
+  (0,0)         (1600,0)       (3200,0)      (4800,0)          (6400,0)
+                    │                              ↳ back to Token Detail
+                    ↓
+              ③ ALT ENTRY                ② SCENARIO 2: Contract Inspection (continues right)
+              [Link Token]
+              (1600,1200)                [Contract List] → [Contract Detail] → [Manage Contract] → [Settings]
+              ↳ → Token Detail           (8100,0)          (9700,0)           (11300,0)           (12900,0)
+
+──────────────────────────────────────────────────────────────────────────────────
+④ TOKEN ACTIONS — Modals triggered from Token Detail (Row 1, y=1200)
+──────────────────────────────────────────────────────────────────────────────────
+
+                                          [Mint]  [Burn]  [Transfer]  [Pause]  [Emergency]
+                                          (6400)  (6940)  (7480)      (8020)   (8560)
+                                            ↓       ↓       ↓          ↓        ↓
+
+⑦ WALLET OPS (Row 1, y=1200)
+[Wallets] → [Wallet Detail]
+(11300)      (12900)
+
+──────────────────────────────────────────────────────────────────────────────────
+⑤ TX RESULTS — Post-confirm transaction states (Row 2, y=1800)
+──────────────────────────────────────────────────────────────────────────────────
+
+                                          [TX Pending]  [TX Success]  [TX Failed]  [TX Governance]
+                                          (6400,1800)   (6880,1800)   (7360,1800)  (7840,1800)
+                                                        ↳ back to TD  ↳ Retry      ↓ to Governance
+
+──────────────────────────────────────────────────────────────────────────────────
+⑥ GOVERNANCE FLOW — From TX-04 or sidebar (Row 3, y=2600, x=6400+)
+──────────────────────────────────────────────────────────────────────────────────
+
+                                          [Governance/Queue] → [Audit Log] → [Policy Editor]
+                                          (6400,2600)          (8040,2600)    (9680,2600)
+
+──────────────────────────────────────────────────────────────────────────────────
+⑧ TOKEN LIFECYCLE MANAGEMENT — From Token Detail (Row 3, y=2600, x=0~4800)
+──────────────────────────────────────────────────────────────────────────────────
+
+  [Supply Overview] → [Token Holders] → [Lockup Manager] → [Lockup Detail]
+  (0,2600)             (1600,2600)       (3200,2600)         (4800,2600)
+                                               ↓
+                                         [Create Lockup Modal]
+                                         (3200,3700)
+
+══════════════════════════════════════════════════════════════════════════════════
+P1 EXTENDED FLOW (y=4000)
+──────────────────────────────────────────────────────────────────────────────────
+
+  [Program Selector] → [Mint Builder] → [Redemption Queue] → [Collateral Profiles]
+  (0,4000)              (1600,4000)      (3200,4000)          (4800,4000)
+
+══════════════════════════════════════════════════════════════════════════════════
+EMPTY STATE COMPONENTS (y=5200)
+──────────────────────────────────────────────────────────────────────────────────
+
+  [ES-01] [ES-02] [ES-03] [ES-04] [ES-05] [ES-06]
+  (0)     (560)   (1120)  (1680)  (2240)  (2800)
+```
 
 ```mermaid
 flowchart LR
-    subgraph Tokens
-        TL[Token List] --> TD[Token Detail]
-        TL --> PS[Program Selector]
-        TD --> PS
-        TD --> MB[Mint Builder]
-        PS --> MB
-        PS --> CP[Collateral Profiles]
-        MB --> RQ[Redemption Queue]
+    subgraph "① Token Creation Journey"
+        D[Dashboard] --> TL[Token List]
+        TL --> AT[Add Token]
+        AT --> DR[Deploy Result]
+        DR --> TD[Token Detail]
     end
-    D[Dashboard] --> TL
-    D --> RQ
+    subgraph "② Contract Inspection"
+        TD -.-> CL[Contract List]
+        CL --> CD[Contract Detail]
+        CD --> MC[Manage Contract]
+    end
+    subgraph "③ Alt Entry"
+        TL --> LT[Link Token]
+        LT -.-> TD
+    end
+    subgraph "④ Token Actions"
+        TD --> Mint & TD --> Burn & TD --> Transfer
+        TD --> Pause & TD --> Emergency
+    end
+    subgraph "⑤ TX Results"
+        Mint & Burn & Transfer & Pause & Emergency --> TXP[TX Pending]
+        TXP --> TXS[TX Success]
+        TXP --> TXF[TX Failed]
+        TXP --> TXG[TX Governance]
+        TXS -.-> TD
+        TXF -.->|Retry| Mint
+    end
+    subgraph "⑥ Governance Flow"
+        TXG --> GOV[Approval Queue]
+        GOV --> AL[Audit Log]
+        AL --> PE[Policy Editor]
+    end
+    subgraph "⑦ Wallet Ops"
+        W[Wallets] --> WD[Wallet Detail]
+    end
+    subgraph "⑧ Token Lifecycle Management"
+        TD --> SO[Supply Overview]
+        TD --> TH[Token Holders]
+        TD --> LM[Lockup Manager]
+        LM --> LD[Lockup Detail]
+        LM --> CLM[Create Lockup Modal]
+    end
+    S[Settings]
 ```
 
 | From \ To | Token List | Token Detail | Program Selector | Mint Builder | Redemption Queue | Collateral Profiles |
@@ -242,4 +376,4 @@ flowchart LR
 ### Next steps (optional)
 1. Set prototype interactions in Figma (click hotspots)
 2. Export Figma file URL to `docs/INDEX.md`
->>>>>>> Stashed changes
+3. Import fallback table package from `docs/design/figma-table-data.md` and `docs/design/figma-table-data/*.csv`

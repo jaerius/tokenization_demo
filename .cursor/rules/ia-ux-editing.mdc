@@ -1,0 +1,51 @@
+---
+description: IA 또는 UserFlow 문서를 편집할 때 적용. 와이어프레임 기획 단계의 문서 일관성 유지.
+globs:
+  - docs/IA.md
+  - docs/UserFlow.md
+  - docs/ia-page-inventory.csv
+---
+
+# IA / UserFlow 편집 규칙
+
+## 1. 문서 구조 보존
+
+### IA.md
+- 6개 영역 유지: Dashboard, Tokens, Smart Contracts, Wallets, Governance, Settings
+- 각 영역의 테이블 구조: `| 화면/섹션 | 포함 요소 | 데이터/필드 | 비고 |`
+- 새 화면 추가 시 해당 영역 테이블에 행 추가
+- Sitemap Mermaid 다이어그램도 함께 갱신
+
+### UserFlow.md
+- 7개+ 플로우 구조 유지
+- 각 플로우 테이블: `| 단계 | 화면 | 사용자 액션 | 시스템 응답 | 예외/분기 |`
+- Mermaid 다이어그램과 테이블이 동기화되어야 함
+- 새 플로우 추가 시 FL-XX ID 부여
+
+## 2. 변경 시 연쇄 업데이트 체크
+
+IA 또는 UserFlow를 변경할 때 다음을 확인:
+
+```
+IA.md 변경 → [ ] screen-inventory.md 매핑 확인
+           → [ ] UserFlow.md에 해당 화면 참조 있으면 갱신
+           → [ ] ia-page-inventory.csv 갱신
+
+UserFlow.md 변경 → [ ] screen-inventory.md Flow mapping 확인
+                 → [ ] IA.md에 새 화면이 필요하면 추가
+```
+
+## 3. MVP 우선순위
+
+- P0(필수): Dashboard, Token List, Token Detail, Add Token, Link Token, Mint/Burn/Transfer 모달
+- P1(권장): Smart Contract, Wallets, Governance 상세
+- P2(선택): Settings, Monitoring, Collection Metadata
+
+새 화면 추가 시 반드시 우선순위를 명시한다.
+
+## 4. Mermaid 다이어그램 규칙
+
+- `<br>` 태그 대신 짧은 텍스트 사용 (호환성)
+- 노드 ID에 특수문자 금지 (영문+숫자만)
+- 다이어그램 수정 후 렌더링 가능 여부를 확인하는 습관
+- flowchart 방향: TD(위→아래) 또는 LR(좌→우) 명시
