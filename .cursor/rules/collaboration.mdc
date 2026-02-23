@@ -52,7 +52,14 @@ alwaysApply: true
 - 새 화면 추가 시 반드시 SCR-XX ID를 부여하고 테이블에 추가
 - Figma Frame ID를 반드시 기록
 
-## 4. 산출물 체인 (의존성)
+## 4. Figma 동시 작업 규칙
+
+- 각자 **자기 이름의 WIP 페이지**에서만 작업 (예: "WIP-Jaewon", "WIP-Colleague")
+- Main 페이지는 AI가 직접 수정하지 않음, 사람이 확인 후 수동 이동
+- 다른 사람의 WIP 페이지 수정 금지
+- 같은 SCR-XX를 두 사람이 동시에 작업하지 않기 (screen-inventory.md의 상태 확인)
+
+## 5. 산출물 체인 (의존성)
 
 ```
 docs/research/ → docs/IA.md → docs/design/ → Figma

@@ -13,22 +13,52 @@ Figma 작업을 시작하기 전에 반드시:
 2. `docs/UserFlow.md`에서 해당 화면이 속한 **플로우의 전후 단계** 확인
 3. `docs/design/screen-inventory.md`에서 기존 SCR-XX ID와 Figma Frame ID 확인
 
-## 2. Figma MCP 사용 패턴
+## 2. 동시 작업 충돌 방지 (Figma Page 분리)
+
+여러 사람이 동시에 Figma MCP로 작업할 때 충돌을 막기 위해
+**반드시 자기 전용 Figma Page에서 작업**한다.
+
+### Page 구조
+```
+Figma 파일
+├── "Main"              ← 확정본만 여기에 (직접 수정 금지)
+├── "WIP-{이름}"        ← 각자 자기 페이지에서 작업
+└── "WIP-{동료이름}"    ← 동료의 페이지 (건드리지 않기)
+```
+
+### 규칙
+- **자기 WIP 페이지를 Figma에서 열어놓은 상태**에서 Talk to Figma 플러그인 연결
+- Talk to Figma MCP는 현재 보고 있는 페이지에서 동작하므로 페이지가 다르면 충돌 불가
+- 화면이 완성되면 Figma에서 수동으로 Main 페이지로 복사 (드래그 or Ctrl+C → 페이지 이동 → Ctrl+V)
+- **Main 페이지는 AI Agent가 직접 수정하지 않음** — 사람이 확인 후 수동 이동
+
+### 작업 흐름
+```
+1. Figma에서 자기 WIP 페이지 선택 (중요!)
+2. Talk to Figma 플러그인 실행 → 채널 ID 확인
+3. Cursor에서 join_channel → 연결
+4. 작업 수행 (자기 WIP 페이지에만 영향)
+5. 완성 → Figma에서 Main으로 수동 복사
+6. screen-inventory.md에 Main의 Frame ID 기록
+```
+
+## 3. Figma MCP 사용 패턴
 
 ### 채널 연결
 ```
-1. Figma Desktop에서 "Cursor Talk to Figma" 플러그인 실행
-2. 플러그인에 표시된 채널 ID 확인 (예: d5x5n0on)
-3. join_channel로 연결
+1. Figma Desktop에서 자기 WIP 페이지를 먼저 열기
+2. "Cursor Talk to Figma" 플러그인 실행
+3. 플러그인에 표시된 채널 ID 확인 (예: d5x5n0on)
+4. join_channel로 연결
 ```
 
 ### 작업 순서 (화면 하나 만들기)
 ```
 1. join_channel → 채널 연결
-2. get_document_info → 현재 Figma 파일 구조 파악
+2. get_document_info → 현재 페이지 구조 파악
 3. create_frame → 새 화면 프레임 생성 (1440×900)
 4. 내부 요소 배치 (create_rectangle, create_text, create_frame 등)
-5. screen-inventory.md에 결과 기록
+5. screen-inventory.md에 결과 기록 (Status: "WIP" → Main 이동 후 "Figma done")
 6. git commit
 ```
 
@@ -69,6 +99,11 @@ Figma에 화면을 만들거나 수정한 후 반드시:
 | SCR-XX | 화면명 | IA 매핑 | Flow 매핑 | 우선순위 | 상태 | Figma Frame ID |
 ```
 형식으로 테이블에 추가/갱신한다. **Figma Frame ID는 필수**.
+
+### 상태값
+- **WIP-{이름}** — 자기 WIP 페이지에서 작업 중 (예: `WIP-Jaewon`)
+- **Review** — 완성, Main 이동 대기
+- **Figma done** — Main 페이지에 확정, Frame ID는 Main 기준
 
 ## 6. 기획자 협업 시
 
