@@ -1,103 +1,131 @@
-# 동료 온보딩 가이드
+# 기획자 협업 온보딩 가이드
 
-> 이 프로젝트에 처음 참여하는 분을 위한 안내입니다.
-> git에 익숙하지 않아도 괜찮습니다.
+> Cursor + Talk to Figma MCP로 와이어프레임을 함께 만드는 방법
 
 ---
 
-## 1단계: Cursor 설치
+## 세팅 (최초 1회, 10분)
 
-1. [cursor.com](https://cursor.com)에서 Cursor 다운로드 및 설치
-2. 설치 후 실행, GitHub 계정으로 로그인
+### 1. Cursor 설치
+- [cursor.com](https://cursor.com) → 다운로드 → 설치 → GitHub 로그인
 
-## 2단계: 프로젝트 가져오기 (최초 1회)
-
-Cursor 터미널(`` Ctrl+` ``)을 열고 아래 명령어를 복사-붙여넣기:
-
+### 2. 프로젝트 가져오기
+터미널(`` Ctrl+` ``)에서:
 ```bash
 cd ~/Desktop
 git clone https://github.com/jaerius/tokenization_demo.git
 ```
+Cursor에서 **File > Open Folder** → `tokenization_demo` 선택
 
-그 다음 Cursor에서 **File > Open Folder** → `Desktop/tokenization_demo` 선택
-
-## 3단계: 작업 시작 전 매번
-
-터미널에서:
-```bash
-./sync.sh pull
-```
-이렇게 하면 팀의 최신 변경사항을 받아옵니다.
-
-## 4단계: 작업하기
-
-Cursor 채팅창에 자연어로 요청하면 됩니다:
-
-| 하고 싶은 일 | Cursor에 이렇게 말하세요 |
-|-------------|------------------------|
-| IA 문서 수정 | "IA.md에서 Dashboard 섹션에 알림 위젯 추가해줘" |
-| 와이어프레임 요청 | "Token Detail 화면에 Pause 버튼 추가하는 명세서 작성해줘" |
-| 현재 상태 확인 | "지금 screen-inventory.md 보여줘" |
-| 저장하고 공유 | "저장해줘" 또는 "올려줘" |
-
-## 5단계: 작업 끝날 때
-
-터미널에서:
-```bash
-./sync.sh all
-```
-이 한 줄이면 저장 + 공유가 됩니다.
+### 3. Figma 플러그인 설치
+1. Figma Desktop App 실행
+2. 프로젝트 파일 열기 (링크는 Slack에서 공유)
+3. 플러그인 검색 → **"Cursor Talk to Figma"** 설치
 
 ---
 
-## sync.sh 사용법
+## 매일 작업 시작할 때
+
+```bash
+./sync.sh pull
+```
+이 한 줄로 팀의 최신 문서를 받아옵니다.
+
+---
+
+## Figma 와이어프레임 작업 방법
+
+### Zone 방식으로 작업합니다
+
+같은 Figma 페이지 안에서 **좌표로 영역을 나눠서** 각자 작업합니다.
+
+```
+같은 Figma 페이지
+
+y=0 ──────────────────────
+  🟦 나의 Zone (y: 0 ~ 5000)
+  여기서 작업
+y=6000 ─────────────────── (빈 공간)
+  🟧 동료 Zone (y: 8000 ~ 13000)
+  동료가 여기서 작업
+y=14000 ──────────────────  (빈 공간)
+  🟩 Main Zone (y: 16000 ~)
+  확정본이 여기로 옮겨짐
+```
+
+**규칙 3가지:**
+1. **자기 Zone에서만 작업** — 동료 Zone에 들어가지 않기
+2. **완성되면 Main Zone으로 이동** — Cursor에 "Main으로 옮겨줘" 라고 말하면 AI가 자동 복사
+3. **screen-inventory.md 확인** — 누가 어떤 화면을 작업 중인지 상태가 적혀있음
+
+### 작업 시작하기
+
+1. Figma에서 프로젝트 파일 열기
+2. **"Cursor Talk to Figma" 플러그인** 실행
+3. 플러그인에 표시되는 **채널 ID** 복사 (예: `abc123`)
+4. Cursor 채팅에서:
+
+```
+피그마 채널 abc123에 연결해줘
+```
+
+5. 이제 Cursor에 자연어로 요청하면 됩니다:
+
+| 하고 싶은 일 | Cursor에 이렇게 말하세요 |
+|-------------|------------------------|
+| 새 화면 만들기 | "Token List 화면 만들어줘. 내 Zone(y=0~5000)에" |
+| 기존 화면 수정 | "SCR-03에 Pause 버튼 추가해줘" |
+| 확정하기 | "SCR-03 완성됐어. Main Zone(y=16000)으로 옮겨줘" |
+| 현재 상태 보기 | "지금 Figma 파일 구조 보여줘" |
+
+### 자기 Zone 좌표 확인
+
+처음 시작할 때 팀과 Zone 배정을 확인하세요:
+
+| 사람 | Zone 범위 | 비고 |
+|------|-----------|------|
+| (이름 1) | y: 0 ~ 5000 | |
+| (이름 2) | y: 8000 ~ 13000 | |
+| Main (확정본) | y: 16000 ~ | AI가 clone_node로 복사 |
+
+---
+
+## 작업 끝날 때
+
+```bash
+./sync.sh all
+```
+저장 메모를 입력하라고 나오면 간단히 적으면 됩니다 (예: "Dashboard 수정").
+
+---
+
+## 꼭 알아야 할 문서 3개
+
+| 문서 | 뭐가 적혀있나 | 언제 보나 |
+|------|-------------|----------|
+| `docs/IA.md` | 각 화면에 뭐가 들어가야 하는지 | 새 화면 만들기 전에 |
+| `docs/UserFlow.md` | 화면 간 이동 흐름 | 플로우 확인할 때 |
+| `docs/design/screen-inventory.md` | 화면 목록 + Figma Frame ID | 작업 현황 볼 때 |
+
+Cursor AI는 이 문서들을 자동으로 참고합니다. "Dashboard에 뭐 넣어야 해?"라고 물어보면 IA.md를 읽고 답해줍니다.
+
+---
+
+## sync.sh 명령어
 
 | 명령어 | 하는 일 |
 |--------|--------|
-| `./sync.sh pull` | 최신 변경사항 받기 |
-| `./sync.sh save` | 내 작업 저장하기 |
-| `./sync.sh push` | 저장한 내용 팀에 공유하기 |
-| `./sync.sh all` | 위 3가지 한번에 |
-| `./sync.sh status` | 현재 상태 보기 |
+| `./sync.sh pull` | 최신 받기 |
+| `./sync.sh save` | 내 작업 저장 |
+| `./sync.sh push` | 팀에 공유 |
+| `./sync.sh all` | 위 3개 한번에 |
+| `./sync.sh status` | 현재 상태 확인 |
 
-## Figma 작업을 하는 경우
+## 문제 발생 시
 
-Figma 화면을 직접 수정하려면 추가 세팅이 필요합니다:
-
-1. Figma Desktop App 설치 및 실행
-2. Figma 파일 열기 (링크는 팀에서 공유)
-3. **자기 이름의 WIP 페이지 생성** (예: "WIP-홍길동") — 이미 있으면 선택
-4. **반드시 자기 WIP 페이지를 보고 있는 상태에서** 다음 진행
-5. Figma 플러그인 검색에서 **"Cursor Talk to Figma"** 설치 및 실행
-6. 플러그인에 표시되는 **채널 ID**를 메모
-7. Cursor 채팅에서: "피그마 채널 [채널ID]에 연결해줘"
-
-> **중요**: 여러 사람이 동시에 작업할 때 충돌을 막기 위해,
-> 각자 자기 WIP 페이지에서만 작업합니다.
-> 화면이 완성되면 Main 페이지로 수동 복사합니다.
-
-## 문제가 생겼을 때
-
-| 상황 | 해결 방법 |
-|------|----------|
-| `./sync.sh pull`에서 충돌 | Cursor 채팅에 "충돌 해결해줘" |
+| 상황 | 해결 |
+|------|------|
+| sync.sh에서 에러 | Cursor 채팅에 "sync 에러 해결해줘" |
+| Figma 연결 안 됨 | 플러그인 재실행 → 새 채널 ID로 다시 연결 |
 | 뭘 수정했는지 모르겠음 | `./sync.sh status` |
-| 실수로 파일을 지움 | Cursor 채팅에 "방금 지운 파일 복구해줘" |
-| 아무것도 모르겠음 | Cursor 채팅에 "도와줘" |
-
-## 프로젝트 구조
-
-```
-tokenization_demo/
-├── CLAUDE.md          ← AI 에이전트 역할 정의 (수정 X)
-├── AGENTS.md          ← 오케스트레이션 규칙 (수정 X)
-├── ONBOARDING.md      ← 이 문서
-├── sync.sh            ← 동기화 도구
-├── .cursor/rules/     ← Cursor AI 규칙 (자동 적용)
-└── docs/
-    ├── IA.md          ← 정보 구조 (Information Architecture)
-    ├── UserFlow.md    ← 사용자 플로우
-    ├── research/      ← 리서치 산출물
-    ├── design/        ← 디자인 산출물 + Figma 매핑
-    └── orchestrator/  ← 품질 검증 문서
-```
+| 동료랑 같은 화면 건드림 | screen-inventory.md에서 상태 확인, 겹치면 대화로 조율 |
