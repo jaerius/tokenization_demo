@@ -1,17 +1,19 @@
-# Tokenization Platform User Flow
+# 토큰화 플랫폼 사용자 플로우
+
+> 이 문서는 `UserFlow.md`의 한국어 번역본입니다. 원본과 차이가 있을 경우 원본을 우선합니다.
 
 > Part A: Layer 1 (Tokenization API Console) | Part B: Layer 2 (Point Token Admin)
 
-## 1) Flow overview
+## 1) 플로우 개요
 
-This document defines required UX flows:
+이 문서는 필수 UX 플로우를 정의합니다:
 
-1. Token issuance flow
-2. Lifecycle management flow (mint/burn/transfer)
-3. End-to-end operator journey
-4. P0 enhancement flows (Add Token v2, Lifecycle Rail, Approval Queue v2)
+1. 토큰 발행 플로우
+2. 생애주기 관리 플로우 (Mint/Burn/Transfer)
+3. 엔드투엔드 운영자 여정
+4. P0 기능 강화 플로우 (Add Token v2, Lifecycle Rail, Approval Queue v2)
 
-## 2) Flow A: Issue New Token
+## 2) Flow A: 신규 토큰 발행
 
 ```mermaid
 flowchart LR
@@ -26,7 +28,7 @@ flowchart LR
     H --> J[Redirect to Token Detail]
 ```
 
-## 3) Flow B: Token Lifecycle Action (Mint/Burn/Transfer)
+## 3) Flow B: 토큰 생애주기 액션 (Mint/Burn/Transfer)
 
 ```mermaid
 flowchart TD
@@ -58,7 +60,7 @@ flowchart TD
     N --> O[Update Activity Log and Supply]
 ```
 
-## 4) Flow C: End-to-End Demo Journey
+## 4) Flow C: 엔드투엔드 데모 여정
 
 ```mermaid
 flowchart LR
@@ -73,17 +75,17 @@ flowchart LR
     I --> J[Back to Dashboard KPI Refresh]
 ```
 
-## 5) UX rules
+## 5) UX 규칙
 
-- All high-impact actions must use confirmation modals.
-- Operation result states must be visible in Token Detail activity log.
-- Error states should preserve user input where possible.
-- Governance state should be shown before final submit.
-- All blockchain operations follow the **Tx Status Flow** (see §5-1).
-- All list/table views must have an **Empty State** with guidance message.
-- Dangerous actions (Pause, Emergency) require explicit acknowledgement UI.
+- 모든 고영향 액션은 확인 모달을 사용해야 한다.
+- 작업 결과 상태는 Token Detail 활동 로그에 표시되어야 한다.
+- 에러 상태에서는 가능한 한 사용자 입력을 보존해야 한다.
+- 최종 제출 전 Governance 상태를 표시해야 한다.
+- 모든 블록체인 작업은 **Tx 상태 플로우** (§5-1 참고)를 따른다.
+- 모든 목록/테이블 뷰는 안내 메시지가 포함된 **빈 상태(Empty State)**를 가져야 한다.
+- 위험 액션(Pause, Emergency)은 명시적 확인 UI가 필요하다.
 
-## 5-1) Tx Status Flow (post-confirm)
+## 5-1) Tx 상태 플로우 (확인 후)
 
 ```mermaid
 flowchart LR
@@ -99,22 +101,22 @@ flowchart LR
     F --> I[Go to Approval Queue]
 ```
 
-**TX-01 Sending**: Progress bar (2/12 blocks), tx hash (pending), spinner
-**TX-02 Confirmed**: Green badge, block number, gas used, Etherscan link
-**TX-03 Failed**: Red badge, error message (e.g., out of gas), Retry button
-**TX-04 Governance**: Orange lock, Request ID, approver list, SLA countdown
+**TX-01 전송 중**: 진행률 바 (2/12 블록), tx hash (대기 중), 스피너
+**TX-02 확인됨**: 초록색 배지, 블록 번호, 가스 사용량, Etherscan 링크
+**TX-03 실패**: 빨간색 배지, 에러 메시지 (예: 가스 부족), 재시도 버튼
+**TX-04 Governance**: 주황색 잠금, Request ID, 승인자 목록, SLA 카운트다운
 
-## 6) Screen mapping
+## 6) 화면 매핑
 
-| Flow step group | Screen(s) |
+| 플로우 단계 그룹 | 화면 |
 |---|---|
-| Discovery and monitoring | Dashboard, Token List |
-| Token onboarding | Add Token, Link Token |
-| Token operations | Token Detail + Mint/Burn/Transfer modals |
-| Contract and policy check | Smart Contracts, Governance |
-| Program & collateral mint | Program Selector, Mint Builder, Redemption Queue, Collateral Profiles |
+| 탐색 및 모니터링 | Dashboard, Token List |
+| 토큰 온보딩 | Add Token, Link Token |
+| 토큰 운영 | Token Detail + Mint/Burn/Transfer 모달 |
+| 컨트랙트 및 정책 확인 | Smart Contracts, Governance |
+| 프로그램 및 담보 Mint | Program Selector, Mint Builder, Redemption Queue, Collateral Profiles |
 
-## 7) Screen-to-screen flow (전체 연결 흐름)
+## 7) 화면 간 전환 플로우 (전체 연결 흐름)
 
 ```mermaid
 flowchart TB
@@ -170,7 +172,6 @@ flowchart TB
 
     SET[SCR-23 Settings]
 
-    %% Dashboard 진입 경로
     D -->|View Tokens| TL
     D -->|Add Token| AT
     D -->|Mint/Transfer| TD
@@ -179,7 +180,6 @@ flowchart TB
     D -->|Wallets| W
     D -->|Pending Approvals| GOV
 
-    %% Token List 전환
     TL -->|Open Detail| TD
     TL -->|+ Add Token| AT
     TL -->|Link Token| LT
@@ -187,12 +187,10 @@ flowchart TB
     TL -->|Redemption| RQ
     TL -->|Collateral| CP
 
-    %% Token 생성 완료 후
     AT -->|Submit| DR
     DR -->|Go to Token Detail| TD
     LT -->|Linked| TD
 
-    %% Token Detail 전환
     TD -->|Mint| MM
     TD -->|Burn| BM
     TD -->|Transfer| TM
@@ -205,7 +203,6 @@ flowchart TB
     TD -->|Collateral| CP
     TD -->|Manage Contract| MC
 
-    %% Program Mint 서브플로우 (Flow D)
     PS -->|Select| MB
     PS -->|Collateral| CP
     MB -->|Submit| RQ
@@ -217,7 +214,6 @@ flowchart TB
     CP -->|Mint Builder| MB
     CP -->|Program Selector| PS
 
-    %% 모달 복귀
     MM -->|Done| TD
     BM -->|Done| TD
     TM -->|Done| TD
@@ -225,28 +221,24 @@ flowchart TB
     LM -->|Done| TD
     EMM -->|Done| TD
 
-    %% Audit / Governance 추가 연결
     GOV -->|Audit Log| AL
     D -->|Audit Log| AL
 
-    %% Smart Contracts 전환
     SCL -->|Open Detail| CD
     CD -->|Manage| MC
     MC -->|Back| CD
     MC -->|Token Detail| TD
 
-    %% Wallets 전환
     W -->|Open Detail| WD
     WD -->|Back| W
 
-    %% Governance 전환
     GOV -->|After Approve/Reject| TD
     GOV -->|View Policy| D
 ```
 
-### Screen-to-screen flow 보충 설명
+### 화면 간 전환 보충 설명
 
-**끊어진 연결 보완 (v2 업데이트):**
+**추가된 연결 (v2 업데이트):**
 
 | 추가된 연결 | 설명 |
 |---|---|
@@ -272,7 +264,7 @@ flowchart TB
 | 3 | 서브플로우 | Program Selector → Mint Builder → Redemption Queue ↔ Collateral |
 | 4 | MC 함수별 | Manage Contract 함수 실행 화면 (balanceOf, mint, burn 등) |
 
-### Flow D: Program & Collateral Mint (FL-08)
+### Flow D: 프로그램 및 담보 Mint (FL-08)
 
 ```mermaid
 flowchart LR
@@ -284,14 +276,14 @@ flowchart LR
     F --> C
 ```
 
-## 8) MVP confirmation
+## 8) MVP 확인
 
-- Issue flow: included
-- Lifecycle flow: included
-- End-to-end journey: included
-- Program & collateral mint flow: included (SCR-15~18)
+- 발행 플로우: 포함
+- 생애주기 플로우: 포함
+- 엔드투엔드 여정: 포함
+- 프로그램 및 담보 Mint 플로우: 포함 (SCR-15~18)
 
-## 9) P0 Enhancement Flow: Add Token v2 (Type/Backing/Supply/Roles)
+## 9) P0 기능 강화: Add Token v2 플로우 (타입/담보/공급량/역할)
 
 ```mermaid
 flowchart LR
@@ -310,14 +302,14 @@ flowchart LR
     J2 --> L[Redirect to Token Detail with Lifecycle Rail]
 ```
 
-### P0 flow notes
+### P0 플로우 참고 사항
 
-- Backing asset class is mandatory in v2 issuance path.
-- Role setup is preview-level for tokenization module; deep policy engine remains out of scope.
-- Token type selection uses **inline accordion pattern**: selecting ERC-20F/721F/1155F card expands a function preview panel below, showing read/write functions and roles without navigating away from the wizard.
-- This connects to Contract Detail (SCR-10) where the same functions appear as live read/write panels after deployment.
+- Backing Asset 클래스는 v2 발행 경로에서 필수.
+- 역할 설정은 토큰화 모듈 수준의 미리보기. 심층 정책 엔진은 범위 밖.
+- Token Type 선택 시 **인라인 아코디언 패턴** 사용: ERC-20F/721F/1155F 카드를 선택하면 아래에 함수 미리보기 패널이 확장되어, 위저드를 벗어나지 않고 읽기/쓰기 함수와 역할을 확인 가능.
+- 이것은 배포 후 동일한 함수가 실시간 읽기/쓰기 패널로 나타나는 Contract Detail (SCR-10)과 연결됨.
 
-## 10) P0 Enhancement Flow: Lifecycle Rail Update
+## 10) P0 기능 강화: Lifecycle Rail 업데이트
 
 ```mermaid
 flowchart LR
@@ -330,15 +322,15 @@ flowchart LR
     G --> H[Audit Snapshot]
 ```
 
-### Lifecycle rail required data
+### Lifecycle Rail 필수 데이터
 
-- state name
-- entered_at timestamp
-- actor
-- tx_hash or request_id
-- transition_reason
+- 상태명
+- entered_at 타임스탬프
+- 수행자
+- tx_hash 또는 request_id
+- 전환 사유
 
-## 11) P0 Enhancement Flow: Approval Queue v2 Operations
+## 11) P0 기능 강화: Approval Queue v2 운영
 
 ```mermaid
 flowchart TD
@@ -355,11 +347,11 @@ flowchart TD
     H --> I[Sync Token Detail and Activity]
 ```
 
-### Queue v2 UX constraints
+### Queue v2 UX 제약 조건
 
-- Batch actions must support 1..N requests.
-- SLA and assignee are first-class columns in queue table.
-- Escalation flags must be visible in list and detail.
+- 배치 액션은 1~N개 요청을 지원해야 함.
+- SLA와 담당자는 큐 테이블의 1급 컬럼.
+- 에스컬레이션 플래그는 목록과 상세에서 모두 표시되어야 함.
 
 ## 12) Manage Contract 함수별 화면 네비게이션
 
@@ -426,7 +418,7 @@ flowchart LR
 | Write | approve(address,uint256) | spender, amount | 트랜잭션 |
 | Write | pause() | 없음 | 트랜잭션 → 승인 |
 
-## 13-A) Flow E: Client Token Request (신청자 플로우)
+## 13-A) Flow E: 고객 토큰 발행 요청 (신청자 플로우)
 
 ```mermaid
 flowchart LR
@@ -443,14 +435,14 @@ flowchart LR
     CLRD -->|Back| CLL
 ```
 
-### Client 플로우 설명
+### 고객 플로우 설명
 
 1. **신청**: CL-01 → CL-02에서 3-Step Wizard (네트워크/타입 → 토큰 정보/목적 → 검토/제출)
 2. **추적**: CL-03에서 전체 신청 목록 확인, 상태 칩으로 진행 현황 파악
 3. **상세**: CL-04에서 5단계 타임라인(Submitted → Under Review → Approved → Executing → Completed)과 어드민 메시지 확인
 4. **완료 후**: CL-05/CL-06에서 발행 완료 토큰 조회 (읽기 전용, 발행 요청 불가)
 
-## 13-B) Flow F: Admin Review & Execution (어드민 심사/실행 플로우)
+## 13-B) Flow F: 어드민 심사 및 실행 플로우
 
 ```mermaid
 flowchart LR
@@ -471,7 +463,7 @@ flowchart LR
     ADH -->|View| ADE
 ```
 
-### Admin 플로우 설명
+### 어드민 플로우 설명
 
 1. **접수 확인**: AD-01에서 대기 건수, SLA 초과 건 파악
 2. **심사**: AD-02에서 큐 확인 → AD-03에서 상세 심사 (KYC, 컴플라이언스 체크리스트)
@@ -479,7 +471,7 @@ flowchart LR
 4. **실행**: AD-04에서 콜드월렛 서명 5단계 (Prepare → Sign → Broadcast → Confirm → Complete)
 5. **이력**: AD-05에서 전체 실행 이력 + 성공률/처리시간 통계
 
-### Cold Wallet Execution Status Flow
+### 콜드월렛 실행 상태 플로우
 
 ```mermaid
 flowchart LR
@@ -515,9 +507,9 @@ flowchart LR
 
 ---
 
-# Part B — Layer 2: Point Token Admin Flows
+# Part B — Layer 2: Point Token Admin 플로우
 
-## 14) Layer 2 Flow overview
+## 14) Layer 2 플로우 개요
 
 Layer 2 Point Token Admin은 포인트/컬쳐 토큰 운영자를 위한 비즈니스 레이어.
 Layer 1의 토큰 관리 플로우를 상속하면서, 재무 관리/블록체인 운영/탐색기 플로우를 추가.
@@ -525,12 +517,12 @@ Layer 1의 토큰 관리 플로우를 상속하면서, 재무 관리/블록체�
 주요 플로우:
 
 1. Token Management (Layer 1 Flow A/B/C 상속)
-2. Financial Management (신규)
-3. Blockchain Operations (신규)
-4. Explorer (신규)
-5. End-to-end operator journey (신규)
+2. 재무 관리 (Financial Management) — 신규
+3. 블록체인 운영 (Blockchain Operations) — 신규
+4. 탐색기 (Explorer) — 신규
+5. 엔드투엔드 운영자 여정 — 신규
 
-## 15) Flow G: Financial Management
+## 15) Flow G: 재무 관리
 
 ```mermaid
 flowchart LR
@@ -557,14 +549,14 @@ flowchart LR
     RBBuy --> TXH
 ```
 
-### Flow G UX rules
+### Flow G UX 규칙
 
 - Retirement (환매/소각): 요청 접수 → 검토 → 승인 시 Burn TX 자동 실행 → TX History에 기록
 - Record Editor: 관리자 전용, 모든 수정은 사유 필수 + 감사 로그 자동 기록
 - Refund/Buy: 환불은 역방향 Transfer + Burn, 매입은 Mint + Transfer
 - 모든 재무 액션은 TX History(L2-17)에 기록 필수
 
-## 16) Flow H: Blockchain Operations
+## 16) Flow H: 블록체인 운영
 
 ```mermaid
 flowchart LR
@@ -589,14 +581,14 @@ flowchart LR
     TSAnomaly -->|View TX| TXD
 ```
 
-### Flow H UX rules
+### Flow H UX 규칙
 
 - TX History: 전체 트랜잭션의 단일 진실 소스. 모든 다른 화면에서 TX Hash 클릭 시 L2-21로 이동
 - Address Whitelist: Transfer 대상 주소는 화이트리스트에 있어야 실행 가능 (정책 엔진과 연동)
 - Gas Wallet: 잔액 부족 시 Dashboard에 경고 표시, 자동 충전 설정 가능
 - Tx Safe: 한도 초과 트랜잭션은 자동 차단 → Anomaly Log에 기록 → 관리자 수동 승인 필요
 
-## 17) Flow I: Explorer
+## 17) Flow I: 탐색기
 
 ```mermaid
 flowchart LR
@@ -610,13 +602,13 @@ flowchart LR
     AH -->|Back| BC
 ```
 
-### Flow I UX rules
+### Flow I UX 규칙
 
 - TX Detail: 프라이빗 체인 전용 탐색기 역할. 외부 Etherscan 불필요
 - Account History: 주소 입력 → 해당 주소의 모든 토큰 잔액, 활동 이력, 잔액 변동 차트 표시
 - TX Hash 링크는 모든 화면에서 일관되게 L2-21로 이동
 
-## 18) Layer 2 Screen-to-screen flow
+## 18) Layer 2 화면 간 전환 플로우
 
 ```mermaid
 flowchart TB

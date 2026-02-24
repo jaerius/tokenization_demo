@@ -5,7 +5,9 @@
 | 문서 | 설명 |
 |------|------|
 | [IA.md](IA.md) | 정보 구조 — 화면 구성, 섹션, 데이터 필드 |
+| [IA-ko.md](IA-ko.md) | 정보 구조 (한국어 번역본) |
 | [UserFlow.md](UserFlow.md) | 사용자 플로우 — 7개 핵심 플로우 + Mermaid 다이어그램 |
+| [UserFlow-ko.md](UserFlow-ko.md) | 사용자 플로우 (한국어 번역본) |
 | [design/screen-inventory.md](design/screen-inventory.md) | 화면 목록 — IA ↔ Figma Frame ID 매핑 (진실의 원천) |
 
 ## Research
@@ -26,6 +28,14 @@
 | [design/gap-implementation-spec.md](design/gap-implementation-spec.md) | GAP 보완 구현 명세 |
 | [design/requirements-figma-audit.md](design/requirements-figma-audit.md) | 요구사항 vs Figma 감사 |
 | [design/figma-alignment-audit-report.md](design/figma-alignment-audit-report.md) | Figma 정렬 감사 (전체 통합) |
+
+## Layer 2 (Point Token Admin)
+
+| 문서 | 설명 |
+|------|------|
+| [IA.md — Part B](IA.md#part-b--layer-2-point-token-admin-culture-token) | Layer 2 IA: 7개 모듈 네비게이션, Sitemap, 28개 화면 목록 |
+| [UserFlow.md — Part B](UserFlow.md#part-b--layer-2-point-token-admin-flows) | Layer 2 전용 플로우 (Financial Mgmt / Blockchain / Explorer) |
+| [design/screen-inventory.md — Part B](design/screen-inventory.md#part-b--layer-2-point-token-admin-culture-token) | Layer 2 화면 28개 Figma Frame ID 매핑 |
 
 ## Documentation
 

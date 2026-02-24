@@ -1,4 +1,10 @@
-# Tokenization Demo Screen Inventory
+# Tokenization Platform Screen Inventory
+
+> Part A: Layer 1 (Tokenization API Console) | Part B: Layer 2 (Point Token Admin)
+
+---
+
+# Part A — Layer 1: Tokenization API Console
 
 ## 1) Design execution context
 
@@ -377,3 +383,194 @@ flowchart LR
 1. Set prototype interactions in Figma (click hotspots)
 2. Export Figma file URL to `docs/INDEX.md`
 3. Import fallback table package from `docs/design/figma-table-data.md` and `docs/design/figma-table-data/*.csv`
+
+---
+
+# Part B — Layer 2: Point Token Admin (Culture Token)
+
+## L2-1) Design context
+
+- Product: BKC&C Culture Token Admin (Point Token Admin)
+- Architecture layer: Layer 2 — wraps Layer 1 Tokenization APIs with business logic
+- Navigation: 7-module sidebar (Dashboard / Token Mgmt / Wallet Mgmt / Financial Mgmt / Blockchain / Explorer / Settings & Commons)
+- Design system: Layer 1과 동일 (Light enterprise, DSRV color tokens)
+- Figma location: Layer 1 화면 하단 y=7000+ 또는 별도 Page
+
+## L2-2) Screen inventory
+
+| ID | Screen | Layer 1 원본 | 유형 | IA mapping | Priority | Status | Figma Frame ID |
+|---|---|---|---|---|---|---|---|
+| L2-01 | Dashboard | SCR-01 복사+개조 | 복사 | Dashboard | P0 | **Figma done** | 1:7905 |
+| L2-02 | Token List | SCR-02 복사 | 복사 | Token Mgmt > Token List | P0 | **Figma done** | 1:8013 |
+| L2-03 | Token Detail | SCR-03 복사 | 복사 | Token Mgmt > Token Detail | P0 | **Figma done** | 1:8228 |
+| L2-04 | Create Token | SCR-04 복사+간소화 | 복사 | Token Mgmt > Create Token | P0 | **Figma done** | 1:8089 |
+| L2-05 | Mint Modal | SCR-06 복사 | 복사 | Token Mgmt > Mint | P0 | **Figma done** | 1:8335 |
+| L2-06 | Burn Modal | SCR-07 복사 | 복사 | Token Mgmt > Burn | P0 | **Figma done** | 1:8350 |
+| L2-07 | Transfer Modal | SCR-08 복사 | 복사 | Token Mgmt > Transfer | P0 | **Figma done** | 1:8365 |
+| L2-08 | Deploy Result | SCR-24 복사 | 복사 | Token Mgmt > Deploy | P0 | **Figma done** | 1:8201 |
+| L2-09 | Supply Overview | SCR-30 복사 | 복사 | Token Mgmt > Supply | P0 | **Figma done** | 1:8478 |
+| L2-10 | Token Holders | SCR-31 복사 | 복사 | Token Mgmt > Holders | P0 | **Figma done** | 1:8547 |
+| L2-11 | Lockup Manager | SCR-32 복사 | 복사 | Token Mgmt > Lockup | P0 | **Figma done** | 1:8582 |
+| L2-12 | Wallet List | SCR-11 복사 | 복사 | Wallet Mgmt > List | P0 | **Figma done** | 1:8383 |
+| L2-13 | Wallet Balance Detail | SCR-14 복사+강화 | 복사 | Wallet Mgmt > Detail | P1 | **Figma done** | 1:8427 |
+| L2-14 | **Retirement** | NEW | 신규 | Financial Mgmt > Retirement | P0 | **Figma done** | 3:2312 |
+| L2-15 | **Record Editor** | NEW | 신규 | Financial Mgmt > Record Editor | P0 | **Figma done** | 3:2405 |
+| L2-16 | **Refund / Buy** | NEW | 신규 | Financial Mgmt > Refund/Buy | P0 | **Figma done** | 3:2446 |
+| L2-17 | **TX History** | NEW | 신규 | Blockchain > TX History | P0 | **Figma done** | 3:2378 |
+| L2-18 | **Address Whitelist** | NEW | 신규 | Blockchain > Whitelist | P1 | **Figma done** | 4:1654 |
+| L2-19 | **Gas Wallet** | NEW | 신규 | Blockchain > Gas Wallet | P1 | **Figma done** | 4:1702 |
+| L2-20 | **Tx Safe** | NEW | 신규 | Blockchain > Tx Safe | P1 | **Figma done** | 4:1760 |
+| L2-21 | **TX Detail** | NEW | 신규 | Explorer > TX Detail | P0 | **Figma done** | 3:2502 |
+| L2-22 | **Account History** | NEW | 신규 | Explorer > Account History | P1 | **Figma done** | 6:1809 |
+| L2-23 | **System Admin** | NEW | 신규 | Settings > System Admin | P1 | **Figma done** | 6:1825 |
+| L2-24 | Policy Engine | SCR-29 복사+강화 | 복사 | Settings > Policy Engine | P1 | **Figma done** | 1:8666 |
+| L2-25 | Audit Log | SCR-28 복사 | 복사 | Settings > Audit Log | P1 | **Figma done** | 3:2323 |
+| L2-26 | **Alert / Notifications** | NEW | 신규 | Settings > Alerts | P2 | **Figma done** | 6:1840 |
+| L2-27 | API & Integration Settings | SCR-23 복사+축소 | 복사 | Settings > API | P2 | **Figma done** | 1:8615 |
+| L2-28 | **Transaction Stats** | NEW | 신규 | Dashboard > TX Stats | P0 | **Figma done** | 3:2565 |
+
+**Summary**: 복사 15개 + 신규 13개 = 총 28개
+
+## L2-3) Key layout specs (Layer 2 specific screens)
+
+### L2-14 Retirement (환매/소각)
+
+- Header: "Retirement Requests" + period filter + status filter
+- KPI row: Total Retired / Pending / Processed Today / Avg Processing Time
+- Table columns: Request ID, Token, Amount, Requester, Status, Submitted At, Processed At, Processor
+- Row actions: Approve, Reject, View Detail
+- Empty state: "No retirement requests."
+
+### L2-15 Record Editor (이력 수정)
+
+- Header: "Record Editor" + search by address/token
+- Warning banner: "All edits require approval and are recorded in the audit log."
+- Table columns: Edit ID, Token, Target Address, Old Value, New Value, Reason, Editor, Approver, Status
+- Action: + New Edit → modal with target address, old/new value, reason
+- Empty state: "No record edits."
+
+### L2-16 Refund / Buy (환불/매입)
+
+- Header: "Refund & Buy Orders" + type filter (Refund/Buy) + status filter
+- KPI row: Total Refunded / Total Bought / Pending / Today's Volume
+- Table columns: Order ID, Type, Token, Amount, Counterparty, Status, TX Hash, Created At
+- Row actions: Process, Cancel, View TX
+- Empty state: "No refund or buy orders."
+
+### L2-17 TX History
+
+- Header: "Transaction History" + date range picker + status filter + type filter
+- Table columns: TX Hash, Block, From, To, Value, Token, Gas Used, Status, Timestamp
+- Row action: View TX Detail (→ L2-21)
+- Pagination + CSV export button
+- Empty state: "No transactions found."
+
+### L2-18 Address Whitelist
+
+- Header: "Address Whitelist" + search + bulk import button
+- Table columns: Address, Label, Added By, Added At, Status
+- Row actions: Revoke, Edit Label
+- Action: + Add Address → inline form or modal
+- Empty state: "No whitelisted addresses."
+
+### L2-19 Gas Wallet
+
+- Header: "Gas Wallet Management"
+- Balance card: Current Balance, Chain, Threshold, Auto-recharge status
+- Recharge history table: Date, Amount, TX Hash, Source
+- Action: Recharge Now → modal with amount
+- Alert: "Balance below threshold" warning when applicable
+
+### L2-20 Tx Safe
+
+- Header: "Transaction Safety Rules"
+- Rule list: Daily Limit, Per-TX Limit, Blacklist, Time Restriction
+- Each rule card: Rule name, Parameters, Status (Active/Disabled), Last Modified
+- Action: + Add Rule → wizard or modal
+- Anomaly log: Recent blocked/flagged transactions
+
+### L2-21 TX Detail (Explorer)
+
+- Header: TX Hash (copyable), Status badge
+- Info sections: Block Number, Timestamp, From, To, Value, Gas Used, Gas Price
+- Event Log: Decoded contract events
+- Internal TX: Sub-calls if applicable
+- Navigation: Back to TX History
+
+### L2-22 Account History
+
+- Header: "Account History" + address search
+- Account info card: Address, Label, Type, Current Balances
+- Activity table: Date, Type, Token, Amount, TX Hash, Counterparty
+- Balance chart: Token balance over time
+- Empty state: "Enter an address to view history."
+
+### L2-23 System Admin
+
+- Tabs: Users | Roles | System Config
+- Users tab: User table (Name, Email, Role, Status, Last Login), + Add User
+- Roles tab: Role definitions, permission matrix
+- System Config tab: Chain settings, feature flags, maintenance mode
+
+### L2-28 Transaction Stats
+
+- Header: "Transaction Statistics" + period selector
+- KPI row: Total TX, Success Rate, Avg Gas, Total Volume
+- Charts: TX count by day (bar), TX volume by token (pie), Success/Fail ratio (donut)
+- Table: Top tokens by TX count
+
+## L2-4) Layer 2 Figma layout
+
+```
+POINT TOKEN ADMIN — PROTOTYPE FLOW MAP
+┌ Read left→right for happy path │ Read top→down for branches └
+
+────────────────────────────────────────────────────────────────
+① TOKEN CREATION (Row 0, y=7000)
+────────────────────────────────────────────────────────────────
+
+  [L2-Dashboard] → [L2-Token List] → [L2-Create Token] → [L2-Deploy] → [L2-Token Detail]
+  (0,7000)         (1600,7000)       (3200,7000)          (4800,7000)   (6400,7000)
+
+────────────────────────────────────────────────────────────────
+② TOKEN ACTIONS (Row 1, y=8200)
+────────────────────────────────────────────────────────────────
+
+  [L2-Mint]  [L2-Burn]  [L2-Transfer]     [L2-Wallet List] → [L2-Wallet Detail]
+  (6400)     (6940)     (7480)             (9700,8200)        (11300,8200)
+
+────────────────────────────────────────────────────────────────
+③ FINANCIAL MANAGEMENT (Row 2, y=9400)
+────────────────────────────────────────────────────────────────
+
+  [L2-Retirement] → [L2-Record Editor] → [L2-Refund/Buy]
+  (0,9400)           (1600,9400)          (3200,9400)
+
+────────────────────────────────────────────────────────────────
+④ BLOCKCHAIN (Row 3, y=10600)
+────────────────────────────────────────────────────────────────
+
+  [L2-TX History] → [L2-Whitelist] → [L2-Gas Wallet] → [L2-Tx Safe]
+  (0,10600)          (1600,10600)     (3200,10600)       (4800,10600)
+
+────────────────────────────────────────────────────────────────
+⑤ EXPLORER + STATS (Row 4, y=11800)
+────────────────────────────────────────────────────────────────
+
+  [L2-TX Detail] → [L2-Account History]     [L2-TX Stats]
+  (0,11800)         (1600,11800)              (3200,11800)
+
+────────────────────────────────────────────────────────────────
+⑥ SETTINGS & COMMONS (Row 5, y=13000)
+────────────────────────────────────────────────────────────────
+
+  [L2-System Admin] → [L2-Policy] → [L2-Audit Log] → [L2-Alerts] → [L2-API Settings]
+  (0,13000)            (1600,13000)  (3200,13000)      (4800,13000)  (6400,13000)
+
+────────────────────────────────────────────────────────────────
+⑦ TOKEN LIFECYCLE (Row 6, y=14200)
+────────────────────────────────────────────────────────────────
+
+  [L2-Supply] → [L2-Holders] → [L2-Lockup Manager]
+  (0,14200)     (1600,14200)    (3200,14200)
+```

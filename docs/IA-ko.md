@@ -1,20 +1,22 @@
-# Tokenization Platform Information Architecture
+# 토큰화 플랫폼 정보 구조 (IA)
+
+> 이 문서는 `IA.md`의 한국어 번역본입니다. 원본과 차이가 있을 경우 원본을 우선합니다.
 
 > 이 문서는 Layer 1 (Tokenization API Console)과 Layer 2 (Point Token Admin)의 IA를 모두 정의합니다.
 
 ---
 
-# Part A — Layer 1: Tokenization API Console
+# Part A — Layer 1: 토큰화 API 콘솔
 
 DSRV 내부 인프라 관리용 콘솔. Layer 1 API(Custody, Tokenization, Blockchain Orchestration)를 직접 제어하는 개발자/운영자 도구.
 
-## 1) IA principles
+## 1) IA 원칙
 
-- Operation-first navigation for fast demo execution
-- Fireblocks-style console density (dark, table-centric, actionable)
-- Clear separation between token lifecycle actions and governance context
+- 빠른 데모 실행을 위한 운영 중심 네비게이션
+- Fireblocks 스타일 콘솔 밀도 (다크 테마, 테이블 중심, 액션 가능)
+- 토큰 생애주기 액션과 거버넌스 컨텍스트 간 명확한 분리
 
-## 2) Global navigation
+## 2) 전역 네비게이션
 
 1. Dashboard
 2. Tokens
@@ -23,7 +25,7 @@ DSRV 내부 인프라 관리용 콘솔. Layer 1 API(Custody, Tokenization, Block
 5. Governance
 6. Settings
 
-## 3) Sitemap (MVP)
+## 3) 사이트맵 (MVP)
 
 ```mermaid
 flowchart TD
@@ -73,37 +75,37 @@ flowchart TD
     Settings --> APIKeys[API Key Management]
 ```
 
-## 4) Page inventory
+## 4) 페이지 인벤토리
 
-| Page | Core sections | Main actions | Priority |
+| 페이지 | 핵심 섹션 | 주요 액션 | 우선순위 |
 |---|---|---|---|
-| Dashboard | KPI cards, recent activity, pending approvals | Jump to token actions | P1 |
-| Token List | Search/filter, token table, status chips | Open detail, add token, link token | P0 |
-| Token Detail | Header summary, supply panel, activity table, utility contracts tab | Mint, burn, transfer, pause/unpause, lock/unlock, emergency action | P0 |
-| Add Token | Network/token standard form, metadata | Create token | P0 |
-| Add Token v2 | Network selector, token type cards with inline function preview accordion, backing asset selector, initial supply, issuance role setup | Create token with advanced issuance parameters | P0 |
-| Link Token | Existing contract input/validation, **ERC-20 검증 결과 패널** (mint/burn/pause 가능 여부 + "관리 가능/불가" 판정) | Link contract | P0 |
-| Deploy Result | Token Address, Deploy Tx Hash, Program ID, 배포 성공/실패 상태 | Go to Token Detail, Copy Address | P0 |
-| Smart Contracts List | Contract table, health/status | Open contract detail | P1 |
-| Manage Contract | Parameters, permissions, status | Update/manage contract | P1 |
-| Wallets | Wallet table, tagging, balances | Select source/destination | P1 |
-| Governance | Policy overview, approval queue | Review statuses | P1 |
-| Approval Queue v2 | Queue operations table, assignee, SLA, escalation, batch actions | Approve/reject/reassign/escalate in bulk | P0 |
-| Pause Modal | Confirmation dialog for pause/unpause action | Confirm pause, cancel | P0 |
-| Lock/Unlock Modal | Address or amount-based lock/unlock | Confirm lock, specify target | P1 |
-| Emergency Action Modal | 2-step confirmation for emergency freeze/shutdown | Confirm emergency action (danger) | P1 |
-| Audit Log | Dedicated audit trail with filtering/search/export | Filter, search, export CSV | P1 |
-| Policy Editor | Policy rule creation/edit with trigger/approver/threshold | Create/edit policy | P2 |
-| Settings | Environment/network/team configuration, **API Key management** | Save configuration, manage API keys | P2 |
-| Supply Overview | Total/Circulating/Locked/Burned supply, distribution breakdown, timeline chart, key metrics | View supply changes over time | P0 |
-| Token Holders | Holder list with rank, address, balance, % supply, tag (Team/Investor/Treasury/Public), export CSV | Filter by tag, search address, export | P0 |
-| Lockup Manager | Lockup schedule list, Total Locked/Active/Next Unlock/Released KPIs, create new lockup | Create lockup, view schedule | P0 |
-| Lockup Detail | Vesting progress bar, release events timeline, schedule info, actions (Release/Pause/Revoke) | Release now, pause, revoke | P0 |
-| Create Lockup Modal | Form: name, beneficiary, amount, type (Linear/Cliff/Step), dates, cliff, duration, interval | Create lockup schedule | P0 |
+| Dashboard | KPI 카드, 최근 활동, 승인 대기 | 토큰 액션으로 이동 | P1 |
+| Token List | 검색/필터, 토큰 테이블, 상태 칩 | 상세 열기, 토큰 추가, 토큰 연결 | P0 |
+| Token Detail | 헤더 요약, 공급량 패널, 활동 테이블, Utility Contracts 탭 | Mint, Burn, Transfer, Pause/Unpause, Lock/Unlock, Emergency Action | P0 |
+| Add Token | 네트워크/토큰 표준 폼, 메타데이터 | 토큰 생성 | P0 |
+| Add Token v2 | 네트워크 선택기, 인라인 함수 미리보기 아코디언이 있는 토큰 타입 카드, Backing Asset 선택기, 초기 공급량, 발행 역할 설정 | 고급 발행 파라미터로 토큰 생성 | P0 |
+| Link Token | 기존 컨트랙트 입력/검증, **ERC-20 검증 결과 패널** (mint/burn/pause 가능 여부 + "관리 가능/불가" 판정) | 컨트랙트 연결 | P0 |
+| Deploy Result | Token Address, Deploy Tx Hash, Program ID, 배포 성공/실패 상태 | Token Detail로 이동, 주소 복사 | P0 |
+| Smart Contracts List | 컨트랙트 테이블, 상태/헬스 | 컨트랙트 상세 열기 | P1 |
+| Manage Contract | 파라미터, 권한, 상태 | 컨트랙트 업데이트/관리 | P1 |
+| Wallets | 지갑 테이블, 태깅, 잔액 | 출처/대상 선택 | P1 |
+| Governance | 정책 개요, 승인 큐 | 상태 검토 | P1 |
+| Approval Queue v2 | 큐 운영 테이블, 담당자, SLA, 에스컬레이션, 일괄 액션 | 일괄 승인/거절/재할당/에스컬레이션 | P0 |
+| Pause Modal | Pause/Unpause 액션 확인 대화상자 | Pause 확인, 취소 | P0 |
+| Lock/Unlock Modal | 주소 또는 수량 기반 Lock/Unlock | Lock 확인, 대상 지정 | P1 |
+| Emergency Action Modal | 긴급 동결/종료를 위한 2단계 확인 | 긴급 액션 확인 (위험) | P1 |
+| Audit Log | 필터/검색/내보내기가 있는 전용 감사 추적 | 필터, 검색, CSV 내보내기 | P1 |
+| Policy Editor | 트리거/승인자/임계값이 있는 정책 규칙 생성/편집 | 정책 생성/편집 | P2 |
+| Settings | 환경/네트워크/팀 설정, **API Key 관리** | 설정 저장, API 키 관리 | P2 |
+| Supply Overview | Total/Circulating/Locked/Burned 공급량, 분포 분석, 타임라인 차트, 핵심 지표 | 시간에 따른 공급량 변화 조회 | P0 |
+| Token Holders | 순위, 주소, 잔액, 공급량 %, 태그(Team/Investor/Treasury/Public)가 있는 Holder 목록, CSV 내보내기 | 태그별 필터, 주소 검색, 내보내기 | P0 |
+| Lockup Manager | Lockup 일정 목록, Total Locked/Active/Next Unlock/Released KPI, 새 Lockup 생성 | Lockup 생성, 일정 조회 | P0 |
+| Lockup Detail | Vesting 진행률 바, 배포 이벤트 타임라인, 일정 정보, 액션(Release/Pause/Revoke) | 즉시 Release, Pause, Revoke | P0 |
+| Create Lockup Modal | 폼: 이름, 수혜자, 수량, 타입(Linear/Cliff/Step), 날짜, cliff, 기간, 간격 | Lockup 일정 생성 | P0 |
 
-## 5) Data object mapping
+## 5) 데이터 객체 매핑
 
-| Object | Key fields |
+| 객체 | 핵심 필드 |
 |---|---|
 | Token | symbol, name, network, standard, total_supply, status |
 | Contract | address, network, owner, template, status |
@@ -118,32 +120,32 @@ flowchart TD
 | LockupSchedule | schedule_id, name, beneficiary, token_id, type (Linear/Cliff/Step), total_amount, released, remaining, start_date, end_date, cliff_period, release_interval, status (Active/Locked/Paused/Completed/Revoked), next_unlock_date |
 | LockupEvent | event_id, schedule_id, event_type (cliff_release/monthly_release/manual_release/revoke), amount, tx_hash, timestamp, status |
 
-## 6) MVP scope decision
+## 6) MVP 범위 결정
 
-### Must-have screens
+### 필수 화면
 
 - Dashboard
 - Token List
 - Token Detail
 - Add Token / Add Token v2 / Link Token
-- Mint/Burn/Transfer action modals
-- Smart Contract overview
+- Mint/Burn/Transfer 액션 모달
+- Smart Contract 개요
 - Approval Queue v2
 
-## 7) P0 enhancement alignment (Fireblocks gap sync)
+## 7) P0 강화 정렬 (Fireblocks 갭 동기화)
 
 ### Add Token v2 (P0)
 
-- Step 1a: Select Network (Ethereum / Polygon / Solana)
-- Step 1b: Select Token Type via selection cards (ERC-20F / ERC-721F / ERC-1155F)
-  - Each card shows: type name, description, function count
-  - On select → **inline accordion expands** showing contract function preview:
-    - Read Functions (e.g., name, symbol, balanceOf, totalSupply, allowance)
-    - Write Functions (e.g., transfer, approve, mint, burn, pause)
-    - Available Roles (e.g., ADMIN, MINTER, PAUSER)
-    - Note: "Deploy 시 자동 설정됨 · Step 4에서 Role 주소 지정 가능"
-  - UX rationale: 별도 페이지 이동 없이 위저드 흐름 유지하면서 함수 스펙 확인 가능
-- Step 2: Select Backing Asset — **카테고리별 Pill Chip 그리드** (단일 선택)
+- Step 1a: 네트워크 선택 (Ethereum / Polygon / Solana)
+- Step 1b: 선택 카드로 토큰 타입 선택 (ERC-20F / ERC-721F / ERC-1155F)
+  - 각 카드 표시: 타입명, 설명, 함수 수
+  - 선택 시 → **인라인 아코디언 확장**으로 컨트랙트 함수 미리보기:
+    - Read Functions (예: name, symbol, balanceOf, totalSupply, allowance)
+    - Write Functions (예: transfer, approve, mint, burn, pause)
+    - Available Roles (예: ADMIN, MINTER, PAUSER)
+    - 참고: "Deploy 시 자동 설정됨 · Step 4에서 Role 주소 지정 가능"
+  - UX 근거: 별도 페이지 이동 없이 위저드 흐름 유지하면서 함수 스펙 확인 가능
+- Step 2: Backing Asset 선택 — **카테고리별 Pill Chip 그리드** (단일 선택)
   - Fiat Currency: USD, EUR, KRW, JPY, GBP, CHF, SGD
   - Commodity: Gold (XAU), Silver (XAG), Platinum, Crude Oil
   - Bond / Fixed Income: US Treasury, Corporate, Municipal, Sovereign
@@ -152,21 +154,21 @@ flowchart TD
 - Step 3: Name / Symbol / Decimals / Initial Supply
 - Step 4: Issuance role setup preview (Admin/Minter/Pauser)
 - Step 1 옵션: Upgradeable Proxy 토글 (on/off) — 보안·감사 관점에서 proxy 패턴 사용 여부 선택
-- Step 5: Review and submit → **Deploy Result 화면**으로 리다이렉트 (Token Address + Tx Hash + Program ID)
+- Step 5: 검토 및 제출 → **Deploy Result 화면**으로 리다이렉트 (Token Address + Tx Hash + Program ID)
 
 ### Token Detail lifecycle rail (P0)
 
-- Display lifecycle states inline:
+- 인라인 생애주기 상태 표시:
   - Defined
   - Deployed/Linked
   - Issued/Minted
   - Distributed/Transferred
   - Burned/Redeemed
-- Each state keeps timestamp, operator, and reference transaction.
+- 각 상태는 타임스탬프, 운영자, 참조 트랜잭션을 유지합니다.
 
 ### Approval Queue v2 (P0)
 
-- Required columns:
+- 필수 컬럼:
   - Request ID
   - Type
   - Token
@@ -175,29 +177,29 @@ flowchart TD
   - SLA
   - Escalation flag
   - Status
-- Required actions:
-  - Bulk approve
-  - Bulk reject
-  - Reassign
-  - Escalate
+- 필수 액션:
+  - 일괄 승인
+  - 일괄 거절
+  - 재할당
+  - 에스컬레이션
 
-### Should-have screens
+### 권장 화면
 
 - Wallet detail
 - Governance queue summary
 
-### Utility Contract integration (P1)
+### Utility Contract 통합 (P1)
 
 - Token Detail 내 "Utility" 탭: 연결된 Utility Contract 목록 + Attach/Detach
 - Lock/Unlock: 주소 또는 물량 단위, Transfer Restriction Hook 설정
 - Utility Deploy: Token ↔ Utility 권한 연결, 연결 이력 기록
 - External Utility Import: Utility Contract Address 등록 + Token 연결 관계 검증
 
-### Deferred
+### 보류
 
-- Full policy editor (deep rule engine) — P2 Policy Editor로 대체
+- Full policy editor (심층 규칙 엔진) — P2 Policy Editor로 대체
 
-## 8-A) Approval-Based Issuance Model (B2B 규제 환경)
+## 8-A) 승인 기반 발행 모델 (B2B 규제 환경)
 
 규제 요건(콜드월렛 발행 의무)에 따라 고객이 토큰 발행을 **신청**하고, DSRV 어드민이 **심사·승인·실행**하는 워크플로우.
 
@@ -245,30 +247,30 @@ flowchart TD
 | AD-04 | Execution Panel | Action | 콜드월렛 Tx 실행 + 상태 추적 | P0 |
 | AD-05 | Execution History | List | 완료 이력 + Tx 결과 | P1 |
 
-### Data objects (추가)
+### 데이터 객체 (추가)
 
-| Object | Key fields |
+| 객체 | 핵심 필드 |
 |---|---|
 | IssuanceRequest | request_id, applicant, token_spec, status, submitted_at, reviewed_by, decision_reason |
 | ColdWalletExecution | execution_id, request_id, tx_hash, signing_status, broadcast_status, block_number |
 
-## 8) IA implementation alignment decision
+## 8) IA 구현 정렬 결정
 
-Product-completeness decision (senior planning viewpoint):
+제품 완성도 결정 (시니어 기획 관점):
 
-- Keep `Add Token v2` as 5-step wizard (Step 5 Review/Submit is required for operational safety).
-- Keep `Contract Detail` and `Manage Contract` as separate surfaces:
-  - Detail = read-oriented context (parameters/permissions overview)
-  - Manage = action-oriented execution surface
-- Keep `Governance` split into:
-  - Approval Queue v2 (actionable operations)
-  - Policy Summary (read-only policy snapshot)
+- `Add Token v2`를 5단계 위저드로 유지 (운영 안전을 위해 Step 5 Review/Submit 필수).
+- `Contract Detail`과 `Manage Contract`를 별도 화면으로 유지:
+  - Detail = 읽기 중심 컨텍스트 (파라미터/권한 개요)
+  - Manage = 액션 중심 실행 화면
+- `Governance`를 다음과 같이 분리 유지:
+  - Approval Queue v2 (실행 가능한 운영)
+  - Policy Summary (읽기 전용 정책 스냅샷)
 
-Current implementation alignment:
+현재 구현 정렬:
 
-- Implemented: Dashboard Overview + Pending Approvals widget, Token List, Token Detail (Lifecycle Rail), Add Token v2, Link Token, Contract List, Contract Detail, Manage Contract, Wallet List, Wallet Detail, Approval Queue v2, Policy Summary, Settings Configuration.
-- Added (Gap Audit 2026-02-23): Pause/Unpause modal, Lock/Unlock modal, Emergency Action modal, Deploy Result screen, Link Token verification panel, Upgradeable toggle, Utility tab, Audit Log screen, Policy Editor, API Key management.
-- Remaining depth gaps: Wallet policy manager, risk controls, monitoring/alerts, NFT metadata helper.
+- 구현 완료: Dashboard Overview + Pending Approvals 위젯, Token List, Token Detail (Lifecycle Rail), Add Token v2, Link Token, Contract List, Contract Detail, Manage Contract, Wallet List, Wallet Detail, Approval Queue v2, Policy Summary, Settings Configuration.
+- 추가됨 (Gap Audit 2026-02-23): Pause/Unpause 모달, Lock/Unlock 모달, Emergency Action 모달, Deploy Result 화면, Link Token 검증 패널, Upgradeable 토글, Utility 탭, Audit Log 화면, Policy Editor, API Key 관리.
+- 남은 심화 갭: Wallet policy manager, risk controls, monitoring/alerts, NFT metadata helper.
 
 ---
 
@@ -276,14 +278,14 @@ Current implementation alignment:
 
 BKC&C 납품용 포인트/컬쳐 토큰 관리 어드민. Layer 1 API를 래핑하며, Financial Management, Blockchain Common, Private Explorer 등 비즈니스 레이어를 추가한 목적 특화 어플리케이션.
 
-## 9) Layer 2 IA principles
+## 9) Layer 2 IA 원칙
 
-- Business-operator-first: 재단/포인트 사업자가 토큰 생애주기를 한 곳에서 관리
-- Financial visibility: 환매, 환불, 매입 등 재무 관련 흐름을 1급 시민으로 취급
-- Compliance-ready: 주소 화이트리스트, 정책 엔진, 감사 로그를 내비게이션 레벨에서 노출
-- Explorer-integrated: 프라이빗 체인 전용 탐색기를 내장하여 외부 도구 의존 제거
+- 비즈니스 운영자 중심: 재단/포인트 사업자가 토큰 생애주기를 한 곳에서 관리
+- 재무 가시성: 환매, 환불, 매입 등 재무 관련 흐름을 1급 시민으로 취급
+- 컴플라이언스 준비: 주소 화이트리스트, 정책 엔진, 감사 로그를 내비게이션 레벨에서 노출
+- Explorer 통합: 프라이빗 체인 전용 탐색기를 내장하여 외부 도구 의존 제거
 
-## 10) Layer 2 Global navigation
+## 10) Layer 2 전역 네비게이션
 
 1. Dashboard
 2. Token Management
@@ -293,7 +295,7 @@ BKC&C 납품용 포인트/컬쳐 토큰 관리 어드민. Layer 1 API를 래핑�
 6. Explorer
 7. Settings & Commons
 
-## 11) Layer 2 Sitemap
+## 11) Layer 2 사이트맵
 
 ```mermaid
 flowchart TD
@@ -343,42 +345,42 @@ flowchart TD
     SettingsCommons --> TxStats[Transaction Stats]
 ```
 
-## 12) Layer 2 Page inventory
+## 12) Layer 2 페이지 인벤토리
 
-| ID | Page | Core sections | Main actions | Priority |
+| ID | 페이지 | 핵심 섹션 | 주요 액션 | 우선순위 |
 |---|---|---|---|---|
-| L2-01 | Dashboard | Operation KPIs (발행량, 트랜잭션 수, 보유자 수), 최근 활동, 알림 | Jump to token/financial actions | P0 |
-| L2-02 | Token List | 토큰 테이블, 상태 필터, 네트워크 필터 | Open detail, create token | P0 |
-| L2-03 | Token Detail | 토큰 요약, 공급량 패널, Lifecycle Rail, 활동 이력 | Mint, burn, transfer | P0 |
-| L2-04 | Create Token | 네트워크/타입 선택, 메타데이터 입력, 역할 설정 | Create token | P0 |
-| L2-05 | Mint Modal | 수량, 대상 지갑, 메모 | Confirm mint | P0 |
-| L2-06 | Burn Modal | 수량, 원본 지갑, 사유 | Confirm burn | P0 |
-| L2-07 | Transfer Modal | 수량, 출발/도착 지갑 | Confirm transfer | P0 |
-| L2-08 | Deploy Result | Token Address, Tx Hash, 상태 | Go to detail, copy address | P0 |
-| L2-09 | Supply Overview | Total/Circulating/Locked/Burned, 타임라인 차트, Key Metrics | View supply changes | P0 |
-| L2-10 | Token Holders | Holder 목록, 잔액, 비율, 태그, CSV 내보내기 | Filter, search, export | P0 |
-| L2-11 | Lockup Manager | Lockup 일정 목록, KPI (Total Locked/Active/Next Unlock) | Create lockup, view schedule | P0 |
-| L2-12 | Wallet List | 지갑 목록, 잔액, 태그, 유형(Operation/Cold/CA) | Select wallet, view detail | P0 |
-| L2-13 | Wallet Balance Detail | 지갑별 토큰 잔액 내역, 트랜잭션 이력 | View transactions | P1 |
-| L2-14 | **Retirement** | 환매/소각 요청 목록, 처리 상태, 필터 | Process retirement, approve/reject | P0 |
-| L2-15 | **Record Editor** | 포인트 이력 수정 테이블, 수정 사유, 승인 플로우 | Edit record, submit for approval | P0 |
-| L2-16 | **Refund / Buy** | 환불/매입 요청 목록, 금액, 대상, 처리 상태 | Process refund, execute buy | P0 |
-| L2-17 | **TX History** | 전체 트랜잭션 이력 테이블, 블록/해시/상태, 필터/검색 | Filter, search, export | P0 |
-| L2-18 | **Address Whitelist** | 주소 화이트리스트 테이블, 추가/삭제, 상태 | Add address, remove, bulk import | P1 |
-| L2-19 | **Gas Wallet** | 가스 지갑 잔액, 충전 이력, 임계값 알림 설정 | Recharge, set threshold | P1 |
-| L2-20 | **Tx Safe** | 트랜잭션 한도 설정, 차단 규칙, 이상 트랜잭션 목록 | Set limits, manage rules | P1 |
-| L2-21 | **TX Detail** | 트랜잭션 상세 (블록, 해시, 가스, from/to, 이벤트 로그) | Copy hash, view on explorer | P0 |
-| L2-22 | **Account History** | 계정별 활동 이력, 잔액 변동, 관련 트랜잭션 | Filter by period, export | P1 |
-| L2-23 | **System Admin** | 사용자 관리, 권한/역할, 시스템 설정 | Add user, assign role | P1 |
-| L2-24 | Policy Engine | 정책 규칙 목록, 트리거/승인자/임계값 | Create/edit policy | P1 |
-| L2-25 | Audit Log | 감사 이력, 필터/검색/내보내기 | Filter, search, export CSV | P1 |
-| L2-26 | **Alert / Notifications** | 알림 설정, 알림 이력, 채널(이메일/슬랙/웹훅) | Configure alerts, view history | P2 |
-| L2-27 | API & Integration Settings | API 키 관리, 웹훅 설정, 연동 상태 | Generate key, configure webhook | P2 |
-| L2-28 | **Transaction Stats** | 트랜잭션 통계 대시보드, 차트, 기간별 추이 | Filter by period, export report | P0 |
+| L2-01 | Dashboard | 운영 KPI (발행량, 트랜잭션 수, 보유자 수), 최근 활동, 알림 | 토큰/재무 액션으로 이동 | P0 |
+| L2-02 | Token List | 토큰 테이블, 상태 필터, 네트워크 필터 | 상세 열기, 토큰 생성 | P0 |
+| L2-03 | Token Detail | 토큰 요약, 공급량 패널, Lifecycle Rail, 활동 이력 | Mint, Burn, Transfer | P0 |
+| L2-04 | Create Token | 네트워크/타입 선택, 메타데이터 입력, 역할 설정 | 토큰 생성 | P0 |
+| L2-05 | Mint Modal | 수량, 대상 지갑, 메모 | Mint 확인 | P0 |
+| L2-06 | Burn Modal | 수량, 원본 지갑, 사유 | Burn 확인 | P0 |
+| L2-07 | Transfer Modal | 수량, 출발/도착 지갑 | Transfer 확인 | P0 |
+| L2-08 | Deploy Result | Token Address, Tx Hash, 상태 | 상세로 이동, 주소 복사 | P0 |
+| L2-09 | Supply Overview | Total/Circulating/Locked/Burned, 타임라인 차트, Key Metrics | 공급량 변화 조회 | P0 |
+| L2-10 | Token Holders | Holder 목록, 잔액, 비율, 태그, CSV 내보내기 | 필터, 검색, 내보내기 | P0 |
+| L2-11 | Lockup Manager | Lockup 일정 목록, KPI (Total Locked/Active/Next Unlock) | Lockup 생성, 일정 조회 | P0 |
+| L2-12 | Wallet List | 지갑 목록, 잔액, 태그, 유형(Operation/Cold/CA) | 지갑 선택, 상세 조회 | P0 |
+| L2-13 | Wallet Balance Detail | 지갑별 토큰 잔액 내역, 트랜잭션 이력 | 트랜잭션 조회 | P1 |
+| L2-14 | **Retirement** | 환매/소각 요청 목록, 처리 상태, 필터 | 환매 처리, 승인/거절 | P0 |
+| L2-15 | **Record Editor** | 포인트 이력 수정 테이블, 수정 사유, 승인 플로우 | 이력 수정, 승인 요청 | P0 |
+| L2-16 | **Refund / Buy** | 환불/매입 요청 목록, 금액, 대상, 처리 상태 | 환불 처리, 매입 실행 | P0 |
+| L2-17 | **TX History** | 전체 트랜잭션 이력 테이블, 블록/해시/상태, 필터/검색 | 필터, 검색, 내보내기 | P0 |
+| L2-18 | **Address Whitelist** | 주소 화이트리스트 테이블, 추가/삭제, 상태 | 주소 추가, 삭제, 일괄 가져오기 | P1 |
+| L2-19 | **Gas Wallet** | 가스 지갑 잔액, 충전 이력, 임계값 알림 설정 | 충전, 임계값 설정 | P1 |
+| L2-20 | **Tx Safe** | 트랜잭션 한도 설정, 차단 규칙, 이상 트랜잭션 목록 | 한도 설정, 규칙 관리 | P1 |
+| L2-21 | **TX Detail** | 트랜잭션 상세 (블록, 해시, 가스, from/to, 이벤트 로그) | 해시 복사, Explorer에서 조회 | P0 |
+| L2-22 | **Account History** | 계정별 활동 이력, 잔액 변동, 관련 트랜잭션 | 기간별 필터, 내보내기 | P1 |
+| L2-23 | **System Admin** | 사용자 관리, 권한/역할, 시스템 설정 | 사용자 추가, 역할 할당 | P1 |
+| L2-24 | Policy Engine | 정책 규칙 목록, 트리거/승인자/임계값 | 정책 생성/편집 | P1 |
+| L2-25 | Audit Log | 감사 이력, 필터/검색/내보내기 | 필터, 검색, CSV 내보내기 | P1 |
+| L2-26 | **Alert / Notifications** | 알림 설정, 알림 이력, 채널(이메일/슬랙/웹훅) | 알림 설정, 이력 조회 | P2 |
+| L2-27 | API & Integration Settings | API 키 관리, 웹훅 설정, 연동 상태 | 키 생성, 웹훅 설정 | P2 |
+| L2-28 | **Transaction Stats** | 트랜잭션 통계 대시보드, 차트, 기간별 추이 | 기간별 필터, 리포트 내보내기 | P0 |
 
-## 13) Layer 2 Data object mapping
+## 13) Layer 2 데이터 객체 매핑
 
-| Object | Key fields |
+| 객체 | 핵심 필드 |
 |---|---|
 | Token | symbol, name, network, standard, total_supply, status, issuer |
 | Wallet | wallet_id, label, type (Operation/Cold/CA), network, address, balance |
@@ -392,7 +394,7 @@ flowchart TD
 | AlertConfig | alert_id, trigger_type, channel (email/slack/webhook), threshold, enabled |
 | SystemUser | user_id, name, email, role (admin/operator/viewer), status, last_login |
 
-## 14) Layer 2 MVP scope
+## 14) Layer 2 MVP 범위
 
 ### P0 (핵심 — 납품 필수)
 
